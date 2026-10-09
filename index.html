@@ -4,67 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>کوانتم | همراه کنکوری‌ها</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Tahoma', 'Segoe UI', sans-serif;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
   }
 
   :root {
-    --navy: #0a1128;
-    --navy-light: #16213f;
-    --gold: #c9a227;
-    --gold-light: #e0c158;
-    --cream: #f8f6f1;
-    --text: #2a2a35;
-    --muted: #6b6f7d;
+    --dark: #1c1a17;
+    --dark-soft: #2a2724;
+    --wine: #5a1e28;
+    --copper: #b87333;
+    --copper-light: #d49556;
+    --cream: #f5f0e6;
+    --paper: #fdfaf3;
+    --text: #2a2724;
+    --muted: #6b6559;
   }
 
   body {
     background: var(--cream);
     color: var(--text);
-    line-height: 1.9;
+    line-height: 2;
     overflow-x: hidden;
-  }
-
-  /* شکل‌های محو پس‌زمینه */
-  .bg-shapes {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .bg-shapes span {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--gold);
-    opacity: 0.05;
-  }
-
-  .bg-shapes span:nth-child(1) {
-    width: 500px; height: 500px;
-    top: -160px; left: -160px;
-  }
-  .bg-shapes span:nth-child(2) {
-    width: 380px; height: 380px;
-    bottom: -120px; right: -120px;
-    background: var(--navy);
+    font-size: 15px;
   }
 
   /* ====== هدر ====== */
   header {
-    background: var(--navy);
-    padding: 16px 50px;
+    background: var(--dark);
+    padding: 18px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(201,162,39,0.35);
+    border-bottom: 3px double var(--copper);
   }
 
   header .logo-wrap {
@@ -80,19 +60,20 @@
   }
 
   header .logo-text {
-    color: #fff;
-    font-size: 22px;
-    font-weight: bold;
+    color: var(--cream);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 1px;
   }
 
   header .logo-text span {
-    color: var(--gold);
+    color: var(--copper);
   }
 
   header nav a {
-    color: #c8cee0;
+    color: #d4cdc0;
     text-decoration: none;
-    margin-right: 26px;
+    margin-right: 28px;
     font-size: 15px;
     position: relative;
     transition: 0.3s;
@@ -104,13 +85,13 @@
     bottom: -6px;
     right: 0;
     width: 0;
-    height: 2px;
-    background: var(--gold);
+    height: 1.5px;
+    background: var(--copper);
     transition: 0.3s;
   }
 
   header nav a:hover {
-    color: var(--gold-light);
+    color: var(--copper-light);
   }
 
   header nav a:hover::after {
@@ -119,44 +100,35 @@
 
   /* ====== Hero ====== */
   .hero {
-    background: var(--navy);
-    color: #fff;
+    background: var(--dark);
+    color: var(--cream);
     text-align: center;
-    padding: 95px 20px 110px;
+    padding: 100px 20px 115px;
     position: relative;
     overflow: hidden;
-    z-index: 1;
   }
 
+  /* قاب تزئینی کلاسیک */
   .hero::before {
     content: '';
     position: absolute;
-    width: 650px;
-    height: 650px;
-    border: 1.5px solid rgba(201,162,39,0.15);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate 50s linear infinite;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    border: 1px solid rgba(184,115,51,0.25);
+    pointer-events: none;
   }
 
   .hero::after {
     content: '';
     position: absolute;
-    width: 850px;
-    height: 850px;
-    border: 1px solid rgba(201,162,39,0.08);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate 70s linear infinite reverse;
-  }
-
-  @keyframes rotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid rgba(184,115,51,0.12);
+    pointer-events: none;
   }
 
   .hero-content {
@@ -165,157 +137,201 @@
   }
 
   .hero .logo-big {
-    width: 130px;
-    height: 130px;
+    width: 135px;
+    height: 135px;
     object-fit: contain;
-    margin-bottom: 22px;
+    margin-bottom: 25px;
     animation: float 5s ease-in-out infinite;
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-10px); }
   }
 
   .hero h1 {
     font-size: 46px;
-    margin-bottom: 18px;
-    font-weight: bold;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
   }
 
   .hero h1 span {
-    color: var(--gold);
+    color: var(--copper);
   }
 
   .divider {
-    width: 110px;
-    height: 2px;
-    background: linear-gradient(to left, transparent, var(--gold), transparent);
-    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 28px;
+    max-width: 250px;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--copper), transparent);
+  }
+
+  .divider .diamond {
+    color: var(--copper);
+    font-size: 11px;
   }
 
   .hero p {
-    font-size: 17px;
-    color: #c8cee0;
+    font-size: 16px;
+    color: #c9c2b5;
     max-width: 640px;
     margin: 0 auto 38px;
   }
 
   .btn {
     display: inline-block;
-    background: var(--gold);
-    color: var(--navy);
-    padding: 14px 44px;
-    border-radius: 6px;
+    background: transparent;
+    color: var(--copper);
+    padding: 14px 46px;
+    border: 1.5px solid var(--copper);
     text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.4s;
+    position: relative;
   }
 
   .btn:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
+    background: var(--copper);
+    color: var(--dark);
   }
 
   /* ====== ویژگی‌ها ====== */
   .features {
-    padding: 95px 20px;
+    padding: 100px 20px;
     max-width: 1000px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
   }
 
   .features h2 {
     text-align: center;
     font-size: 32px;
-    color: var(--navy);
-    margin-bottom: 10px;
+    color: var(--dark);
+    margin-bottom: 14px;
+    font-weight: 700;
   }
 
   .features .sub {
     text-align: center;
     color: var(--muted);
-    margin-bottom: 55px;
+    margin-bottom: 50px;
     font-size: 15px;
   }
 
-  .features .line {
+  .features .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 55px;
+  }
+
+  .features .ornament::before,
+  .features .ornament::after {
+    content: '';
     width: 60px;
-    height: 2px;
-    background: var(--gold);
-    margin: 0 auto 45px;
+    height: 1px;
+    background: var(--copper);
+  }
+
+  .features .ornament span {
+    color: var(--copper);
+    font-size: 12px;
   }
 
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     gap: 32px;
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
   }
 
   .card {
-    background: #fff;
+    background: var(--paper);
     padding: 45px 32px;
-    border-radius: 18px;
-    box-shadow: 0 6px 25px rgba(10,17,40,0.06);
-    transition: 0.4s;
     text-align: center;
     position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(201,162,39,0.18);
+    border: 1px solid #e2d9c8;
+    transition: 0.4s;
+  }
+
+  /* گوشه‌های تزئینی کلاسیک */
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--copper);
+    transition: 0.4s;
   }
 
   .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(to left, var(--gold), var(--gold-light));
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: 0.4s;
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
   }
 
-  .card:hover::before {
-    transform: scaleX(1);
+  .card::after {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
   }
 
   .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 45px rgba(10,17,40,0.13);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(28,26,23,0.12);
+    border-color: var(--copper);
+  }
+
+  .card:hover::before,
+  .card:hover::after {
+    width: 32px;
+    height: 32px;
   }
 
   .card .icon-circle {
-    width: 82px;
-    height: 82px;
-    margin: 0 auto 22px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
     border-radius: 50%;
-    background: var(--navy);
+    background: var(--paper);
+    border: 1.5px solid var(--copper);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 34px;
     position: relative;
   }
 
   .card .icon-circle::after {
     content: '';
     position: absolute;
-    inset: -4px;
+    inset: 5px;
     border-radius: 50%;
-    border: 1.5px solid var(--gold);
-    opacity: 0.6;
+    border: 1px dashed rgba(184,115,51,0.4);
   }
 
   .card h3 {
-    color: var(--navy);
-    margin-bottom: 13px;
+    color: var(--dark);
+    margin-bottom: 14px;
     font-size: 21px;
+    font-weight: 700;
   }
 
   .card p {
@@ -325,35 +341,23 @@
 
   /* ====== بخش رایگان ====== */
   .free {
-    background: var(--navy);
-    color: #fff;
+    background: var(--dark);
+    color: var(--cream);
     text-align: center;
-    padding: 85px 20px;
+    padding: 90px 20px;
     position: relative;
     overflow: hidden;
-    z-index: 1;
   }
 
   .free::before {
     content: '';
     position: absolute;
-    width: 420px;
-    height: 420px;
-    border: 1.5px solid rgba(201,162,39,0.13);
-    border-radius: 50%;
-    top: -210px;
-    right: -110px;
-  }
-
-  .free::after {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border: 1px solid rgba(201,162,39,0.09);
-    border-radius: 50%;
-    bottom: -150px;
-    left: -90px;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    border: 1px solid rgba(184,115,51,0.2);
+    pointer-events: none;
   }
 
   .free .content {
@@ -362,41 +366,44 @@
   }
 
   .free .icon-big {
-    font-size: 48px;
-    margin-bottom: 18px;
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: var(--copper);
   }
 
   .free h2 {
     font-size: 32px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+    font-weight: 700;
   }
 
   .free h2 span {
-    color: var(--gold);
+    color: var(--copper);
   }
 
   .free p {
     font-size: 16px;
     max-width: 640px;
     margin: 0 auto;
-    color: #c8cee0;
+    color: #c9c2b5;
   }
 
   /* ====== فوتر ====== */
   footer {
-    background: #050a18;
-    color: #7f889c;
+    background: #14120f;
+    color: #8a8377;
     text-align: center;
-    padding: 32px 20px;
+    padding: 35px 20px;
     font-size: 14px;
-    border-top: 1px solid rgba(201,162,39,0.3);
+    border-top: 3px double var(--copper);
   }
 
   footer .brand {
-    color: var(--gold);
-    font-weight: bold;
-    font-size: 16px;
+    color: var(--copper);
+    font-weight: 700;
+    font-size: 17px;
     margin-bottom: 8px;
+    letter-spacing: 1px;
   }
 
   /* ====== موبایل ====== */
@@ -410,20 +417,17 @@
       margin: 0 10px;
       font-size: 14px;
     }
-    .hero h1 { font-size: 32px; }
-    .hero p { font-size: 15px; }
+    .hero h1 { font-size: 30px; }
+    .hero p { font-size: 14px; }
     .hero .logo-big { width: 100px; height: 100px; }
+    .hero::before { top: 15px; left: 15px; right: 15px; bottom: 15px; }
+    .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
     .features h2 { font-size: 25px; }
-    .free h2 { font-size: 25px; }
+    .free h2 { font-size: 24px; }
   }
 </style>
 </head>
 <body>
-
-  <div class="bg-shapes">
-    <span></span>
-    <span></span>
-  </div>
 
   <!-- هدر -->
   <header>
@@ -442,7 +446,7 @@
     <div class="hero-content">
       <img src="logo.png" alt="کوانتم" class="logo-big">
       <h1>به <span>کوانتم</span> خوش آمدی</h1>
-      <div class="divider"></div>
+      <div class="divider"><span class="diamond">◆</span></div>
       <p>
         همراه ساده‌ی مسیر کنکور؛ با آزمون‌های آنلاین و جزوه‌های کوچک و مفید — کاملاً رایگان.
       </p>
@@ -454,7 +458,7 @@
   <section class="features" id="features">
     <h2>کوانتم چیکار می‌کنه؟</h2>
     <p class="sub">دو امکانات ساده، ولی کارآمد</p>
-    <div class="line"></div>
+    <div class="ornament"><span>◆</span></div>
 
     <div class="cards">
       <div class="card">
@@ -474,7 +478,7 @@
   <!-- رایگان -->
   <section class="free" id="free">
     <div class="content">
-      <div class="icon-big">💎</div>
+      <div class="icon-big">◆</div>
       <h2>کوانتم <span>۱۰۰٪ رایگان</span> است</h2>
       <p>
         تمام امکانات کوانتم برای همه‌ی دانش‌آموزان ایرانی، بدون هیچ هزینه‌ای در دسترسه.
