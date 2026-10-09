@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کنکور یار | همراه رایگان دانش‌آموزان کنکوری</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tahoma', 'Segoe UI', sans-serif;
+  }
+
+  body {
+    background: #f4f7fb;
+    color: #1a1a2e;
+    line-height: 1.8;
+  }
+
+  /* ===== هدر ===== */
+  header {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  header .logo {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  header nav a:hover {
+    color: #ffd166;
+  }
+
+  /* ===== بخش Hero ===== */
+  .hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #1e3c72;
+  }
+
+  .hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #333;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #06d6a0;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #2a5298;
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: #1e3c72;
+    transform: translateY(-2px);
+  }
+
+  /* ===== ویژگی‌ها ===== */
+  .features {
+    padding: 70px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 50px;
+    color: #1e3c72;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .card {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    transition: 0.3s;
+    text-align: center;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  }
+
+  .card .icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    color: #2a5298;
+    margin-bottom: 12px;
+    font-size: 19px;
+  }
+
+  .card p {
+    color: #555;
+    font-size: 15px;
+  }
+
+  /* ===== بخش رایگان ===== */
+  .free-section {
+    background: linear-gradient(135deg, #06d6a0, #1b9e77);
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .free-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .free-section p {
+    font-size: 17px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ===== فرم ثبت‌نام ===== */
+  .signup {
+    padding: 70px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .signup h2 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
+
+  .signup p.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 35px;
+  }
+
+  form {
+    background: #fff;
+    padding: 35px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+
+  form input,
+  form select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: 1.5px solid #d5dbe5;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+    font-family: inherit;
+  }
+
+  form input:focus,
+  form select:focus {
+    outline: none;
+    border-color: #2a5298;
+    box-shadow: 0 0 0 3px rgba(42,82,152,0.15);
+  }
+
+  form button {
+    width: 100%;
+    padding: 14px;
+    background: #2a5298;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+  }
+
+  form button:hover {
+    background: #1e3c72;
+  }
+
+  .success-msg {
+    display: none;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* ===== فوتر ===== */
+  footer {
+    background: #1a1a2e;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+  }
+
+  footer a {
+    color: #06d6a0;
+    text-decoration: none;
+  }
+
+  /* ===== موبایل ===== */
+  @media (max-width: 700px) {
+    header {
+      flex-direction: column;
+      gap: 10px;
+      padding: 15px;
+    }
+    header nav a {
+      margin: 0 8px;
+      font-size: 14px;
+    }
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- هدر -->
+  <header>
+    <div class="logo">📚 کنکور یار</div>
+    <nav>
+      <a href="#features">امکانات</a>
+      <a href="#free">رایگان</a>
+      <a href="#signup">ثبت‌نام</a>
+    </nav>
+  </header>
+
+  <!-- بخش Hero -->
+  <section class="hero">
+    <span class="badge">🎉 کاملاً رایگان</span>
+    <h1>همراه تو تا کنکور</h1>
+    <p>
+      ما اینجاییم تا مسیر کنکور رو برات هموارتر کنیم. جزوه، آزمون، برنامه‌ریزی و مشاوره — 
+      همه و همه به صورت <strong>رایگان</strong> برای همه‌ی دانش‌آموزان ایران.
+    </p>
+    <a href="#signup" class="btn">همین حالا ثبت‌نام کن</a>
+  </section>
+
+  <!-- ویژگی‌ها -->
+  <section class="features" id="features">
+    <h2>چی برات داریم؟</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>آزمون‌های آنلاین</h3>
+        <p>آزمون‌های شبیه‌ساز کنکور با تصحیح خودکار و کارنامه‌ی تحلیلی.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📅</div>
+        <h3>برنامه‌ریزی هوشمند</h3>
+        <p>برنامه‌ی مطالعاتی شخصی‌سازی‌شده بر اساس سطح و هدف تو.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📖</div>
+        <h3>جزوه و خلاصه‌ها</h3>
+        <p>دانلود جزوه‌های خلاصه و نکات مهم تمام دروس کنکور.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💬</div>
+        <h3>پرسش و پاسخ</h3>
+        <p>سوالات درسی‌ت رو بپرس و از پاسخ رتبه‌های برتر بهره‌مند شو.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- بخش رایگان -->
+  <section class="free-section" id="free">
+    <h2>💚 این سایت کاملاً رایگانه</h2>
+    <p>
+      ما باور داریم هیچ دانش‌آموزی نباید به خاطر هزینه، از آموزش باکیفیت محروم بشه. 
+      تمام امکانات این سایت برای همه‌ی دانش‌آموزان ایرانی <strong>۱۰۰٪ رایگان</strong> است.
+    </p>
+  </section>
+
+  <!-- فرم ثبت‌نام -->
+  <section class="signup" id="signup">
+    <h2>ثبت‌نام رایگان</h2>
+    <p class="subtitle">اطلاعاتت رو وارد کن تا به تمام امکانات دسترسی پیدا کنی</p>
+
+    <form id="signupForm">
+      <div class="success-msg" id="successMsg">✅ ثبت‌نام شما با موفقیت انجام شد!</div>
+
+      <label for="name">نام و نام خانوادگی</label>
+      <input type="text" id="name" placeholder="مثلاً: علی محمدی" required>
+
+      <label for="email">ایمیل</label>
+      <input type="email" id="email" placeholder="example@gmail.com" required>
+
+      <label for="phone">شماره موبایل</label>
+      <input type="tel" id="phone" placeholder="09xxxxxxxxx" required>
+
+      <label for="grade">پایه‌ی تحصیلی</label>
+      <select id="grade" required>
+        <option value="">انتخاب کن</option>
+        <option value="10">دهم</option>
+        <option value="11">یازدهم</option>
+        <option value="12">دوازدهم</option>
+        <option value="grad">فارغ‌التحصیل</option>
+      </select>
+
+      <label for="field">رشته</label>
+      <select id="field" required>
+        <option value="">انتخاب کن</option>
+        <option value="riazi">ریاضی و فیزیک</option>
+        <option value="tajrobi">علوم تجربی</option>
+        <option value="ensani">علوم انسانی</option>
+        <option value="honar">هنر</option>
+      </select>
+
+      <button type="submit">ثبت‌نام کن 🚀</button>
+    </form>
+  </section>
+
+  <!-- فوتر -->
+  <footer>
+    <p>© ۱۴۰۴ | ساخته شده با ❤️ برای دانش‌آموزان کنکوری</p>
+    <p style="margin-top:8px;">
+      <a href="#signup">ثبت‌نام</a> | 
+      <a href="#features">امکانات</a> | 
+      <a href="#free">رایگان</a>
+    </p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // گرفتن اطلاعات
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        grade: document.getElementById('grade').value,
+        field: document.getElementById('field').value
+      };
+
+      console.log('اطلاعات ثبت‌نام:', data);
+
+      // نمایش پیام موفقیت
+      successMsg.style.display = 'block';
+      form.reset();
+
+      // مخفی کردن پیام بعد از ۴ ثانیه
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>
