@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>کنکور یار | همراه رایگان دانش‌آموزان کنکوری</title>
+<title>کوانتم | همراه کنکوری‌ها</title>
 <style>
   * {
     margin: 0;
@@ -12,136 +12,322 @@
     font-family: 'Tahoma', 'Segoe UI', sans-serif;
   }
 
-  body {
-    background: #f4f7fb;
-    color: #1a1a2e;
-    line-height: 1.8;
+  :root {
+    --navy: #0a1128;
+    --navy-light: #142247;
+    --gold: #d4af37;
+    --gold-light: #f0d97a;
+    --silver: #e6e8ee;
+    --cream: #f7f5ef;
   }
 
-  /* ===== هدر ===== */
+  body {
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* ====== شکل‌های تزئینی پس‌زمینه ====== */
+  .bg-shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-shapes span {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+
+  .bg-shapes span:nth-child(1) {
+    width: 500px; height: 500px;
+    background: var(--gold);
+    top: -150px; left: -150px;
+  }
+  .bg-shapes span:nth-child(2) {
+    width: 350px; height: 350px;
+    background: var(--navy);
+    bottom: -100px; right: -100px;
+  }
+  .bg-shapes span:nth-child(3) {
+    width: 200px; height: 200px;
+    background: var(--gold);
+    top: 40%; right: 10%;
+    opacity: 0.04;
+  }
+
+  /* ====== هدر ====== */
   header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #fff;
-    padding: 15px 40px;
+    background: var(--navy);
+    padding: 15px 45px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(10,17,40,0.25);
+    border-bottom: 2px solid var(--gold);
   }
 
-  header .logo {
-    font-size: 22px;
+  header .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  header .logo-wrap img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
+  }
+
+  header .logo-text {
+    color: #fff;
+    font-size: 24px;
     font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  header .logo-text span {
+    color: var(--gold);
   }
 
   header nav a {
-    color: #fff;
+    color: #cdd4e6;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 25px;
     font-size: 15px;
+    position: relative;
+    transition: 0.3s;
+  }
+
+  header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
     transition: 0.3s;
   }
 
   header nav a:hover {
-    color: #ffd166;
+    color: var(--gold-light);
   }
 
-  /* ===== بخش Hero ===== */
+  header nav a:hover::after {
+    width: 100%;
+  }
+
+  /* ====== بخش Hero ====== */
   .hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: #fff;
+    padding: 100px 20px 120px;
     text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  /* حلقه‌ی طلایی تزئینی پشت متن */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border: 2px solid rgba(212,175,55,0.15);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 40s linear infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    border: 1px solid rgba(212,175,55,0.08);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 60s linear infinite reverse;
+  }
+
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero .logo-big {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 25px rgba(212,175,55,0.55));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
   }
 
   .hero h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    color: #1e3c72;
-  }
-
-  .hero p {
-    font-size: 18px;
-    max-width: 700px;
-    margin: 0 auto 30px;
-    color: #333;
-  }
-
-  .badge {
-    display: inline-block;
-    background: #06d6a0;
+    font-size: 52px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
     color: #fff;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    font-weight: bold;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(212,175,55,0.5);
+  }
+
+  .hero .tagline {
+    font-size: 19px;
+    color: #cdd4e6;
+    max-width: 650px;
+    margin: 0 auto 40px;
   }
 
   .btn {
     display: inline-block;
-    background: #2a5298;
-    color: #fff;
-    padding: 14px 36px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    padding: 15px 45px;
+    border-radius: 50px;
     text-decoration: none;
     font-size: 17px;
     font-weight: bold;
     transition: 0.3s;
     border: none;
     cursor: pointer;
+    box-shadow: 0 8px 25px rgba(212,175,55,0.35);
   }
 
   .btn:hover {
-    background: #1e3c72;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(212,175,55,0.55);
   }
 
-  /* ===== ویژگی‌ها ===== */
+  /* ====== خط جداکننده‌ی طلایی ====== */
+  .divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to left, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+    border-radius: 3px;
+  }
+
+  /* ====== ویژگی‌ها ====== */
   .features {
-    padding: 70px 20px;
-    max-width: 1100px;
+    padding: 90px 20px;
+    max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .features h2 {
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 50px;
-    color: #1e3c72;
+    font-size: 34px;
+    margin-bottom: 12px;
+    color: var(--navy);
+  }
+
+  .features .sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 55px;
+    font-size: 16px;
   }
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
+    max-width: 780px;
+    margin: 0 auto;
   }
 
   .card {
     background: #fff;
-    padding: 30px 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-    transition: 0.3s;
+    padding: 45px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(10,17,40,0.08);
+    transition: 0.4s;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.15);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to left, var(--gold), var(--gold-light));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: 0.4s;
+  }
+
+  .card:hover::before {
+    transform: scaleX(1);
   }
 
   .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 55px rgba(10,17,40,0.15);
   }
 
-  .card .icon {
-    font-size: 42px;
-    margin-bottom: 15px;
+  .card .icon-circle {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    box-shadow: 0 8px 20px rgba(10,17,40,0.25);
+    position: relative;
+  }
+
+  .card .icon-circle::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    opacity: 0.5;
   }
 
   .card h3 {
-    color: #2a5298;
-    margin-bottom: 12px;
-    font-size: 19px;
+    color: var(--navy);
+    margin-bottom: 14px;
+    font-size: 22px;
   }
 
   .card p {
@@ -149,274 +335,175 @@
     font-size: 15px;
   }
 
-  /* ===== بخش رایگان ===== */
+  /* ====== بخش رایگان ====== */
   .free-section {
-    background: linear-gradient(135deg, #06d6a0, #1b9e77);
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
     color: #fff;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .free-section::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border: 2px solid rgba(212,175,55,0.15);
+    border-radius: 50%;
+    top: -200px;
+    right: -100px;
+  }
+
+  .free-section::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: 50%;
+    bottom: -150px;
+    left: -80px;
+  }
+
+  .free-section .content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .free-section .icon-big {
+    font-size: 55px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 0 20px rgba(212,175,55,0.5));
   }
 
   .free-section h2 {
-    font-size: 32px;
-    margin-bottom: 15px;
+    font-size: 36px;
+    margin-bottom: 18px;
+  }
+
+  .free-section h2 span {
+    color: var(--gold);
   }
 
   .free-section p {
     font-size: 17px;
-    max-width: 700px;
+    max-width: 680px;
     margin: 0 auto;
+    color: #cdd4e6;
   }
 
-  /* ===== فرم ثبت‌نام ===== */
-  .signup {
-    padding: 70px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .signup h2 {
-    text-align: center;
-    color: #1e3c72;
-    margin-bottom: 10px;
-    font-size: 28px;
-  }
-
-  .signup p.subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 35px;
-  }
-
-  form {
-    background: #fff;
-    padding: 35px 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-  }
-
-  form label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
-  }
-
-  form input,
-  form select {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-    border: 1.5px solid #d5dbe5;
-    border-radius: 8px;
-    font-size: 15px;
-    transition: 0.3s;
-    font-family: inherit;
-  }
-
-  form input:focus,
-  form select:focus {
-    outline: none;
-    border-color: #2a5298;
-    box-shadow: 0 0 0 3px rgba(42,82,152,0.15);
-  }
-
-  form button {
-    width: 100%;
-    padding: 14px;
-    background: #2a5298;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    font-family: inherit;
-  }
-
-  form button:hover {
-    background: #1e3c72;
-  }
-
-  .success-msg {
-    display: none;
-    background: #d4edda;
-    color: #155724;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 18px;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  /* ===== فوتر ===== */
+  /* ====== فوتر ====== */
   footer {
-    background: #1a1a2e;
-    color: #ccc;
+    background: #050a18;
+    color: #8a93a8;
     text-align: center;
-    padding: 30px 20px;
+    padding: 35px 20px;
     font-size: 14px;
+    border-top: 2px solid var(--gold);
   }
 
-  footer a {
-    color: #06d6a0;
-    text-decoration: none;
+  footer .logo-mini {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
   }
 
-  /* ===== موبایل ===== */
+  /* ====== موبایل ====== */
   @media (max-width: 700px) {
     header {
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       padding: 15px;
     }
     header nav a {
       margin: 0 8px;
       font-size: 14px;
     }
-    .hero h1 { font-size: 28px; }
-    .hero p { font-size: 16px; }
+    .hero h1 { font-size: 34px; }
+    .hero .tagline { font-size: 16px; }
+    .hero .logo-big { width: 100px; height: 100px; }
+    .features h2 { font-size: 26px; }
+    .free-section h2 { font-size: 26px; }
   }
 </style>
 </head>
 <body>
 
+  <!-- شکل‌های تزئینی پس‌زمینه -->
+  <div class="bg-shapes">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
   <!-- هدر -->
   <header>
-    <div class="logo">📚 کنکور یار</div>
+    <div class="logo-wrap">
+      <img src="logo.png" alt="لوگوی کوانتم">
+      <div class="logo-text">کوانتم<span>.</span></div>
+    </div>
     <nav>
       <a href="#features">امکانات</a>
       <a href="#free">رایگان</a>
-      <a href="#signup">ثبت‌نام</a>
+      <a href="#contact">ارتباط</a>
     </nav>
   </header>
 
-  <!-- بخش Hero -->
+  <!-- Hero -->
   <section class="hero">
-    <span class="badge">🎉 کاملاً رایگان</span>
-    <h1>همراه تو تا کنکور</h1>
-    <p>
-      ما اینجاییم تا مسیر کنکور رو برات هموارتر کنیم. جزوه، آزمون، برنامه‌ریزی و مشاوره — 
-      همه و همه به صورت <strong>رایگان</strong> برای همه‌ی دانش‌آموزان ایران.
-    </p>
-    <a href="#signup" class="btn">همین حالا ثبت‌نام کن</a>
+    <div class="hero-content">
+      <img src="logo.png" alt="لوگوی کوانتم" class="logo-big">
+      <h1>به <span>کوانتم</span> خوش آمدی</h1>
+      <div class="divider"></div>
+      <p class="tagline">
+        یه همراه ساده و صمیمی برای مسیر کنکور؛ 
+        با آزمون‌های آنلاین و جزوه‌های کوچیک و مفید — همه چیز کاملاً رایگان.
+      </p>
+      <a href="#features" class="btn">شروع کن 🚀</a>
+    </div>
   </section>
 
   <!-- ویژگی‌ها -->
   <section class="features" id="features">
-    <h2>چی برات داریم؟</h2>
+    <h2>کوانتم چیکار می‌کنه؟</h2>
+    <p class="sub">دو امکانات ساده، ولی کارآمد</p>
+
     <div class="cards">
       <div class="card">
-        <div class="icon">📝</div>
-        <h3>آزمون‌های آنلاین</h3>
-        <p>آزمون‌های شبیه‌ساز کنکور با تصحیح خودکار و کارنامه‌ی تحلیلی.</p>
+        <div class="icon-circle">📝</div>
+        <h3>آزمون آنلاین</h3>
+        <p>آزمون‌های شبیه‌ساز کنکور با تصحیح خودکار و کارنامه‌ی تحلیلی، تا خودت رو محک بزنی.</p>
       </div>
+
       <div class="card">
-        <div class="icon">📅</div>
-        <h3>برنامه‌ریزی هوشمند</h3>
-        <p>برنامه‌ی مطالعاتی شخصی‌سازی‌شده بر اساس سطح و هدف تو.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📖</div>
-        <h3>جزوه و خلاصه‌ها</h3>
-        <p>دانلود جزوه‌های خلاصه و نکات مهم تمام دروس کنکور.</p>
-      </div>
-      <div class="card">
-        <div class="icon">💬</div>
-        <h3>پرسش و پاسخ</h3>
-        <p>سوالات درسی‌ت رو بپرس و از پاسخ رتبه‌های برتر بهره‌مند شو.</p>
+        <div class="icon-circle">📖</div>
+        <h3>جزوه‌ی کوچک</h3>
+        <p>خلاصه‌های کوتاه و کاربردی از مهم‌ترین نکات دروس، برای مرور سریع قبل از آزمون.</p>
       </div>
     </div>
   </section>
 
   <!-- بخش رایگان -->
   <section class="free-section" id="free">
-    <h2>💚 این سایت کاملاً رایگانه</h2>
-    <p>
-      ما باور داریم هیچ دانش‌آموزی نباید به خاطر هزینه، از آموزش باکیفیت محروم بشه. 
-      تمام امکانات این سایت برای همه‌ی دانش‌آموزان ایرانی <strong>۱۰۰٪ رایگان</strong> است.
-    </p>
-  </section>
-
-  <!-- فرم ثبت‌نام -->
-  <section class="signup" id="signup">
-    <h2>ثبت‌نام رایگان</h2>
-    <p class="subtitle">اطلاعاتت رو وارد کن تا به تمام امکانات دسترسی پیدا کنی</p>
-
-    <form id="signupForm">
-      <div class="success-msg" id="successMsg">✅ ثبت‌نام شما با موفقیت انجام شد!</div>
-
-      <label for="name">نام و نام خانوادگی</label>
-      <input type="text" id="name" placeholder="مثلاً: علی محمدی" required>
-
-      <label for="email">ایمیل</label>
-      <input type="email" id="email" placeholder="example@gmail.com" required>
-
-      <label for="phone">شماره موبایل</label>
-      <input type="tel" id="phone" placeholder="09xxxxxxxxx" required>
-
-      <label for="grade">پایه‌ی تحصیلی</label>
-      <select id="grade" required>
-        <option value="">انتخاب کن</option>
-        <option value="10">دهم</option>
-        <option value="11">یازدهم</option>
-        <option value="12">دوازدهم</option>
-        <option value="grad">فارغ‌التحصیل</option>
-      </select>
-
-      <label for="field">رشته</label>
-      <select id="field" required>
-        <option value="">انتخاب کن</option>
-        <option value="riazi">ریاضی و فیزیک</option>
-        <option value="tajrobi">علوم تجربی</option>
-        <option value="ensani">علوم انسانی</option>
-        <option value="honar">هنر</option>
-      </select>
-
-      <button type="submit">ثبت‌نام کن 🚀</button>
-    </form>
+    <div class="content">
+      <div class="icon-big">💎</div>
+      <h2>کوانتم <span>۱۰۰٪ رایگان</span> است</h2>
+      <p>
+        ما باور داریم هیچ دانش‌آموزی نباید به خاطر هزینه از آموزش باکیفیت محروم بشه. 
+        تمام امکانات کوانتم برای همه‌ی دانش‌آموزان ایرانی، بدون هیچ هزینه‌ای در دسترسه.
+      </p>
+    </div>
   </section>
 
   <!-- فوتر -->
-  <footer>
+  <footer id="contact">
+    <div class="logo-mini">کوانتم</div>
     <p>© ۱۴۰۴ | ساخته شده با ❤️ برای دانش‌آموزان کنکوری</p>
-    <p style="margin-top:8px;">
-      <a href="#signup">ثبت‌نام</a> | 
-      <a href="#features">امکانات</a> | 
-      <a href="#free">رایگان</a>
-    </p>
   </footer>
-
-  <script>
-    const form = document.getElementById('signupForm');
-    const successMsg = document.getElementById('successMsg');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // گرفتن اطلاعات
-      const data = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        grade: document.getElementById('grade').value,
-        field: document.getElementById('field').value
-      };
-
-      console.log('اطلاعات ثبت‌نام:', data);
-
-      // نمایش پیام موفقیت
-      successMsg.style.display = 'block';
-      form.reset();
-
-      // مخفی کردن پیام بعد از ۴ ثانیه
-      setTimeout(() => {
-        successMsg.style.display = 'none';
-      }, 4000);
-    });
-  </script>
 
 </body>
 </html>
