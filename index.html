@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>کوانتم | همراه کنکوری‌ها</title>
+<title>Quantum College | همراه کنکوری‌ها</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <style>
@@ -15,15 +15,15 @@
   }
 
   :root {
-    --dark: #1c1a17;
-    --dark-soft: #2a2724;
-    --wine: #5a1e28;
-    --copper: #b87333;
-    --copper-light: #d49556;
-    --cream: #f5f0e6;
-    --paper: #fdfaf3;
-    --text: #2a2724;
-    --muted: #6b6559;
+    --forest: #142A23;
+    --forest-soft: #1e3a30;
+    --gold: #C8A96B;
+    --gold-soft: #d9c08a;
+    --cream: #F4F0E6;
+    --paper: #fbf8f1;
+    --brick: #B85C45;
+    --text: #1f2a25;
+    --muted: #6b756e;
   }
 
   body {
@@ -36,7 +36,7 @@
 
   /* ====== هدر ====== */
   header {
-    background: var(--dark);
+    background: var(--forest);
     padding: 18px 50px;
     display: flex;
     justify-content: space-between;
@@ -44,34 +44,36 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 3px double var(--copper);
+    border-bottom: 1px solid rgba(200,169,107,0.35);
   }
 
   header .logo-wrap {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
 
   header .logo-wrap img {
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
   }
 
   header .logo-text {
     color: var(--cream);
-    font-size: 23px;
+    font-size: 21px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    font-family: 'Georgia', 'Vazirmatn', serif;
   }
 
   header .logo-text span {
-    color: var(--copper);
+    color: var(--gold);
+    font-style: italic;
   }
 
   header nav a {
-    color: #d4cdc0;
+    color: #c9cec9;
     text-decoration: none;
     margin-right: 28px;
     font-size: 15px;
@@ -86,12 +88,12 @@
     right: 0;
     width: 0;
     height: 1.5px;
-    background: var(--copper);
+    background: var(--gold);
     transition: 0.3s;
   }
 
   header nav a:hover {
-    color: var(--copper-light);
+    color: var(--gold);
   }
 
   header nav a:hover::after {
@@ -100,7 +102,7 @@
 
   /* ====== Hero ====== */
   .hero {
-    background: var(--dark);
+    background: var(--forest);
     color: var(--cream);
     text-align: center;
     padding: 100px 20px 115px;
@@ -108,26 +110,25 @@
     overflow: hidden;
   }
 
-  /* قاب تزئینی کلاسیک */
   .hero::before {
     content: '';
     position: absolute;
-    top: 30px;
-    left: 30px;
-    right: 30px;
-    bottom: 30px;
-    border: 1px solid rgba(184,115,51,0.25);
+    top: 28px;
+    left: 28px;
+    right: 28px;
+    bottom: 28px;
+    border: 1px solid rgba(200,169,107,0.28);
     pointer-events: none;
   }
 
   .hero::after {
     content: '';
     position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
-    border: 1px solid rgba(184,115,51,0.12);
+    top: 38px;
+    left: 38px;
+    right: 38px;
+    bottom: 38px;
+    border: 1px solid rgba(200,169,107,0.12);
     pointer-events: none;
   }
 
@@ -140,7 +141,7 @@
     width: 135px;
     height: 135px;
     object-fit: contain;
-    margin-bottom: 25px;
+    margin-bottom: 26px;
     animation: float 5s ease-in-out infinite;
   }
 
@@ -149,15 +150,28 @@
     50% { transform: translateY(-10px); }
   }
 
+  .hero .eyebrow {
+    display: inline-block;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
   .hero h1 {
-    font-size: 46px;
+    font-size: 48px;
     margin-bottom: 20px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
   .hero h1 span {
-    color: var(--copper);
+    color: var(--gold);
+    font-style: italic;
+    font-family: 'Georgia', 'Vazirmatn', serif;
   }
 
   .divider {
@@ -166,7 +180,7 @@
     justify-content: center;
     gap: 12px;
     margin: 0 auto 28px;
-    max-width: 250px;
+    max-width: 260px;
   }
 
   .divider::before,
@@ -174,38 +188,37 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(to left, transparent, var(--copper), transparent);
+    background: linear-gradient(to left, transparent, var(--gold), transparent);
   }
 
   .divider .diamond {
-    color: var(--copper);
+    color: var(--brick);
     font-size: 11px;
   }
 
   .hero p {
     font-size: 16px;
-    color: #c9c2b5;
-    max-width: 640px;
-    margin: 0 auto 38px;
+    color: #c4cbc6;
+    max-width: 660px;
+    margin: 0 auto 40px;
   }
 
   .btn {
     display: inline-block;
-    background: transparent;
-    color: var(--copper);
+    background: var(--brick);
+    color: var(--cream);
     padding: 14px 46px;
-    border: 1.5px solid var(--copper);
+    border: 1.5px solid var(--brick);
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 1px;
     transition: 0.4s;
-    position: relative;
   }
 
   .btn:hover {
-    background: var(--copper);
-    color: var(--dark);
+    background: transparent;
+    color: var(--brick);
   }
 
   /* ====== ویژگی‌ها ====== */
@@ -217,8 +230,8 @@
 
   .features h2 {
     text-align: center;
-    font-size: 32px;
-    color: var(--dark);
+    font-size: 34px;
+    color: var(--forest);
     margin-bottom: 14px;
     font-weight: 700;
   }
@@ -226,8 +239,10 @@
   .features .sub {
     text-align: center;
     color: var(--muted);
-    margin-bottom: 50px;
+    margin-bottom: 45px;
     font-size: 15px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
   }
 
   .features .ornament {
@@ -243,11 +258,11 @@
     content: '';
     width: 60px;
     height: 1px;
-    background: var(--copper);
+    background: var(--gold);
   }
 
   .features .ornament span {
-    color: var(--copper);
+    color: var(--brick);
     font-size: 12px;
   }
 
@@ -261,10 +276,10 @@
 
   .card {
     background: var(--paper);
-    padding: 45px 32px;
+    padding: 48px 32px;
     text-align: center;
     position: relative;
-    border: 1px solid #e2d9c8;
+    border: 1px solid #e4ddca;
     transition: 0.4s;
   }
 
@@ -275,7 +290,7 @@
     position: absolute;
     width: 22px;
     height: 22px;
-    border: 1.5px solid var(--copper);
+    border: 1.5px solid var(--gold);
     transition: 0.4s;
   }
 
@@ -295,8 +310,8 @@
 
   .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 15px 40px rgba(28,26,23,0.12);
-    border-color: var(--copper);
+    box-shadow: 0 18px 45px rgba(20,42,35,0.15);
+    border-color: var(--gold);
   }
 
   .card:hover::before,
@@ -306,12 +321,12 @@
   }
 
   .card .icon-circle {
-    width: 80px;
-    height: 80px;
+    width: 82px;
+    height: 82px;
     margin: 0 auto 24px;
     border-radius: 50%;
     background: var(--paper);
-    border: 1.5px solid var(--copper);
+    border: 1.5px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,13 +337,13 @@
   .card .icon-circle::after {
     content: '';
     position: absolute;
-    inset: 5px;
+    inset: 6px;
     border-radius: 50%;
-    border: 1px dashed rgba(184,115,51,0.4);
+    border: 1px dashed rgba(184,92,69,0.5);
   }
 
   .card h3 {
-    color: var(--dark);
+    color: var(--forest);
     margin-bottom: 14px;
     font-size: 21px;
     font-weight: 700;
@@ -341,7 +356,7 @@
 
   /* ====== بخش رایگان ====== */
   .free {
-    background: var(--dark);
+    background: var(--forest);
     color: var(--cream);
     text-align: center;
     padding: 90px 20px;
@@ -352,11 +367,11 @@
   .free::before {
     content: '';
     position: absolute;
-    top: 25px;
-    left: 25px;
-    right: 25px;
-    bottom: 25px;
-    border: 1px solid rgba(184,115,51,0.2);
+    top: 24px;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    border: 1px solid rgba(200,169,107,0.22);
     pointer-events: none;
   }
 
@@ -366,44 +381,52 @@
   }
 
   .free .icon-big {
-    font-size: 42px;
-    margin-bottom: 20px;
-    color: var(--copper);
+    font-size: 38px;
+    margin-bottom: 22px;
+    color: var(--gold);
   }
 
   .free h2 {
-    font-size: 32px;
+    font-size: 34px;
     margin-bottom: 20px;
     font-weight: 700;
   }
 
   .free h2 span {
-    color: var(--copper);
+    color: var(--gold);
+    font-style: italic;
+    font-family: 'Georgia', 'Vazirmatn', serif;
   }
 
   .free p {
     font-size: 16px;
     max-width: 640px;
     margin: 0 auto;
-    color: #c9c2b5;
+    color: #c4cbc6;
   }
 
   /* ====== فوتر ====== */
   footer {
-    background: #14120f;
-    color: #8a8377;
+    background: #0d1c17;
+    color: #8a938d;
     text-align: center;
     padding: 35px 20px;
     font-size: 14px;
-    border-top: 3px double var(--copper);
+    border-top: 1px solid rgba(200,169,107,0.35);
   }
 
   footer .brand {
-    color: var(--copper);
+    color: var(--gold);
     font-weight: 700;
     font-size: 17px;
     margin-bottom: 8px;
     letter-spacing: 1px;
+    font-family: 'Georgia', 'Vazirmatn', serif;
+  }
+
+  footer .brand em {
+    color: var(--brick);
+    font-style: italic;
   }
 
   /* ====== موبایل ====== */
@@ -423,7 +446,7 @@
     .hero::before { top: 15px; left: 15px; right: 15px; bottom: 15px; }
     .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
     .features h2 { font-size: 25px; }
-    .free h2 { font-size: 24px; }
+    .free h2 { font-size: 25px; }
   }
 </style>
 </head>
@@ -432,8 +455,8 @@
   <!-- هدر -->
   <header>
     <div class="logo-wrap">
-      <img src="logo.png" alt="کوانتم">
-      <div class="logo-text">کوانتم<span>.</span></div>
+      <img src="logo.png" alt="Quantum College">
+      <div class="logo-text">Quantum <span>College</span></div>
     </div>
     <nav>
       <a href="#features">امکانات</a>
@@ -444,8 +467,9 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <img src="logo.png" alt="کوانتم" class="logo-big">
-      <h1>به <span>کوانتم</span> خوش آمدی</h1>
+      <img src="logo.png" alt="Quantum College" class="logo-big">
+      <div class="eyebrow">Est. 2026</div>
+      <h1>به <span>Quantum College</span> خوش آمدی</h1>
       <div class="divider"><span class="diamond">◆</span></div>
       <p>
         همراه ساده‌ی مسیر کنکور؛ با آزمون‌های آنلاین و جزوه‌های کوچک و مفید — کاملاً رایگان.
@@ -479,16 +503,16 @@
   <section class="free" id="free">
     <div class="content">
       <div class="icon-big">◆</div>
-      <h2>کوانتم <span>۱۰۰٪ رایگان</span> است</h2>
+      <h2>Quantum College <span>۱۰۰٪ رایگان</span> است</h2>
       <p>
-        تمام امکانات کوانتم برای همه‌ی دانش‌آموزان ایرانی، بدون هیچ هزینه‌ای در دسترسه.
+        تمام امکانات برای همه‌ی دانش‌آموزان ایرانی، بدون هیچ هزینه‌ای در دسترسه.
       </p>
     </div>
   </section>
 
   <!-- فوتر -->
   <footer>
-    <div class="brand">کوانتم</div>
+    <div class="brand">Quantum <em>College</em></div>
     <p>© ۱۴۰۴ | ساخته شده با ❤️ برای دانش‌آموزان کنکوری</p>
   </footer>
 
