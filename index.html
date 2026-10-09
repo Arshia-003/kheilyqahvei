@@ -4,14 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>کوانتم | همراه کنکوری‌ها</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
+
+<!-- فاوآیکن (لوگو بالای تب مرورگر) -->
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<!-- فونت کلاسیک نسخ‌مانند -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Estedad', 'Vazirmatn', 'Tahoma', sans-serif;
+    font-family: 'Noto Naskh Arabic', 'Tahoma', serif;
   }
 
   :root {
@@ -29,15 +37,15 @@
   body {
     background: var(--cream);
     color: var(--text);
-    line-height: 2;
+    line-height: 2.1;
     overflow-x: hidden;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   /* ====== هدر ====== */
   header {
     background: var(--forest);
-    padding: 18px 50px;
+    padding: 16px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,17 +61,33 @@
     gap: 14px;
   }
 
-  header .logo-wrap img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
+  /* لوگوی دایره‌ای */
+  header .logo-wrap .logo-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--forest-soft);
+    box-shadow: 0 0 0 3px rgba(200,169,107,0.15);
+    flex-shrink: 0;
+  }
+
+  header .logo-wrap .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   header .logo-text {
     color: var(--cream);
-    font-size: 23px;
+    font-size: 26px;
     font-weight: 700;
     letter-spacing: 1px;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   header .logo-text span {
@@ -74,7 +98,7 @@
     color: #c9cec9;
     text-decoration: none;
     margin-right: 28px;
-    font-size: 15px;
+    font-size: 16px;
     position: relative;
     transition: 0.3s;
   }
@@ -135,12 +159,27 @@
     z-index: 2;
   }
 
-  .hero .logo-big {
-    width: 135px;
-    height: 135px;
-    object-fit: contain;
-    margin-bottom: 28px;
+  /* لوگوی بزرگ دایره‌ای در Hero */
+  .hero .logo-big-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--forest-soft);
+    box-shadow: 0 0 0 6px rgba(200,169,107,0.15),
+                0 0 40px rgba(200,169,107,0.25);
+    margin: 0 auto 32px;
     animation: float 5s ease-in-out infinite;
+  }
+
+  .hero .logo-big-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   @keyframes float {
@@ -149,11 +188,12 @@
   }
 
   .hero h1 {
-    font-size: 52px;
+    font-size: 54px;
     margin-bottom: 22px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 1px;
     color: var(--cream);
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   .hero h1 span {
@@ -183,7 +223,7 @@
   }
 
   .hero p {
-    font-size: 16px;
+    font-size: 17px;
     color: #c4cbc6;
     max-width: 660px;
     margin: 0 auto 40px;
@@ -193,13 +233,14 @@
     display: inline-block;
     background: var(--brick);
     color: var(--cream);
-    padding: 14px 46px;
+    padding: 12px 46px;
     border: 1.5px solid var(--brick);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: 0.4s;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   .btn:hover {
@@ -216,17 +257,18 @@
 
   .features h2 {
     text-align: center;
-    font-size: 34px;
+    font-size: 38px;
     color: var(--forest);
     margin-bottom: 14px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   .features .sub {
     text-align: center;
     color: var(--muted);
     margin-bottom: 45px;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .features .ornament {
@@ -328,13 +370,14 @@
   .card h3 {
     color: var(--forest);
     margin-bottom: 14px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   .card p {
     color: var(--muted);
-    font-size: 15px;
+    font-size: 16px;
   }
 
   /* ====== بخش رایگان ====== */
@@ -370,9 +413,10 @@
   }
 
   .free h2 {
-    font-size: 34px;
+    font-size: 38px;
     margin-bottom: 20px;
-    font-weight: 800;
+    font-weight: 700;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   .free h2 span {
@@ -380,7 +424,7 @@
   }
 
   .free p {
-    font-size: 16px;
+    font-size: 17px;
     max-width: 640px;
     margin: 0 auto;
     color: #c4cbc6;
@@ -392,16 +436,17 @@
     color: #8a938d;
     text-align: center;
     padding: 35px 20px;
-    font-size: 14px;
+    font-size: 15px;
     border-top: 1px solid rgba(200,169,107,0.35);
   }
 
   footer .brand {
     color: var(--gold);
     font-weight: 700;
-    font-size: 19px;
+    font-size: 22px;
     margin-bottom: 8px;
     letter-spacing: 1px;
+    font-family: 'Noto Naskh Arabic', serif;
   }
 
   /* ====== موبایل ====== */
@@ -413,15 +458,15 @@
     }
     header nav a {
       margin: 0 10px;
-      font-size: 14px;
+      font-size: 15px;
     }
-    .hero h1 { font-size: 32px; }
-    .hero p { font-size: 14px; }
-    .hero .logo-big { width: 100px; height: 100px; }
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 15px; }
+    .hero .logo-big-circle { width: 110px; height: 110px; }
     .hero::before { top: 15px; left: 15px; right: 15px; bottom: 15px; }
     .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
-    .features h2 { font-size: 25px; }
-    .free h2 { font-size: 25px; }
+    .features h2 { font-size: 27px; }
+    .free h2 { font-size: 27px; }
   }
 </style>
 </head>
@@ -430,7 +475,9 @@
   <!-- هدر -->
   <header>
     <div class="logo-wrap">
-      <img src="logo.png" alt="کوانتم">
+      <div class="logo-circle">
+        <img src="logo.png" alt="کوانتم">
+      </div>
       <div class="logo-text">کوانتم<span>.</span></div>
     </div>
     <nav>
@@ -442,7 +489,9 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <img src="logo.png" alt="کوانتم" class="logo-big">
+      <div class="logo-big-circle">
+        <img src="logo.png" alt="کوانتم">
+      </div>
       <h1>به <span>کوانتم</span> خوش آمدی</h1>
       <div class="divider"><span class="diamond">◆</span></div>
       <p>
