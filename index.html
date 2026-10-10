@@ -315,7 +315,7 @@
     text-align: center;
     position: relative;
     border: 1px solid #e4ddca;
-    border-radius: 4px;                            /* حالت عادی: گوشه‌های کمی گرد */
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -345,13 +345,12 @@
     border-top: none;
   }
 
-  /* هاور روی کارت - همون انیمیشن دکمه‌ها */
+  /* هاور روی کارت - فقط بزرگ‌تر و سایه، بدون تغییر شکل */
   .card:hover {
-    transform: translateY(-8px) scale(1.05);
-    border-radius: 999px;                          /* بیضی */
-    padding: 55px 50px;                            /* کشیده‌تر تا بیضی قشنگ بشه */
+    transform: translateY(-6px) scale(1.04);
     box-shadow: 0 22px 55px rgba(20,42,35,0.22);
     border-color: var(--gold);
+    /* نکته: border-radius عوض نمی‌شه — کارت مربعی می‌مونه */
   }
 
   .card:hover::before,
@@ -384,13 +383,13 @@
     inset: 6px;
     border-radius: 50%;
     border: 1px dashed rgba(184,92,69,0.5);
-    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: border-color 0.5s ease;
   }
 
-  /* با هاور روی کارت، حلقه شروع به چرخش می‌کنه */
+  /* با هاور روی کارت، حلقه شروع به چرخش می‌کنه - آروم و باوقار */
   .card:hover .icon-circle::after {
     border-color: var(--gold);
-    animation: spin 6s linear infinite;
+    animation: spin 20s linear infinite;
   }
 
   /* با هاور، خود دایره هم یه کوچولو بزرگ‌تر می‌شه */
@@ -490,7 +489,6 @@
     .free h2 { font-size: 26px; }
     .btn { padding: 12px 36px; }
     .btn:hover { padding: 12px 44px; }
-    .card:hover { padding: 55px 35px; }
   }
 </style>
 </head>
