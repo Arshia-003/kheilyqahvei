@@ -2,7 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#142A23">
 <title>کوانتم | همراه کنکوری‌ها</title>
 
 <!-- فاوآیکن -->
@@ -21,6 +22,7 @@
     box-sizing: border-box;
     font-family: 'Vazirmatn', 'Tahoma', sans-serif;
     font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
   }
 
   :root {
@@ -35,10 +37,14 @@
     --muted: #6b756e;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background: var(--cream);
     color: var(--text);
-    line-height: 2;
+    line-height: 1.9;
     overflow-x: hidden;
     font-size: 15px;
     font-family: 'Vazirmatn', sans-serif;
@@ -56,6 +62,12 @@
     font-weight: 700;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
   /* ====== هدر ====== */
   header {
     background: var(--forest);
@@ -67,12 +79,14 @@
     top: 0;
     z-index: 100;
     border-bottom: 1px solid rgba(200,169,107,0.35);
+    gap: 16px;
   }
 
   header .logo-wrap {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
+    min-width: 0;
   }
 
   header .logo-wrap .logo-circle {
@@ -99,6 +113,7 @@
     color: var(--cream);
     font-size: 24px;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
 
   header .logo-text span {
@@ -117,6 +132,7 @@
     font-size: 15px;
     letter-spacing: 0.5px;
     cursor: pointer;
+    white-space: nowrap;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -199,6 +215,7 @@
     margin-bottom: 22px;
     letter-spacing: 0.5px;
     color: var(--cream);
+    line-height: 1.4;
   }
 
   .hero h1 span {
@@ -263,6 +280,7 @@
     padding: 100px 20px;
     max-width: 1000px;
     margin: 0 auto;
+    width: 100%;
   }
 
   .features h2 {
@@ -270,6 +288,7 @@
     font-size: 36px;
     color: var(--forest);
     margin-bottom: 14px;
+    line-height: 1.4;
   }
 
   .features .sub {
@@ -320,7 +339,6 @@
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* گوشه‌های تزئینی */
   .card::before,
   .card::after {
     content: '';
@@ -345,12 +363,10 @@
     border-top: none;
   }
 
-  /* هاور روی کارت - فقط بزرگ‌تر و سایه، بدون تغییر شکل */
   .card:hover {
     transform: translateY(-6px) scale(1.04);
     box-shadow: 0 22px 55px rgba(20,42,35,0.22);
     border-color: var(--gold);
-    /* نکته: border-radius عوض نمی‌شه — کارت مربعی می‌مونه */
   }
 
   .card:hover::before,
@@ -360,7 +376,6 @@
     border-color: var(--brick);
   }
 
-  /* ====== دایره‌ی آیکن ====== */
   .card .icon-circle {
     width: 82px;
     height: 82px;
@@ -376,7 +391,6 @@
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* حلقه‌ی چیندار - توی حالت عادی ثابت */
   .card .icon-circle::after {
     content: '';
     position: absolute;
@@ -386,13 +400,11 @@
     transition: border-color 0.5s ease;
   }
 
-  /* با هاور روی کارت، حلقه شروع به چرخش می‌کنه - آروم و باوقار */
   .card:hover .icon-circle::after {
     border-color: var(--gold);
     animation: spin 20s linear infinite;
   }
 
-  /* با هاور، خود دایره هم یه کوچولو بزرگ‌تر می‌شه */
   .card:hover .icon-circle {
     transform: scale(1.1);
     border-color: var(--brick);
@@ -455,6 +467,7 @@
   .free h2 {
     font-size: 36px;
     margin-bottom: 20px;
+    line-height: 1.5;
   }
 
   .free h2 span {
@@ -474,21 +487,267 @@
     border-top: 1px solid rgba(200,169,107,0.35);
   }
 
-  @media (max-width: 700px) {
-    header { padding: 14px 18px; }
-    header .logo-text { font-size: 20px; }
-    header .logo-wrap .logo-circle { width: 44px; height: 44px; }
-    .auth-btn { padding: 8px 20px; font-size: 14px; }
-    .auth-btn:hover { padding: 8px 26px; }
-    .hero h1 { font-size: 32px; }
-    .hero p { font-size: 14px; }
-    .hero .logo-big-circle { width: 110px; height: 110px; }
-    .hero::before { top: 15px; left: 15px; right: 15px; bottom: 15px; }
-    .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
-    .features h2 { font-size: 26px; }
-    .free h2 { font-size: 26px; }
-    .btn { padding: 12px 36px; }
-    .btn:hover { padding: 12px 44px; }
+  /* ============================================
+     📱 RESPONSIVE - تبلت
+     ============================================ */
+  @media (max-width: 900px) {
+    header {
+      padding: 14px 24px;
+    }
+
+    .features {
+      padding: 80px 20px;
+    }
+
+    .hero {
+      padding: 80px 20px 95px;
+    }
+  }
+
+  /* ============================================
+     📱 RESPONSIVE - موبایل
+     ============================================ */
+  @media (max-width: 640px) {
+    body {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* ---- هدر ---- */
+    header {
+      padding: 12px 16px;
+      gap: 10px;
+    }
+
+    header .logo-wrap {
+      gap: 10px;
+    }
+
+    header .logo-wrap .logo-circle {
+      width: 42px;
+      height: 42px;
+      border-width: 1.5px;
+      box-shadow: 0 0 0 2px rgba(200,169,107,0.15);
+    }
+
+    header .logo-text {
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .auth-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      border-width: 1.3px;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      padding: 60px 22px 75px;
+    }
+
+    .hero::before {
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+    }
+
+    .hero::after {
+      top: 22px;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+    }
+
+    .hero .logo-big-circle {
+      width: 105px;
+      height: 105px;
+      border-width: 2px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 0 4px rgba(200,169,107,0.15),
+                  0 0 25px rgba(200,169,107,0.25);
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .divider {
+      max-width: 180px;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 32px;
+      padding: 0 6px;
+    }
+
+    .btn {
+      padding: 13px 40px;
+      font-size: 15px;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    /* ---- ویژگی‌ها ---- */
+    .features {
+      padding: 60px 18px;
+    }
+
+    .features h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .features .sub {
+      font-size: 13.5px;
+      margin-bottom: 32px;
+    }
+
+    .features .ornament {
+      margin-bottom: 38px;
+    }
+
+    .features .ornament::before,
+    .features .ornament::after {
+      width: 45px;
+    }
+
+    .cards {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      padding: 36px 24px;
+    }
+
+    /* حذف افکت‌های هاور روی موبایل - چون لمس معنی نداره */
+    .card:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: #e4ddca;
+    }
+
+    .card:hover::before,
+    .card:hover::after {
+      width: 22px;
+      height: 22px;
+      border-color: var(--gold);
+    }
+
+    .card:hover .icon-circle {
+      transform: none;
+      border-color: var(--gold);
+      box-shadow: none;
+    }
+
+    .card:hover .icon-circle::after {
+      animation: none;
+      border-color: rgba(184,92,69,0.5);
+    }
+
+    .card:hover h3 {
+      color: var(--forest);
+    }
+
+    .card .icon-circle {
+      width: 72px;
+      height: 72px;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* ---- بخش رایگان ---- */
+    .free {
+      padding: 60px 22px;
+    }
+
+    .free::before {
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+    }
+
+    .free .icon-big {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .free h2 {
+      font-size: 22px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .free p {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+  }
+
+  /* ============================================
+     📱 موبایل خیلی کوچک (مثل iPhone SE)
+     ============================================ */
+  @media (max-width: 380px) {
+    header {
+      padding: 10px 12px;
+    }
+
+    header .logo-wrap .logo-circle {
+      width: 38px;
+      height: 38px;
+    }
+
+    header .logo-text {
+      font-size: 17px;
+    }
+
+    .auth-btn {
+      padding: 7px 12px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      font-size: 24px;
+    }
+
+    .hero .logo-big-circle {
+      width: 90px;
+      height: 90px;
+    }
+
+    .features h2 {
+      font-size: 21px;
+    }
+
+    .free h2 {
+      font-size: 19px;
+    }
+  }
+
+  /* ============================================
+     🎯 فقط روی دستگاه‌های دارای موس (کامپیوتر)
+     افکت‌های هاور فعال باشن
+     ============================================ */
+  @media (hover: hover) and (pointer: fine) {
+    /* همه‌چیز همون‌طور که بود می‌مونه */
   }
 </style>
 </head>
