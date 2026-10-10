@@ -6,11 +6,9 @@
 <meta name="theme-color" content="#142A23">
 <title>کوانتم | همراه کنکوری‌ها</title>
 
-<!-- فاوآیکن -->
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 
-<!-- فونت‌ها -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
@@ -37,9 +35,7 @@
     --muted: #6b756e;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--cream);
@@ -62,11 +58,7 @@
     font-weight: 700;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
+  img { max-width: 100%; height: auto; display: block; }
 
   /* ====== هدر ====== */
   header {
@@ -116,11 +108,8 @@
     white-space: nowrap;
   }
 
-  header .logo-text span {
-    color: var(--gold);
-  }
+  header .logo-text span { color: var(--gold); }
 
-  /* ====== دکمه ثبت‌نام / ورود ====== */
   .auth-btn {
     display: inline-block;
     background: transparent;
@@ -159,10 +148,7 @@
   .hero::before {
     content: '';
     position: absolute;
-    top: 28px;
-    left: 28px;
-    right: 28px;
-    bottom: 28px;
+    top: 28px; left: 28px; right: 28px; bottom: 28px;
     border: 1px solid rgba(200,169,107,0.28);
     pointer-events: none;
   }
@@ -170,18 +156,12 @@
   .hero::after {
     content: '';
     position: absolute;
-    top: 38px;
-    left: 38px;
-    right: 38px;
-    bottom: 38px;
+    top: 38px; left: 38px; right: 38px; bottom: 38px;
     border: 1px solid rgba(200,169,107,0.12);
     pointer-events: none;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-  }
+  .hero-content { position: relative; z-index: 2; }
 
   .hero .logo-big-circle {
     width: 150px;
@@ -199,11 +179,7 @@
     animation: float 5s ease-in-out infinite;
   }
 
-  .hero .logo-big-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .hero .logo-big-circle img { width: 100%; height: 100%; object-fit: cover; }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -218,9 +194,7 @@
     line-height: 1.4;
   }
 
-  .hero h1 span {
-    color: var(--gold);
-  }
+  .hero h1 span { color: var(--gold); }
 
   .divider {
     display: flex;
@@ -239,10 +213,7 @@
     background: linear-gradient(to left, transparent, var(--gold), transparent);
   }
 
-  .divider .diamond {
-    color: var(--brick);
-    font-size: 11px;
-  }
+  .divider .diamond { color: var(--brick); font-size: 11px; }
 
   .hero p {
     font-size: 16px;
@@ -251,7 +222,6 @@
     margin: 0 auto 40px;
   }
 
-  /* ====== دکمه شروع کن ====== */
   .btn {
     display: inline-block;
     background: var(--brick);
@@ -314,10 +284,7 @@
     background: var(--gold);
   }
 
-  .features .ornament span {
-    color: var(--brick);
-    font-size: 12px;
-  }
+  .features .ornament span { color: var(--brick); font-size: 12px; }
 
   .cards {
     display: grid;
@@ -327,7 +294,6 @@
     margin: 0 auto;
   }
 
-  /* ====== کارت‌ها ====== */
   .card {
     background: var(--paper);
     padding: 48px 32px;
@@ -350,17 +316,13 @@
   }
 
   .card::before {
-    top: 10px;
-    right: 10px;
-    border-left: none;
-    border-bottom: none;
+    top: 10px; right: 10px;
+    border-left: none; border-bottom: none;
   }
 
   .card::after {
-    bottom: 10px;
-    left: 10px;
-    border-right: none;
-    border-top: none;
+    bottom: 10px; left: 10px;
+    border-right: none; border-top: none;
   }
 
   .card:hover {
@@ -371,14 +333,12 @@
 
   .card:hover::before,
   .card:hover::after {
-    width: 34px;
-    height: 34px;
+    width: 34px; height: 34px;
     border-color: var(--brick);
   }
 
   .card .icon-circle {
-    width: 82px;
-    height: 82px;
+    width: 82px; height: 82px;
     margin: 0 auto 24px;
     border-radius: 50%;
     background: var(--paper);
@@ -423,14 +383,9 @@
     transition: color 0.4s;
   }
 
-  .card:hover h3 {
-    color: var(--brick);
-  }
+  .card:hover h3 { color: var(--brick); }
 
-  .card p {
-    color: var(--muted);
-    font-size: 15px;
-  }
+  .card p { color: var(--muted); font-size: 15px; }
 
   /* ====== بخش رایگان ====== */
   .free {
@@ -445,18 +400,12 @@
   .free::before {
     content: '';
     position: absolute;
-    top: 24px;
-    left: 24px;
-    right: 24px;
-    bottom: 24px;
+    top: 24px; left: 24px; right: 24px; bottom: 24px;
     border: 1px solid rgba(200,169,107,0.22);
     pointer-events: none;
   }
 
-  .free .content {
-    position: relative;
-    z-index: 2;
-  }
+  .free .content { position: relative; z-index: 2; }
 
   .free .icon-big {
     font-size: 38px;
@@ -470,9 +419,7 @@
     line-height: 1.5;
   }
 
-  .free h2 span {
-    color: var(--gold);
-  }
+  .free h2 span { color: var(--gold); }
 
   .free p {
     font-size: 16px;
@@ -488,81 +435,240 @@
   }
 
   /* ============================================
+     🔮 مودال (پنجره‌ی کوچک)
+     ============================================ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 42, 35, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-box {
+    background: var(--paper);
+    max-width: 580px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid var(--gold);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35),
+                0 0 0 1px rgba(200,169,107,0.2);
+    padding: 55px 45px 45px;
+    transform: scale(0.92) translateY(20px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.4s ease;
+  }
+
+  .modal-overlay.active .modal-box {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+
+  /* قاب داخلی کلاسیک */
+  .modal-box::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(200,169,107,0.35);
+    pointer-events: none;
+  }
+
+  /* گوشه‌های تزئینی */
+  .modal-box::after {
+    content: '';
+    position: absolute;
+    top: 22px; right: 22px;
+    width: 26px; height: 26px;
+    border-top: 1.5px solid var(--brick);
+    border-right: 1.5px solid var(--brick);
+    pointer-events: none;
+  }
+
+  /* خط تزئینی گوشه‌ی پایین چپ */
+  .modal-corner {
+    position: absolute;
+    bottom: 22px; left: 22px;
+    width: 26px; height: 26px;
+    border-bottom: 1.5px solid var(--brick);
+    border-left: 1.5px solid var(--brick);
+    pointer-events: none;
+  }
+
+  /* دکمه‌ی بستن */
+  .modal-close {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 5;
+    font-family: 'Vazirmatn', sans-serif;
+    padding-bottom: 3px;
+  }
+
+  .modal-close:hover {
+    background: var(--brick);
+    border-color: var(--brick);
+    color: var(--cream);
+    transform: rotate(90deg);
+  }
+
+  /* محتوای مودال */
+  .modal-content {
+    position: relative;
+    z-index: 2;
+    color: var(--text);
+  }
+
+  .modal-content .modal-title {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: var(--forest);
+    margin-bottom: 8px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .modal-content .modal-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .modal-content .modal-ornament::before,
+  .modal-content .modal-ornament::after {
+    content: '';
+    width: 45px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .modal-content .modal-ornament span {
+    color: var(--brick);
+    font-size: 11px;
+  }
+
+  .modal-content p {
+    font-size: 15px;
+    line-height: 2.1;
+    color: #3a4440;
+    margin-bottom: 16px;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  .modal-content p strong {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    color: var(--forest);
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    margin-top: 8px;
+    border-top: 1px dashed rgba(200,169,107,0.5);
+    border-bottom: 1px dashed rgba(200,169,107,0.5);
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+
+  .modal-content .modal-signature {
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: var(--brick);
+    font-size: 14px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(200,169,107,0.35);
+    position: relative;
+  }
+
+  .modal-content .modal-signature::before {
+    content: '◆';
+    color: var(--gold);
+    font-size: 10px;
+    display: block;
+    margin-bottom: 10px;
+    font-style: normal;
+  }
+
+  /* اسکرول‌بار مودال */
+  .modal-box::-webkit-scrollbar {
+    width: 6px;
+  }
+  .modal-box::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .modal-box::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 3px;
+  }
+
+  /* ============================================
      📱 RESPONSIVE - تبلت
      ============================================ */
   @media (max-width: 900px) {
-    header {
-      padding: 14px 24px;
-    }
-
-    .features {
-      padding: 80px 20px;
-    }
-
-    .hero {
-      padding: 80px 20px 95px;
-    }
+    header { padding: 14px 24px; }
+    .features { padding: 80px 20px; }
+    .hero { padding: 80px 20px 95px; }
   }
 
   /* ============================================
      📱 RESPONSIVE - موبایل
      ============================================ */
   @media (max-width: 640px) {
-    body {
-      font-size: 14px;
-      line-height: 1.9;
-    }
+    body { font-size: 14px; line-height: 1.9; }
 
-    /* ---- هدر ---- */
-    header {
-      padding: 12px 16px;
-      gap: 10px;
-    }
-
-    header .logo-wrap {
-      gap: 10px;
-    }
-
+    header { padding: 12px 16px; gap: 10px; }
+    header .logo-wrap { gap: 10px; }
     header .logo-wrap .logo-circle {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       border-width: 1.5px;
       box-shadow: 0 0 0 2px rgba(200,169,107,0.15);
     }
-
-    header .logo-text {
-      font-size: 19px;
-      letter-spacing: 0;
-    }
-
+    header .logo-text { font-size: 19px; letter-spacing: 0; }
     .auth-btn {
       padding: 8px 16px;
       font-size: 13px;
       border-width: 1.3px;
     }
 
-    /* ---- Hero ---- */
-    .hero {
-      padding: 60px 22px 75px;
-    }
-
-    .hero::before {
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-    }
-
-    .hero::after {
-      top: 22px;
-      left: 22px;
-      right: 22px;
-      bottom: 22px;
-    }
+    .hero { padding: 60px 22px 75px; }
+    .hero::before { top: 14px; left: 14px; right: 14px; bottom: 14px; }
+    .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
 
     .hero .logo-big-circle {
-      width: 105px;
-      height: 105px;
+      width: 105px; height: 105px;
       border-width: 2px;
       margin-bottom: 24px;
       box-shadow: 0 0 0 4px rgba(200,169,107,0.15),
@@ -575,10 +681,7 @@
       line-height: 1.5;
     }
 
-    .divider {
-      max-width: 180px;
-      margin-bottom: 22px;
-    }
+    .divider { max-width: 180px; margin-bottom: 22px; }
 
     .hero p {
       font-size: 14px;
@@ -594,160 +697,86 @@
       max-width: 260px;
     }
 
-    /* ---- ویژگی‌ها ---- */
-    .features {
-      padding: 60px 18px;
-    }
-
-    .features h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .features .sub {
-      font-size: 13.5px;
-      margin-bottom: 32px;
-    }
-
-    .features .ornament {
-      margin-bottom: 38px;
-    }
-
+    .features { padding: 60px 18px; }
+    .features h2 { font-size: 24px; margin-bottom: 10px; }
+    .features .sub { font-size: 13.5px; margin-bottom: 32px; }
+    .features .ornament { margin-bottom: 38px; }
     .features .ornament::before,
-    .features .ornament::after {
-      width: 45px;
-    }
+    .features .ornament::after { width: 45px; }
 
-    .cards {
-      grid-template-columns: 1fr;
-      gap: 22px;
-    }
+    .cards { grid-template-columns: 1fr; gap: 22px; }
+    .card { padding: 36px 24px; }
 
-    .card {
-      padding: 36px 24px;
-    }
-
-    /* حذف افکت‌های هاور روی موبایل - چون لمس معنی نداره */
-    .card:hover {
-      transform: none;
-      box-shadow: none;
-      border-color: #e4ddca;
-    }
-
+    .card:hover { transform: none; box-shadow: none; border-color: #e4ddca; }
     .card:hover::before,
     .card:hover::after {
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       border-color: var(--gold);
     }
-
     .card:hover .icon-circle {
       transform: none;
       border-color: var(--gold);
       box-shadow: none;
     }
-
     .card:hover .icon-circle::after {
       animation: none;
       border-color: rgba(184,92,69,0.5);
     }
-
-    .card:hover h3 {
-      color: var(--forest);
-    }
+    .card:hover h3 { color: var(--forest); }
 
     .card .icon-circle {
-      width: 72px;
-      height: 72px;
+      width: 72px; height: 72px;
       font-size: 30px;
       margin-bottom: 20px;
     }
+    .card h3 { font-size: 19px; margin-bottom: 12px; }
+    .card p { font-size: 14px; line-height: 1.9; }
 
-    .card h3 {
-      font-size: 19px;
-      margin-bottom: 12px;
+    .free { padding: 60px 22px; }
+    .free::before { top: 14px; left: 14px; right: 14px; bottom: 14px; }
+    .free .icon-big { font-size: 32px; margin-bottom: 16px; }
+    .free h2 { font-size: 22px; line-height: 1.6; margin-bottom: 16px; }
+    .free p { font-size: 14px; line-height: 1.9; }
+
+    /* ---- مودال موبایل ---- */
+    .modal-overlay { padding: 12px; }
+    .modal-box {
+      padding: 50px 22px 32px;
+      max-height: 92vh;
+      border-width: 1px;
+    }
+    .modal-box::before { inset: 10px; }
+    .modal-box::after { top: 18px; right: 18px; width: 20px; height: 20px; }
+    .modal-corner { bottom: 18px; left: 18px; width: 20px; height: 20px; }
+
+    .modal-close {
+      top: 20px;
+      left: 20px;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
     }
 
-    .card p {
-      font-size: 14px;
+    .modal-content .modal-title { font-size: 20px; }
+    .modal-content .modal-ornament { margin-bottom: 20px; }
+    .modal-content p { font-size: 14px; line-height: 2; }
+    .modal-content p strong {
+      font-size: 13.5px;
+      padding: 12px 12px;
       line-height: 1.9;
     }
-
-    /* ---- بخش رایگان ---- */
-    .free {
-      padding: 60px 22px;
-    }
-
-    .free::before {
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-    }
-
-    .free .icon-big {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-
-    .free h2 {
-      font-size: 22px;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .free p {
-      font-size: 14px;
-      line-height: 1.9;
-    }
+    .modal-content .modal-signature { font-size: 13px; }
   }
 
-  /* ============================================
-     📱 موبایل خیلی کوچک (مثل iPhone SE)
-     ============================================ */
   @media (max-width: 380px) {
-    header {
-      padding: 10px 12px;
-    }
-
-    header .logo-wrap .logo-circle {
-      width: 38px;
-      height: 38px;
-    }
-
-    header .logo-text {
-      font-size: 17px;
-    }
-
-    .auth-btn {
-      padding: 7px 12px;
-      font-size: 12px;
-    }
-
-    .hero h1 {
-      font-size: 24px;
-    }
-
-    .hero .logo-big-circle {
-      width: 90px;
-      height: 90px;
-    }
-
-    .features h2 {
-      font-size: 21px;
-    }
-
-    .free h2 {
-      font-size: 19px;
-    }
-  }
-
-  /* ============================================
-     🎯 فقط روی دستگاه‌های دارای موس (کامپیوتر)
-     افکت‌های هاور فعال باشن
-     ============================================ */
-  @media (hover: hover) and (pointer: fine) {
-    /* همه‌چیز همون‌طور که بود می‌مونه */
+    header { padding: 10px 12px; }
+    header .logo-wrap .logo-circle { width: 38px; height: 38px; }
+    header .logo-text { font-size: 17px; }
+    .auth-btn { padding: 7px 12px; font-size: 12px; }
+    .hero h1 { font-size: 24px; }
+    .hero .logo-big-circle { width: 90px; height: 90px; }
+    .features h2 { font-size: 21px; }
+    .free h2 { font-size: 19px; }
   }
 </style>
 </head>
@@ -783,13 +812,15 @@
     <div class="ornament"><span>◆</span></div>
 
     <div class="cards">
-      <div class="card">
+      <!-- کارت آزمون آنلاین -->
+      <div class="card" data-modal="exam">
         <div class="icon-circle">📝</div>
         <h3>آزمون آنلاین</h3>
         <p>آزمون‌های شبیه‌ساز کنکور با تصحیح خودکار و کارنامه، تا خودت رو محک بزنی.</p>
       </div>
 
-      <div class="card">
+      <!-- کارت جزوه‌ی کوچک -->
+      <div class="card" data-modal="notes">
         <div class="icon-circle">📖</div>
         <h3>جزوه‌ی کوچک</h3>
         <p>خلاصه‌های کوتاه و کاربردی از مهم‌ترین نکات دروس، برای مرور سریع.</p>
@@ -808,6 +839,117 @@
   </section>
 
   <footer></footer>
+
+  <!-- ============================================
+       🔮 مودال آزمون آنلاین
+       ============================================ -->
+  <div class="modal-overlay" id="modal-exam">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="بستن">×</button>
+      <div class="modal-corner"></div>
+
+      <div class="modal-content">
+        <h3 class="modal-title">📝 آزمون آنلاین کوانتم</h3>
+        <div class="modal-ornament"><span>◆</span></div>
+
+        <p>
+          در کوانتم می‌تونی در آزمون‌های آنلاین شرکت کنی، دانسته‌هات رو بسنجی و نتیجه‌ات رو بررسی کنی.
+        </p>
+
+        <p>
+          ما در تلاشیم تا هر روز با اضافه‌کردن سؤال‌های جدید، متنوع‌تر کردن آزمون‌ها و ارائه قابلیت‌های بیشتر، تجربه‌ای بهتر و کامل‌تر از سنجش و یادگیری رو برات فراهم کنیم.
+        </p>
+
+        <p>
+          <strong>این فقط شروع راهه؛ هر روز سؤال‌های بیشتر و امکانات تازه‌تری به کوانتم اضافه می‌شن!</strong>
+        </p>
+
+        <span class="modal-signature">کوانتم؛ قدم‌به‌قدم تا پیشرفت.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       🔮 مودال جزوه‌های کوچک
+       ============================================ -->
+  <div class="modal-overlay" id="modal-notes">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="بستن">×</button>
+      <div class="modal-corner"></div>
+
+      <div class="modal-content">
+        <h3 class="modal-title">📚 جزوه‌های کوچک کوانتم</h3>
+        <div class="modal-ornament"><span>◆</span></div>
+
+        <p>
+          گاهی برای یادگیری بهتر، به یک توضیح ساده و کاربردی نیاز داری؛ نه چندین صفحه متن اضافی!
+        </p>
+
+        <p>
+          جزوه‌های کوچک کوانتم قراره نکات مهم درسی رو به شکلی خلاصه، منظم و قابل‌فهم در اختیارت بذارن تا بتونی مطالب رو راحت‌تر مرور کنی و بهتر یاد بگیری.
+        </p>
+
+        <p>
+          ما هم به‌مرور جزوه‌های بیشتری به مجموعه اضافه می‌کنیم و قابلیت‌های تازه‌ای در اختیار تو قرار می‌دیم تا مسیر یادگیری‌ات کامل‌تر و کاربردی‌تر بشه.
+        </p>
+
+        <p>
+          <strong>هر روز، محتوای بیشتر؛ امکانات بیشتر؛ فرصت‌های بیشتر برای یادگیری!</strong>
+        </p>
+
+        <span class="modal-signature">کوانتم؛ یادگیری هوشمندانه، پیشرفت پیوسته.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // گرفتن همه‌ی کارت‌ها و مودال‌ها
+    const cards = document.querySelectorAll('.card[data-modal]');
+    const overlays = document.querySelectorAll('.modal-overlay');
+
+    // باز کردن مودال با کلیک روی کارت
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const modalId = 'modal-' + card.dataset.modal;
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden'; // قفل اسکرول
+        }
+      });
+    });
+
+    // بستن مودال
+    function closeModal(modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // آزاد کردن اسکرول
+    }
+
+    // بستن با دکمه‌ی X یا کلیک بیرون
+    overlays.forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeModal(overlay);
+        }
+      });
+
+      const closeBtn = overlay.querySelector('.modal-close');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => closeModal(overlay));
+      }
+    });
+
+    // بستن با کلید Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        overlays.forEach(overlay => {
+          if (overlay.classList.contains('active')) {
+            closeModal(overlay);
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
