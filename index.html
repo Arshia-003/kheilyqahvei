@@ -44,16 +44,12 @@
     overflow-x: hidden;
     font-size: 15px;
     font-family: 'Vazirmatn', sans-serif;
-    font-weight: 400;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  h1, h2, h3,
-  .logo-text,
-  .btn,
-  .auth-btn {
+  h1, h2, h3, .logo-text, .btn, .auth-btn {
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
   }
@@ -82,8 +78,7 @@
   }
 
   header .logo-wrap .logo-circle {
-    width: 52px;
-    height: 52px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid var(--gold);
@@ -95,9 +90,7 @@
     flex-shrink: 0;
   }
 
-  header .logo-wrap .logo-circle img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
+  header .logo-wrap .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
 
   header .logo-text {
     color: var(--cream);
@@ -448,10 +441,7 @@
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
-  .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
+  .modal-overlay.active { opacity: 1; visibility: visible; }
 
   .modal-box {
     background: var(--paper);
@@ -459,6 +449,7 @@
     width: 100%;
     max-height: 88vh;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     border: 1px solid var(--gold);
     box-shadow: 0 30px 80px rgba(0,0,0,0.35),
@@ -475,16 +466,15 @@
     opacity: 1;
   }
 
-  /* قاب داخلی کلاسیک */
   .modal-box::before {
     content: '';
     position: absolute;
     inset: 14px;
     border: 1px solid rgba(200,169,107,0.35);
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* گوشه‌ی تزئینی بالا-راست */
   .modal-box::after {
     content: '';
     position: absolute;
@@ -493,9 +483,9 @@
     border-top: 1.5px solid var(--brick);
     border-right: 1.5px solid var(--brick);
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* گوشه‌ی تزئینی پایین-چپ */
   .modal-corner {
     position: absolute;
     bottom: 22px; left: 22px;
@@ -503,48 +493,140 @@
     border-bottom: 1.5px solid var(--brick);
     border-left: 1.5px solid var(--brick);
     pointer-events: none;
+    z-index: 1;
   }
 
   /* ============================================
-     ✕ دکمه‌ی بستن - ضربدر دقیقاً وسط
+     ✕ دکمه‌ی بستن با افکت ذره‌بین (DeepSeek style)
      ============================================ */
-  .modal-close {
+  .modal-close-wrap {
     position: absolute;
     top: 26px;
     left: 26px;
+    width: 44px;
+    height: 44px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* دایره‌ی ذره‌بین - پشت دکمه، با هاور ظاهر می‌شه */
+  .modal-close-wrap .magnifier {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: rgba(200,169,107,0.08);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  /* هاله‌ی نرم پشت ذره‌بین */
+  .modal-close-wrap .magnifier::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,107,0.22) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* حلقه‌ی نبض‌دار (مثل DeepSeek) */
+  .modal-close-wrap .magnifier::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0;
+  }
+
+  /* دکمه‌ی بستن (ضربدر) */
+  .modal-close {
+    position: relative;
     width: 38px;
     height: 38px;
     border-radius: 50%;
     border: 1.5px solid var(--gold);
-    background: transparent;
+    background: var(--paper);
     color: var(--gold);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+    padding-bottom: 2px;
     margin: 0;
     line-height: 1;
-    transition: all 0.3s ease;
-    z-index: 5;
-    /* فونت مخصوص ضربدر که دقیقاً وسط می‌شینه */
     font-family: 'Estedad', 'Tahoma', sans-serif;
     font-size: 22px;
     font-weight: 400;
-    /* نکته: مهم‌ترین خط برای وسط‌چین شدن دقیق ضربدر */
     text-align: center;
-    padding-bottom: 2px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 2;
   }
 
-  .modal-close:hover {
+  /* === هاور روی wrap: نمایش ذره‌بین + زوم دکمه === */
+  .modal-close-wrap:hover .magnifier {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .modal-close-wrap:hover .magnifier::before {
+    opacity: 1;
+    animation: magnifierPulse 2s ease-in-out infinite;
+  }
+
+  .modal-close-wrap:hover .magnifier::after {
+    opacity: 1;
+    animation: magnifierRing 1.8s ease-out infinite;
+  }
+
+  /* خود دکمه با هاور بزرگ‌نمایی می‌شه (حس ذره‌بین) */
+  .modal-close-wrap:hover .modal-close {
+    transform: scale(1.15);
     background: var(--forest);
     border-color: var(--forest);
     color: var(--cream);
-    transform: rotate(90deg);
+    box-shadow: 0 0 0 4px rgba(200,169,107,0.15),
+                0 8px 20px rgba(20,42,35,0.3);
+  }
+
+  /* چرخش ملایم ضربدر موقع هاور */
+  .modal-close-wrap:hover .modal-close {
+    transform: scale(1.15) rotate(90deg);
+  }
+
+  /* انیمیشن هاله‌ی نبض‌دار */
+  @keyframes magnifierPulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.3;
+    }
+  }
+
+  /* انیمیشن حلقه‌ی منتشرشونده */
+  @keyframes magnifierRing {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
   }
 
   /* ============================================
-     🎨 محتوای مودال با رنگ سبز جنگلی
+     🎨 محتوای مودال
      ============================================ */
   .modal-content {
     position: relative;
@@ -579,10 +661,7 @@
     opacity: 0.4;
   }
 
-  .modal-content .modal-ornament span {
-    color: var(--forest);
-    font-size: 11px;
-  }
+  .modal-content .modal-ornament span { color: var(--forest); font-size: 11px; }
 
   .modal-content p {
     font-size: 15px;
@@ -593,7 +672,6 @@
     text-align-last: center;
   }
 
-  /* متن تأکیدی (Strong) - با پس‌زمینه‌ی سبز ملایم */
   .modal-content p strong {
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
@@ -610,7 +688,6 @@
     border-radius: 2px;
   }
 
-  /* گوشه‌های طلایی روی باکس Strong */
   .modal-content p strong::before,
   .modal-content p strong::after {
     content: '';
@@ -630,7 +707,6 @@
     border-right: none; border-top: none;
   }
 
-  /* امضای پایانی */
   .modal-content .modal-signature {
     display: block;
     text-align: center;
@@ -653,7 +729,6 @@
     font-style: normal;
   }
 
-  /* اسکرول‌بار مودال */
   .modal-box::-webkit-scrollbar { width: 6px; }
   .modal-box::-webkit-scrollbar-track { background: transparent; }
   .modal-box::-webkit-scrollbar-thumb {
@@ -681,11 +756,7 @@
       box-shadow: 0 0 0 2px rgba(200,169,107,0.15);
     }
     header .logo-text { font-size: 19px; letter-spacing: 0; }
-    .auth-btn {
-      padding: 8px 16px;
-      font-size: 13px;
-      border-width: 1.3px;
-    }
+    .auth-btn { padding: 8px 16px; font-size: 13px; border-width: 1.3px; }
 
     .hero { padding: 60px 22px 75px; }
     .hero::before { top: 14px; left: 14px; right: 14px; bottom: 14px; }
@@ -738,22 +809,33 @@
     .modal-box::after { top: 18px; right: 18px; width: 20px; height: 20px; }
     .modal-corner { bottom: 18px; left: 18px; width: 20px; height: 20px; }
 
-    .modal-close {
+    .modal-close-wrap {
       top: 20px;
       left: 20px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .modal-close {
       width: 34px;
       height: 34px;
       font-size: 20px;
     }
 
+    /* روی موبایل افکت ذره‌بین غیرفعال */
+    .modal-close-wrap:hover .magnifier { opacity: 0; }
+    .modal-close-wrap:hover .modal-close {
+      transform: none;
+      background: var(--paper);
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: none;
+    }
+
     .modal-content .modal-title { font-size: 20px; }
     .modal-content .modal-ornament { margin-bottom: 20px; }
     .modal-content p { font-size: 14px; line-height: 2; }
-    .modal-content p strong {
-      font-size: 13.5px;
-      padding: 14px 16px;
-      line-height: 1.9;
-    }
+    .modal-content p strong { font-size: 13.5px; padding: 14px 16px; line-height: 1.9; }
     .modal-content .modal-signature { font-size: 13px; }
   }
 
@@ -830,7 +912,11 @@
   <!-- 🔮 مودال آزمون آنلاین -->
   <div class="modal-overlay" id="modal-exam">
     <div class="modal-box">
-      <button class="modal-close" aria-label="بستن">×</button>
+      <!-- دکمه‌ی بستن با ذره‌بین -->
+      <div class="modal-close-wrap">
+        <div class="magnifier"></div>
+        <button class="modal-close" aria-label="بستن">×</button>
+      </div>
       <div class="modal-corner"></div>
 
       <div class="modal-content">
@@ -857,7 +943,10 @@
   <!-- 🔮 مودال جزوه‌های کوچک -->
   <div class="modal-overlay" id="modal-notes">
     <div class="modal-box">
-      <button class="modal-close" aria-label="بستن">×</button>
+      <div class="modal-close-wrap">
+        <div class="magnifier"></div>
+        <button class="modal-close" aria-label="بستن">×</button>
+      </div>
       <div class="modal-corner"></div>
 
       <div class="modal-content">
