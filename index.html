@@ -112,7 +112,7 @@
     color: var(--gold);
     padding: 10px 28px;
     border: 1.5px solid var(--gold);
-    border-radius: 4px;               /* حالت عادی: مستطیل */
+    border-radius: 4px;
     text-decoration: none;
     font-size: 15px;
     letter-spacing: 0.5px;
@@ -123,9 +123,9 @@
   .auth-btn:hover {
     background: var(--gold);
     color: var(--forest);
-    border-radius: 999px;             /* هاور: بیضی */
-    transform: scale(1.08);           /* یه کوچولو بزرگ‌تر */
-    padding: 10px 36px;               /* کشیده‌تر تا بیضی قشنگ بشه */
+    border-radius: 999px;
+    transform: scale(1.08);
+    padding: 10px 36px;
     box-shadow: 0 8px 20px rgba(200,169,107,0.35);
   }
 
@@ -241,7 +241,7 @@
     color: var(--cream);
     padding: 14px 46px;
     border: 1.5px solid var(--brick);
-    border-radius: 4px;               /* حالت عادی: مستطیل */
+    border-radius: 4px;
     text-decoration: none;
     font-size: 16px;
     letter-spacing: 0.5px;
@@ -252,9 +252,9 @@
   .btn:hover {
     background: transparent;
     color: var(--brick);
-    border-radius: 999px;             /* هاور: بیضی */
-    transform: scale(1.08);           /* یه کوچولو بزرگ‌تر */
-    padding: 14px 56px;               /* کشیده‌تر تا بیضی قشنگ بشه */
+    border-radius: 999px;
+    transform: scale(1.08);
+    padding: 14px 56px;
     box-shadow: 0 10px 25px rgba(184,92,69,0.35);
   }
 
@@ -308,15 +308,19 @@
     margin: 0 auto;
   }
 
+  /* ====== کارت‌ها ====== */
   .card {
     background: var(--paper);
     padding: 48px 32px;
     text-align: center;
     position: relative;
     border: 1px solid #e4ddca;
-    transition: 0.4s;
+    border-radius: 4px;                            /* حالت عادی: گوشه‌های کمی گرد */
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* گوشه‌های تزئینی */
   .card::before,
   .card::after {
     content: '';
@@ -324,7 +328,7 @@
     width: 22px;
     height: 22px;
     border: 1.5px solid var(--gold);
-    transition: 0.4s;
+    transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .card::before {
@@ -341,18 +345,23 @@
     border-top: none;
   }
 
+  /* هاور روی کارت - همون انیمیشن دکمه‌ها */
   .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(20,42,35,0.15);
+    transform: translateY(-8px) scale(1.05);
+    border-radius: 999px;                          /* بیضی */
+    padding: 55px 50px;                            /* کشیده‌تر تا بیضی قشنگ بشه */
+    box-shadow: 0 22px 55px rgba(20,42,35,0.22);
     border-color: var(--gold);
   }
 
   .card:hover::before,
   .card:hover::after {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+    border-color: var(--brick);
   }
 
+  /* ====== دایره‌ی آیکن ====== */
   .card .icon-circle {
     width: 82px;
     height: 82px;
@@ -365,20 +374,46 @@
     justify-content: center;
     font-size: 34px;
     position: relative;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* حلقه‌ی چیندار - توی حالت عادی ثابت */
   .card .icon-circle::after {
     content: '';
     position: absolute;
     inset: 6px;
     border-radius: 50%;
     border: 1px dashed rgba(184,92,69,0.5);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* با هاور روی کارت، حلقه شروع به چرخش می‌کنه */
+  .card:hover .icon-circle::after {
+    border-color: var(--gold);
+    animation: spin 6s linear infinite;
+  }
+
+  /* با هاور، خود دایره هم یه کوچولو بزرگ‌تر می‌شه */
+  .card:hover .icon-circle {
+    transform: scale(1.1);
+    border-color: var(--brick);
+    box-shadow: 0 0 0 6px rgba(200,169,107,0.15);
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   .card h3 {
     color: var(--forest);
     margin-bottom: 14px;
     font-size: 22px;
+    transition: color 0.4s;
+  }
+
+  .card:hover h3 {
+    color: var(--brick);
   }
 
   .card p {
@@ -455,6 +490,7 @@
     .free h2 { font-size: 26px; }
     .btn { padding: 12px 36px; }
     .btn:hover { padding: 12px 44px; }
+    .card:hover { padding: 55px 35px; }
   }
 </style>
 </head>
