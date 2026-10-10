@@ -48,7 +48,6 @@
     flex-direction: column;
   }
 
-  /* ====== تیترها ====== */
   h1, h2, h3,
   .logo-text,
   .btn,
@@ -106,23 +105,28 @@
     color: var(--gold);
   }
 
-  /* دکمه ثبت‌نام / ورود */
+  /* ====== دکمه ثبت‌نام / ورود ====== */
   .auth-btn {
     display: inline-block;
     background: transparent;
     color: var(--gold);
     padding: 10px 28px;
     border: 1.5px solid var(--gold);
+    border-radius: 4px;               /* حالت عادی: مستطیل */
     text-decoration: none;
     font-size: 15px;
     letter-spacing: 0.5px;
-    transition: 0.4s;
     cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .auth-btn:hover {
     background: var(--gold);
     color: var(--forest);
+    border-radius: 999px;             /* هاور: بیضی */
+    transform: scale(1.08);           /* یه کوچولو بزرگ‌تر */
+    padding: 10px 36px;               /* کشیده‌تر تا بیضی قشنگ بشه */
+    box-shadow: 0 8px 20px rgba(200,169,107,0.35);
   }
 
   /* ====== Hero ====== */
@@ -230,21 +234,28 @@
     margin: 0 auto 40px;
   }
 
+  /* ====== دکمه شروع کن ====== */
   .btn {
     display: inline-block;
     background: var(--brick);
     color: var(--cream);
     padding: 14px 46px;
     border: 1.5px solid var(--brick);
+    border-radius: 4px;               /* حالت عادی: مستطیل */
     text-decoration: none;
     font-size: 16px;
     letter-spacing: 0.5px;
-    transition: 0.4s;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .btn:hover {
     background: transparent;
     color: var(--brick);
+    border-radius: 999px;             /* هاور: بیضی */
+    transform: scale(1.08);           /* یه کوچولو بزرگ‌تر */
+    padding: 14px 56px;               /* کشیده‌تر تا بیضی قشنگ بشه */
+    box-shadow: 0 10px 25px rgba(184,92,69,0.35);
   }
 
   /* ====== ویژگی‌ها ====== */
@@ -423,24 +434,18 @@
     color: #c4cbc6;
   }
 
-  /* ====== فوتر (خالی و مینیمال) ====== */
   footer {
     background: #0d1c17;
     padding: 20px;
     border-top: 1px solid rgba(200,169,107,0.35);
   }
 
-  /* ====== موبایل ====== */
   @media (max-width: 700px) {
-    header {
-      padding: 14px 18px;
-    }
+    header { padding: 14px 18px; }
     header .logo-text { font-size: 20px; }
     header .logo-wrap .logo-circle { width: 44px; height: 44px; }
-    .auth-btn {
-      padding: 8px 20px;
-      font-size: 14px;
-    }
+    .auth-btn { padding: 8px 20px; font-size: 14px; }
+    .auth-btn:hover { padding: 8px 26px; }
     .hero h1 { font-size: 32px; }
     .hero p { font-size: 14px; }
     .hero .logo-big-circle { width: 110px; height: 110px; }
@@ -448,12 +453,13 @@
     .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
     .features h2 { font-size: 26px; }
     .free h2 { font-size: 26px; }
+    .btn { padding: 12px 36px; }
+    .btn:hover { padding: 12px 44px; }
   }
 </style>
 </head>
 <body>
 
-  <!-- هدر -->
   <header>
     <div class="logo-wrap">
       <div class="logo-circle">
@@ -464,7 +470,6 @@
     <button class="auth-btn" type="button">ثبت‌نام / ورود</button>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <div class="logo-big-circle">
@@ -479,7 +484,6 @@
     </div>
   </section>
 
-  <!-- ویژگی‌ها -->
   <section class="features" id="features">
     <h2>کوانتم چیکار می‌کنه؟</h2>
     <p class="sub">دو امکانات ساده، ولی کارآمد</p>
@@ -500,7 +504,6 @@
     </div>
   </section>
 
-  <!-- رایگان -->
   <section class="free" id="free">
     <div class="content">
       <div class="icon-big">◆</div>
@@ -511,7 +514,6 @@
     </div>
   </section>
 
-  <!-- فوتر خالی -->
   <footer></footer>
 
 </body>
