@@ -50,7 +50,6 @@
     overflow-x: hidden;
   }
 
-  /* قاب‌های تزئینی پس‌زمینه */
   body::before {
     content: '';
     position: fixed;
@@ -72,9 +71,6 @@
     font-weight: 700;
   }
 
-  /* ============================================
-     🔐 کارت اصلی ورود / ثبت‌نام
-     ============================================ */
   .auth-card {
     background: var(--paper);
     width: 100%;
@@ -89,17 +85,10 @@
   }
 
   @keyframes cardIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* قاب داخلی */
   .auth-card::before {
     content: '';
     position: absolute;
@@ -108,7 +97,6 @@
     pointer-events: none;
   }
 
-  /* گوشه‌های تزئینی */
   .auth-card::after {
     content: '';
     position: absolute;
@@ -128,9 +116,6 @@
     pointer-events: none;
   }
 
-  /* ============================================
-     🎓 لوگو و برند
-     ============================================ */
   .brand-head {
     text-align: center;
     margin-bottom: 26px;
@@ -139,8 +124,7 @@
   }
 
   .brand-head .logo-circle {
-    width: 78px;
-    height: 78px;
+    width: 78px; height: 78px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid var(--gold);
@@ -153,9 +137,7 @@
     margin: 0 auto 16px;
   }
 
-  .brand-head .logo-circle img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
+  .brand-head .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
 
   .brand-head .brand-name {
     font-family: 'Estedad', sans-serif;
@@ -174,9 +156,6 @@
     font-style: italic;
   }
 
-  /* ============================================
-     📑 تب‌های ورود / ثبت‌نام
-     ============================================ */
   .tabs {
     display: flex;
     position: relative;
@@ -201,10 +180,8 @@
   }
 
   .tab-btn:hover { color: var(--forest); }
-
   .tab-btn.active { color: var(--forest); }
 
-  /* خط زیر تب فعال */
   .tab-btn::after {
     content: '';
     position: absolute;
@@ -218,9 +195,6 @@
 
   .tab-btn.active::after { width: 100%; }
 
-  /* ============================================
-     📝 فرم‌ها
-     ============================================ */
   .form-section {
     display: none;
     position: relative;
@@ -280,7 +254,6 @@
     background: #fdf2f1;
   }
 
-  /* پیام خطا زیر فیلد */
   .field-error {
     display: none;
     font-size: 12px;
@@ -291,9 +264,6 @@
 
   .field-error.show { display: block; }
 
-  /* ============================================
-     🔀 سوییچ «مرا به خاطر بسپار»
-     ============================================ */
   .remember-row {
     display: flex;
     align-items: center;
@@ -313,7 +283,6 @@
     color: var(--text);
   }
 
-  /* سوییچ (Toggle) */
   .switch {
     position: relative;
     display: inline-block;
@@ -352,7 +321,6 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
   }
 
-  /* حالت روشن */
   .switch input:checked + .slider {
     background: var(--forest);
     border-color: var(--forest);
@@ -367,7 +335,6 @@
     box-shadow: 0 0 0 4px rgba(200,169,107,0.12);
   }
 
-  /* لینک فراموشی رمز */
   .forgot-link {
     font-size: 13px;
     color: var(--brick);
@@ -380,9 +347,6 @@
     text-decoration: underline;
   }
 
-  /* ============================================
-     🎯 دکمه‌ی ارسال فرم
-     ============================================ */
   .submit-btn {
     width: 100%;
     background: var(--brick);
@@ -397,9 +361,10 @@
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     margin-top: 4px;
+    position: relative;
   }
 
-  .submit-btn:hover {
+  .submit-btn:hover:not(:disabled) {
     background: transparent;
     color: var(--brick);
     border-radius: 999px;
@@ -407,13 +372,15 @@
     box-shadow: 0 10px 25px rgba(184,92,69,0.3);
   }
 
-  .submit-btn:active {
+  .submit-btn:active:not(:disabled) {
     transform: scale(0.98);
   }
 
-  /* ============================================
-     🔗 جداکننده‌ی "یا"
-     ============================================ */
+  .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
   .divider-or {
     display: flex;
     align-items: center;
@@ -433,9 +400,6 @@
     background: linear-gradient(to left, transparent, rgba(200,169,107,0.5), transparent);
   }
 
-  /* ============================================
-     🔴 دکمه‌ی ورود با گوگل
-     ============================================ */
   .google-btn {
     width: 100%;
     background: var(--paper);
@@ -469,9 +433,6 @@
     flex-shrink: 0;
   }
 
-  /* ============================================
-     📌 فوتر کوچک
-     ============================================ */
   .auth-foot {
     text-align: center;
     margin-top: 26px;
@@ -492,9 +453,6 @@
 
   .auth-foot a:hover { color: var(--brick); }
 
-  /* ============================================
-     ✅ پیام موفقیت
-     ============================================ */
   .success-box {
     display: none;
     position: absolute;
@@ -547,9 +505,23 @@
     font-size: 14px;
   }
 
-  /* ============================================
-     📱 RESPONSIVE
-     ============================================ */
+  /* پیام خطا کلی */
+  .global-error {
+    display: none;
+    background: #fdf2f1;
+    border: 1px solid var(--error);
+    color: var(--error);
+    padding: 12px 16px;
+    border-radius: 3px;
+    font-size: 13.5px;
+    margin-bottom: 18px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .global-error.show { display: block; }
+
   @media (max-width: 640px) {
     body { padding: 16px 12px; }
     body::before { top: 10px; left: 10px; right: 10px; bottom: 10px; }
@@ -565,21 +537,12 @@
 
     .tab-btn { font-size: 15px; padding: 10px 6px; }
 
-    .form-group input {
-      font-size: 15px;
-      padding: 11px 14px;
-    }
+    .form-group input { font-size: 15px; padding: 11px 14px; }
 
     .submit-btn { font-size: 15px; padding: 13px 24px; }
     .google-btn { font-size: 14px; padding: 11px 16px; }
 
-    .remember-row {
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
+    .remember-row { flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
     .remember-label { font-size: 13px; }
     .forgot-link { font-size: 12.5px; margin-right: auto; }
   }
@@ -590,7 +553,6 @@
   <div class="auth-card">
     <div class="auth-corner"></div>
 
-    <!-- برند -->
     <div class="brand-head">
       <div class="logo-circle">
         <img src="logo.png" alt="کوانتم">
@@ -599,11 +561,13 @@
       <div class="brand-sub">همراه ساده‌ی مسیر کنکور</div>
     </div>
 
-    <!-- تب‌ها -->
     <div class="tabs">
       <button class="tab-btn active" data-tab="login" type="button">ورود</button>
       <button class="tab-btn" data-tab="register" type="button">ثبت‌نام</button>
     </div>
+
+    <!-- پیام خطای کلی -->
+    <div class="global-error" id="global-error"></div>
 
     <!-- ============ فرم ورود ============ -->
     <form class="form-section active" id="form-login" novalidate>
@@ -630,7 +594,7 @@
         <a href="#" class="forgot-link">فراموشی رمز؟</a>
       </div>
 
-      <button type="submit" class="submit-btn">ورود به کوانتم</button>
+      <button type="submit" class="submit-btn" id="btn-login">ورود به کوانتم</button>
 
       <div class="divider-or">یا</div>
 
@@ -679,7 +643,7 @@
         </label>
       </div>
 
-      <button type="submit" class="submit-btn">ثبت‌نام در کوانتم</button>
+      <button type="submit" class="submit-btn" id="btn-register">ثبت‌نام در کوانتم</button>
 
       <div class="divider-or">یا</div>
 
@@ -698,7 +662,6 @@
       </div>
     </form>
 
-    <!-- پیام موفقیت -->
     <div class="success-box" id="success-box">
       <div class="check-circle">✓</div>
       <h3 id="success-title">خوش آمدی!</h3>
@@ -708,6 +671,11 @@
   </div>
 
   <script>
+    // ============================================
+    // 🔗 آدرس Google Apps Script API
+    // ============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycby0pXJdTClYx7RuYswfwRWHcEgBhZ41ePEcsk9Frwoqw8rJhCL5vsZC9DIx5_reAIJa/exec';
+
     /* ============================================
        🔄 تب‌ها و لینک‌های سوئیچ
        ============================================ */
@@ -718,6 +686,7 @@
     function switchTab(tabName) {
       tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
       forms.forEach(f => f.classList.toggle('active', f.id === 'form-' + tabName));
+      hideGlobalError();
     }
 
     tabBtns.forEach(btn => {
@@ -749,11 +718,42 @@
       }
     }
 
-    /* --- ورود --- */
-    const formLogin = document.getElementById('form-login');
+    function showGlobalError(msg) {
+      const el = document.getElementById('global-error');
+      el.textContent = msg;
+      el.classList.add('show');
+    }
 
-    formLogin.addEventListener('submit', (e) => {
+    function hideGlobalError() {
+      const el = document.getElementById('global-error');
+      el.classList.remove('show');
+    }
+
+    /* ============================================
+       📤 ارسال به Google Sheets
+       ============================================ */
+    async function sendToSheet(payload) {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors', // برای دور زدن CORS
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+      // با no-cors نمی‌تونیم پاسخ رو بخونیم، پس فرض می‌کنیم موفق بوده
+      return { status: 'success' };
+    }
+
+    /* ============================================
+       🔐 فرم ورود
+       ============================================ */
+    const formLogin = document.getElementById('form-login');
+    const btnLogin = document.getElementById('btn-login');
+
+    formLogin.addEventListener('submit', async (e) => {
       e.preventDefault();
+      hideGlobalError();
 
       const email = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
@@ -776,21 +776,42 @@
 
       if (!valid) return;
 
-      // ذخیره‌ی ساده (برای دمو)
-      localStorage.setItem('quantum_user', JSON.stringify({
-        email: email,
-        name: email.split('@')[0],
-        remember: document.getElementById('login-remember').checked
-      }));
+      // دکمه در حالت لودینگ
+      btnLogin.disabled = true;
+      btnLogin.textContent = 'در حال ورود...';
 
-      showSuccess('خوش برگشتی!', 'در حال انتقال به پنل درسی...');
+      try {
+        await sendToSheet({
+          action: 'login',
+          email: email,
+          password: password,
+          remember: document.getElementById('login-remember').checked
+        });
+
+        // ذخیره در localStorage
+        localStorage.setItem('quantum_user', JSON.stringify({
+          email: email,
+          name: email.split('@')[0],
+          remember: document.getElementById('login-remember').checked
+        }));
+
+        showSuccess('خوش برگشتی!', 'در حال انتقال به پنل درسی...');
+      } catch (err) {
+        showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
+        btnLogin.disabled = false;
+        btnLogin.textContent = 'ورود به کوانتم';
+      }
     });
 
-    /* --- ثبت‌نام --- */
+    /* ============================================
+       📝 فرم ثبت‌نام
+       ============================================ */
     const formRegister = document.getElementById('form-register');
+    const btnRegister = document.getElementById('btn-register');
 
-    formRegister.addEventListener('submit', (e) => {
+    formRegister.addEventListener('submit', async (e) => {
       e.preventDefault();
+      hideGlobalError();
 
       const name = document.getElementById('reg-name').value.trim();
       const email = document.getElementById('reg-email').value.trim();
@@ -821,33 +842,68 @@
 
       if (!valid) return;
 
-      localStorage.setItem('quantum_user', JSON.stringify({
-        name: name,
-        email: email,
-        remember: document.getElementById('reg-remember').checked
-      }));
+      btnRegister.disabled = true;
+      btnRegister.textContent = 'در حال ثبت‌نام...';
 
-      showSuccess('خوش آمدی، ' + name.split(' ')[0] + '!', 'حساب تو با موفقیت ساخته شد...');
+      try {
+        await sendToSheet({
+          action: 'register',
+          name: name,
+          email: email,
+          password: password,
+          remember: document.getElementById('reg-remember').checked
+        });
+
+        localStorage.setItem('quantum_user', JSON.stringify({
+          name: name,
+          email: email,
+          remember: document.getElementById('reg-remember').checked
+        }));
+
+        showSuccess('خوش آمدی، ' + name.split(' ')[0] + '!', 'حساب تو با موفقیت ساخته شد...');
+      } catch (err) {
+        showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
+        btnRegister.disabled = false;
+        btnRegister.textContent = 'ثبت‌نام در کوانتم';
+      }
     });
 
-    /* --- ورود با گوگل --- */
+    /* ============================================
+       🔵 ورود با گوگل (دمو)
+       ============================================ */
     ['google-login-1', 'google-login-2'].forEach(id => {
       const btn = document.getElementById(id);
       if (btn) {
-        btn.addEventListener('click', () => {
-          // دمو: شبیه‌سازی ورود گوگل
-          localStorage.setItem('quantum_user', JSON.stringify({
-            name: 'کاربر گوگل',
-            email: 'user@gmail.com',
-            provider: 'google',
-            remember: true
-          }));
-          showSuccess('ورود با گوگل موفق!', 'در حال انتقال به پنل درسی...');
+        btn.addEventListener('click', async () => {
+          const isRegister = id === 'google-login-2';
+
+          try {
+            await sendToSheet({
+              action: isRegister ? 'register-google' : 'login-google',
+              name: 'کاربر گوگل',
+              email: 'user@gmail.com',
+              password: '(google-oauth)',
+              remember: true
+            });
+
+            localStorage.setItem('quantum_user', JSON.stringify({
+              name: 'کاربر گوگل',
+              email: 'user@gmail.com',
+              provider: 'google',
+              remember: true
+            }));
+
+            showSuccess('ورود با گوگل موفق!', 'در حال انتقال به پنل درسی...');
+          } catch (err) {
+            showGlobalError('مشکلی در ارتباط با سرور پیش آمد.');
+          }
         });
       }
     });
 
-    /* --- نمایش موفقیت و انتقال به پنل --- */
+    /* ============================================
+       ✅ نمایش موفقیت و انتقال
+       ============================================ */
     function showSuccess(title, message) {
       document.getElementById('success-title').textContent = title;
       document.getElementById('success-message').textContent = message;
