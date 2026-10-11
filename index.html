@@ -6,11 +6,9 @@
 <meta name="theme-color" content="#142A23">
 <title>کوانتم | همراه کنکوری‌ها</title>
 
-<!-- فاوآیکن -->
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 
-<!-- فونت‌ها -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
@@ -55,7 +53,8 @@
   h1, h2, h3,
   .logo-text,
   .btn,
-  .auth-btn {
+  .auth-btn,
+  .welcome-btn {
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
   }
@@ -110,7 +109,7 @@
 
   header .logo-text span { color: var(--gold); }
 
-  /* دکمه ثبت‌نام / ورود */
+  /* ====== دکمه ثبت‌نام / ورود (مهمان) ====== */
   .auth-btn {
     display: inline-block;
     background: transparent;
@@ -133,6 +132,78 @@
     transform: scale(1.08);
     padding: 10px 36px;
     box-shadow: 0 8px 20px rgba(200,169,107,0.35);
+  }
+
+  /* ============================================
+     👋 دکمه‌ی خوش‌آمد (کاربر لاگین‌شده)
+     ============================================ */
+  .welcome-btn {
+    display: none; /* پیش‌فرض مخفی */
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    border-radius: 999px;
+    color: var(--cream);
+    padding: 7px 18px 7px 14px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .welcome-btn.show {
+    display: inline-flex;
+  }
+
+  .welcome-btn:hover {
+    background: rgba(200,169,107,0.12);
+    box-shadow: 0 0 0 4px rgba(200,169,107,0.15);
+    transform: scale(1.03);
+  }
+
+  .welcome-btn .user-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .welcome-btn .welcome-text {
+    color: var(--gold-soft);
+  }
+
+  .welcome-btn .welcome-text strong {
+    color: var(--cream);
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+  }
+
+  /* انیمیشن دست تکون دادن */
+  .wave-emoji {
+    display: inline-block;
+    animation: wave 2.5s ease-in-out infinite;
+    transform-origin: 70% 70%;
+  }
+
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
   }
 
   /* ====== Hero ====== */
@@ -186,6 +257,19 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+
+  /* پیام شخصی‌سازی‌شده بالای تیتر */
+  .hero-greeting {
+    display: none;
+    color: var(--gold);
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-greeting.show { display: block; }
 
   .hero h1 {
     font-size: 48px;
@@ -428,7 +512,6 @@
     color: #c4cbc6;
   }
 
-  /* ====== فوتر ====== */
   footer {
     background: #0d1c17;
     padding: 20px;
@@ -509,9 +592,6 @@
     z-index: 1;
   }
 
-  /* ============================================
-     ✕ دکمه‌ی بستن با افکت ذره‌بین
-     ============================================ */
   .modal-close-wrap {
     position: absolute;
     top: 26px;
@@ -613,9 +693,6 @@
     100% { transform: scale(1.8); opacity: 0; }
   }
 
-  /* ============================================
-     🎨 محتوای مودال
-     ============================================ */
   .modal-content {
     position: relative;
     z-index: 2;
@@ -750,9 +827,26 @@
       border-width: 1.3px;
     }
 
+    /* دکمه‌ی خوش‌آمد موبایل */
+    .welcome-btn {
+      padding: 5px 12px 5px 10px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .welcome-btn .user-dot {
+      width: 26px;
+      height: 26px;
+      font-size: 12.5px;
+    }
+    .welcome-btn .welcome-text {
+      display: none; /* فقط آواتار روی موبایل */
+    }
+
     .hero { padding: 60px 22px 75px; }
     .hero::before { top: 14px; left: 14px; right: 14px; bottom: 14px; }
     .hero::after { top: 22px; left: 22px; right: 22px; bottom: 22px; }
+
+    .hero-greeting { font-size: 14.5px; margin-bottom: 10px; }
 
     .hero .logo-big-circle {
       width: 105px; height: 105px;
@@ -777,7 +871,6 @@
     .cards { grid-template-columns: 1fr; gap: 22px; }
     .card { padding: 36px 24px; }
 
-    /* افکت‌های هاور روی موبایل غیرفعال */
     .card:hover { transform: none; box-shadow: none; border-color: #e4ddca; }
     .card:hover::before,
     .card:hover::after { width: 22px; height: 22px; border-color: var(--gold); }
@@ -795,23 +888,15 @@
     .free h2 { font-size: 22px; line-height: 1.6; margin-bottom: 16px; }
     .free p { font-size: 14px; line-height: 1.9; }
 
-    /* مودال موبایل */
     .modal-overlay { padding: 12px; }
     .modal-box { padding: 50px 22px 32px; max-height: 92vh; border-width: 1px; }
     .modal-box::before { inset: 10px; }
     .modal-box::after { top: 18px; right: 18px; width: 20px; height: 20px; }
     .modal-corner { bottom: 18px; left: 18px; width: 20px; height: 20px; }
 
-    .modal-close-wrap {
-      top: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
-    }
-
+    .modal-close-wrap { top: 20px; left: 20px; width: 40px; height: 40px; }
     .modal-close { width: 34px; height: 34px; font-size: 20px; }
 
-    /* روی موبایل افکت ذره‌بین غیرفعال */
     .modal-close-wrap:hover .magnifier { opacity: 0; }
     .modal-close-wrap:hover .modal-close {
       transform: none;
@@ -833,6 +918,8 @@
     header .logo-wrap .logo-circle { width: 38px; height: 38px; }
     header .logo-text { font-size: 17px; }
     .auth-btn { padding: 7px 12px; font-size: 12px; }
+    .welcome-btn { padding: 5px 10px 5px 8px; }
+    .welcome-btn .user-dot { width: 24px; height: 24px; font-size: 12px; }
     .hero h1 { font-size: 24px; }
     .hero .logo-big-circle { width: 90px; height: 90px; }
     .features h2 { font-size: 21px; }
@@ -850,7 +937,15 @@
       </div>
       <div class="logo-text">کوانتم<span>.</span></div>
     </div>
-    <a href="auth.html" class="auth-btn">ثبت‌نام / ورود</a>
+
+    <!-- دکمه‌ی مهمان -->
+    <a href="auth.html" class="auth-btn" id="auth-btn">ثبت‌نام / ورود</a>
+
+    <!-- دکمه‌ی خوش‌آمد (کاربر لاگین‌شده) -->
+    <a href="panel.html" class="welcome-btn" id="welcome-btn">
+      <span class="user-dot" id="user-dot">؟</span>
+      <span class="welcome-text">سلام <strong id="welcome-name">کاربر</strong> <span class="wave-emoji">👋</span></span>
+    </a>
   </header>
 
   <!-- ====== Hero ====== -->
@@ -859,6 +954,7 @@
       <div class="logo-big-circle">
         <img src="logo.png" alt="کوانتم">
       </div>
+      <div class="hero-greeting" id="hero-greeting"></div>
       <h1>به <span>کوانتم</span> خوش آمدی</h1>
       <div class="divider"><span class="diamond">◆</span></div>
       <p>
@@ -971,8 +1067,41 @@
     </div>
   </div>
 
-  <!-- ====== اسکریپت مودال ====== -->
   <script>
+    /* ============================================
+       🔐 چک وضعیت ورود کاربر
+       ============================================ */
+    const userData = localStorage.getItem('quantum_user');
+    const authBtn = document.getElementById('auth-btn');
+    const welcomeBtn = document.getElementById('welcome-btn');
+    const heroGreeting = document.getElementById('hero-greeting');
+
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        const fullName = user.name || 'کاربر';
+        const firstName = fullName.split(' ')[0];
+
+        // مخفی کردن دکمه‌ی مهمان
+        authBtn.style.display = 'none';
+
+        // نمایش دکمه‌ی خوش‌آمد
+        welcomeBtn.classList.add('show');
+        document.getElementById('welcome-name').textContent = firstName;
+        document.getElementById('user-dot').textContent = firstName.charAt(0);
+
+        // پیام شخصی‌سازی‌شده بالای تیتر
+        heroGreeting.textContent = 'سلام ' + firstName + ' عزیز 👋';
+        heroGreeting.classList.add('show');
+      } catch (e) {
+        // اگه دیتا خراب بود، پاک کن
+        localStorage.removeItem('quantum_user');
+      }
+    }
+
+    /* ============================================
+       🔮 مودال‌ها
+       ============================================ */
     const cards = document.querySelectorAll('.card[data-modal]');
     const overlays = document.querySelectorAll('.modal-overlay');
 
