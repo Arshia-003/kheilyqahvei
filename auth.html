@@ -38,7 +38,6 @@
 
   html { scroll-behavior: smooth; }
 
-  /* ✅ حذف اسکرول - صفحه دقیقاً به اندازه‌ی viewport */
   html, body {
     height: 100%;
     overflow: hidden;
@@ -75,9 +74,6 @@
     font-weight: 700;
   }
 
-  /* ============================================
-     📐 کارت با اسکرول داخلی (نه کل صفحه)
-     ============================================ */
   .auth-card {
     background: var(--paper);
     width: 100%;
@@ -137,9 +133,6 @@
     z-index: 0;
   }
 
-  /* ============================================
-     🎓 برند
-     ============================================ */
   .brand-head {
     text-align: center;
     margin-bottom: 22px;
@@ -180,9 +173,6 @@
     font-style: italic;
   }
 
-  /* ============================================
-     📑 تب‌ها
-     ============================================ */
   .tabs {
     display: flex;
     position: relative;
@@ -222,9 +212,6 @@
 
   .tab-btn.active::after { width: 100%; }
 
-  /* ============================================
-     📝 فرم‌ها
-     ============================================ */
   .form-section {
     display: none;
     position: relative;
@@ -294,9 +281,6 @@
 
   .field-error.show { display: block; }
 
-  /* ============================================
-     🔀 سوییچ
-     ============================================ */
   .remember-row {
     display: flex;
     align-items: center;
@@ -376,9 +360,6 @@
     text-decoration: underline;
   }
 
-  /* ============================================
-     🎯 دکمه‌ها
-     ============================================ */
   .submit-btn {
     width: 100%;
     background: var(--brick);
@@ -476,9 +457,6 @@
 
   .auth-foot a:hover { color: var(--brick); }
 
-  /* ============================================
-     ✅ پیام موفقیت
-     ============================================ */
   .success-box {
     display: none;
     position: absolute;
@@ -528,7 +506,6 @@
 
   .success-box p { color: var(--muted); font-size: 13.5px; }
 
-  /* پیام خطای کلی */
   .global-error {
     display: none;
     background: #fdf2f1;
@@ -545,9 +522,6 @@
 
   .global-error.show { display: block; }
 
-  /* ============================================
-     📱 موبایل
-     ============================================ */
   @media (max-width: 640px) {
     body { padding: 12px; }
     body::before { top: 8px; left: 8px; right: 8px; bottom: 8px; }
@@ -579,7 +553,6 @@
     .forgot-link { font-size: 12px; }
   }
 
-  /* موبایل خیلی کوچک (iPhone SE) */
   @media (max-width: 380px) and (max-height: 700px) {
     .auth-card { padding: 28px 18px 22px; }
     .brand-head { margin-bottom: 14px; }
@@ -714,7 +687,7 @@
     <div class="success-box" id="success-box">
       <div class="check-circle">✓</div>
       <h3 id="success-title">خوش آمدی!</h3>
-      <p id="success-message">در حال انتقال به پنل درسی...</p>
+      <p id="success-message">در حال انتقال به صفحه‌ی اصلی...</p>
     </div>
 
   </div>
@@ -750,8 +723,6 @@
        ✅ اعتبارسنجی
        ============================================ */
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    // جیمیل معتبر: فقط حروف/عدد/نقطه/خط‌تیره/پلاس، حداقل ۶ کاراکتر قبل از @gmail.com
     const gmailRegex = /^[a-z0-9](\.?[a-z0-9_\-+]){4,}@gmail\.com$/i;
 
     function showError(inputId, errorId, show) {
@@ -770,7 +741,6 @@
       const el = document.getElementById('global-error');
       el.textContent = msg;
       el.classList.add('show');
-      // پاک کردن خطاها بعد از ۵ ثانیه
       setTimeout(() => el.classList.remove('show'), 5000);
     }
 
@@ -843,14 +813,13 @@
           return;
         }
 
-        // موفق
         localStorage.setItem('quantum_user', JSON.stringify({
           email: email,
           name: result.name || email.split('@')[0],
           remember: document.getElementById('login-remember').checked
         }));
 
-        showSuccess('خوش برگشتی، ' + (result.name || '').split(' ')[0] + '!', 'در حال انتقال به پنل درسی...');
+        showSuccess('خوش برگشتی، ' + (result.name || '').split(' ')[0] + '!', 'در حال انتقال به صفحه‌ی اصلی...');
       } catch (err) {
         console.error(err);
         showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
@@ -875,7 +844,6 @@
 
       let valid = true;
 
-      // نام: حداقل دو کلمه، هر کلمه حداقل ۲ کاراکتر
       const nameParts = name.split(/\s+/).filter(p => p.length >= 2);
       if (nameParts.length < 2) {
         showError('reg-name', 'err-reg-name', true);
@@ -884,7 +852,6 @@
         showError('reg-name', 'err-reg-name', false);
       }
 
-      // جیمیل معتبر
       if (!gmailRegex.test(email)) {
         showError('reg-email', 'err-reg-email', true);
         valid = false;
@@ -969,7 +936,7 @@
               remember: true
             }));
 
-            showSuccess('ورود با گوگل موفق!', 'در حال انتقال به پنل درسی...');
+            showSuccess('ورود با گوگل موفق!', 'در حال انتقال به صفحه‌ی اصلی...');
           } catch (err) {
             showGlobalError('مشکلی در ارتباط با سرور پیش آمد.');
           }
@@ -978,7 +945,7 @@
     });
 
     /* ============================================
-       ✅ نمایش موفقیت و انتقال
+       ✅ نمایش موفقیت و انتقال به صفحه‌ی اصلی
        ============================================ */
     function showSuccess(title, message) {
       document.getElementById('success-title').textContent = title;
@@ -986,7 +953,8 @@
       document.getElementById('success-box').classList.add('show');
 
       setTimeout(() => {
-        window.location.href = 'panel.html';
+        // ✅ رفتن به صفحه‌ی اصلی (نه پنل)
+        window.location.href = 'index.html';
       }, 1800);
     }
   </script>
