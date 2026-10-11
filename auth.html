@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#142A23">
+<title>ورود / ثبت‌نام | کوانتم</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    --forest: #142A23;
+    --forest-soft: #1e3a30;
+    --gold: #C8A96B;
+    --gold-soft: #d9c08a;
+    --cream: #F4F0E6;
+    --paper: #fbf8f1;
+    --brick: #B85C45;
+    --text: #1f2a25;
+    --muted: #6b756e;
+    --error: #c0392b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--forest);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    font-size: 15px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* قاب‌های تزئینی پس‌زمینه */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 22px; left: 22px; right: 22px; bottom: 22px;
+    border: 1px solid rgba(200,169,107,0.18);
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 32px; left: 32px; right: 32px; bottom: 32px;
+    border: 1px solid rgba(200,169,107,0.08);
+    pointer-events: none;
+  }
+
+  h1, h2, h3, .logo-text, .btn, .auth-btn, .tab-btn, .submit-btn {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+  }
+
+  /* ============================================
+     🔐 کارت اصلی ورود / ثبت‌نام
+     ============================================ */
+  .auth-card {
+    background: var(--paper);
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    border: 1px solid var(--gold);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(200,169,107,0.15);
+    padding: 55px 42px 42px;
+    z-index: 2;
+    animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* قاب داخلی */
+  .auth-card::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(200,169,107,0.3);
+    pointer-events: none;
+  }
+
+  /* گوشه‌های تزئینی */
+  .auth-card::after {
+    content: '';
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 22px; height: 22px;
+    border-top: 1.5px solid var(--brick);
+    border-right: 1.5px solid var(--brick);
+    pointer-events: none;
+  }
+
+  .auth-corner {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    width: 22px; height: 22px;
+    border-bottom: 1.5px solid var(--brick);
+    border-left: 1.5px solid var(--brick);
+    pointer-events: none;
+  }
+
+  /* ============================================
+     🎓 لوگو و برند
+     ============================================ */
+  .brand-head {
+    text-align: center;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .brand-head .logo-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--forest-soft);
+    box-shadow: 0 0 0 5px rgba(200,169,107,0.15),
+                0 0 30px rgba(200,169,107,0.2);
+    margin: 0 auto 16px;
+  }
+
+  .brand-head .logo-circle img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .brand-head .brand-name {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    color: var(--forest);
+    font-size: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-head .brand-name span { color: var(--gold); }
+
+  .brand-head .brand-sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ============================================
+     📑 تب‌های ورود / ثبت‌نام
+     ============================================ */
+  .tabs {
+    display: flex;
+    position: relative;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(200,169,107,0.35);
+    z-index: 2;
+  }
+
+  .tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 8px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .tab-btn:hover { color: var(--forest); }
+
+  .tab-btn.active { color: var(--forest); }
+
+  /* خط زیر تب فعال */
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--forest);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tab-btn.active::after { width: 100%; }
+
+  /* ============================================
+     📝 فرم‌ها
+     ============================================ */
+  .form-section {
+    display: none;
+    position: relative;
+    z-index: 2;
+    animation: formFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .form-section.active { display: block; }
+
+  @keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    color: var(--forest);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  .form-group label .req { color: var(--brick); margin-right: 3px; }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--cream);
+    border: 1.5px solid #e4ddca;
+    border-radius: 3px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14.5px;
+    color: var(--text);
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .form-group input::placeholder {
+    color: #a8a89e;
+    font-size: 14px;
+  }
+
+  .form-group input:focus {
+    border-color: var(--gold);
+    background: var(--paper);
+    box-shadow: 0 0 0 3px rgba(200,169,107,0.15);
+  }
+
+  .form-group input.error {
+    border-color: var(--error);
+    background: #fdf2f1;
+  }
+
+  /* پیام خطا زیر فیلد */
+  .field-error {
+    display: none;
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 6px;
+    padding-right: 4px;
+  }
+
+  .field-error.show { display: block; }
+
+  /* ============================================
+     🔀 سوییچ «مرا به خاطر بسپار»
+     ============================================ */
+  .remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 22px 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .remember-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* سوییچ (Toggle) */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .switch .slider {
+    position: absolute;
+    inset: 0;
+    background: #d4cdc0;
+    border-radius: 999px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid #c4bda8;
+    cursor: pointer;
+  }
+
+  .switch .slider::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    right: 2px;
+    background: var(--paper);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+
+  /* حالت روشن */
+  .switch input:checked + .slider {
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+
+  .switch input:checked + .slider::before {
+    transform: translateX(-22px);
+    background: var(--gold);
+  }
+
+  .switch .slider:hover {
+    box-shadow: 0 0 0 4px rgba(200,169,107,0.12);
+  }
+
+  /* لینک فراموشی رمز */
+  .forgot-link {
+    font-size: 13px;
+    color: var(--brick);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .forgot-link:hover {
+    color: var(--forest);
+    text-decoration: underline;
+  }
+
+  /* ============================================
+     🎯 دکمه‌ی ارسال فرم
+     ============================================ */
+  .submit-btn {
+    width: 100%;
+    background: var(--brick);
+    color: var(--cream);
+    padding: 14px 30px;
+    border: 1.5px solid var(--brick);
+    border-radius: 4px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 4px;
+  }
+
+  .submit-btn:hover {
+    background: transparent;
+    color: var(--brick);
+    border-radius: 999px;
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(184,92,69,0.3);
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* ============================================
+     🔗 جداکننده‌ی "یا"
+     ============================================ */
+  .divider-or {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 26px 0 20px;
+    color: var(--muted);
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .divider-or::before,
+  .divider-or::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, rgba(200,169,107,0.5), transparent);
+  }
+
+  /* ============================================
+     🔴 دکمه‌ی ورود با گوگل
+     ============================================ */
+  .google-btn {
+    width: 100%;
+    background: var(--paper);
+    color: var(--forest);
+    padding: 12px 20px;
+    border: 1.5px solid #e4ddca;
+    border-radius: 3px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .google-btn:hover {
+    border-color: var(--gold);
+    background: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(20,42,35,0.1);
+  }
+
+  .google-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     📌 فوتر کوچک
+     ============================================ */
+  .auth-foot {
+    text-align: center;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(200,169,107,0.4);
+    font-size: 13px;
+    color: var(--muted);
+    position: relative;
+    z-index: 2;
+  }
+
+  .auth-foot a {
+    color: var(--forest);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+
+  .auth-foot a:hover { color: var(--brick); }
+
+  /* ============================================
+     ✅ پیام موفقیت
+     ============================================ */
+  .success-box {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: var(--paper);
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .success-box.show {
+    display: flex;
+    animation: formFadeIn 0.5s ease;
+  }
+
+  .success-box .check-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 40px;
+    margin-bottom: 20px;
+    animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  .success-box h3 {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    color: var(--forest);
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .success-box p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ============================================
+     📱 RESPONSIVE
+     ============================================ */
+  @media (max-width: 640px) {
+    body { padding: 16px 12px; }
+    body::before { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+    body::after { top: 18px; left: 18px; right: 18px; bottom: 18px; }
+
+    .auth-card { padding: 45px 24px 32px; }
+    .auth-card::before { inset: 8px; }
+    .auth-card::after { top: 14px; right: 14px; width: 18px; height: 18px; }
+    .auth-corner { bottom: 14px; left: 14px; width: 18px; height: 18px; }
+
+    .brand-head .logo-circle { width: 66px; height: 66px; }
+    .brand-head .brand-name { font-size: 21px; }
+
+    .tab-btn { font-size: 15px; padding: 10px 6px; }
+
+    .form-group input {
+      font-size: 15px;
+      padding: 11px 14px;
+    }
+
+    .submit-btn { font-size: 15px; padding: 13px 24px; }
+    .google-btn { font-size: 14px; padding: 11px 16px; }
+
+    .remember-row {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .remember-label { font-size: 13px; }
+    .forgot-link { font-size: 12.5px; margin-right: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="auth-card">
+    <div class="auth-corner"></div>
+
+    <!-- برند -->
+    <div class="brand-head">
+      <div class="logo-circle">
+        <img src="logo.png" alt="کوانتم">
+      </div>
+      <div class="brand-name">کوانتم<span>.</span></div>
+      <div class="brand-sub">همراه ساده‌ی مسیر کنکور</div>
+    </div>
+
+    <!-- تب‌ها -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login" type="button">ورود</button>
+      <button class="tab-btn" data-tab="register" type="button">ثبت‌نام</button>
+    </div>
+
+    <!-- ============ فرم ورود ============ -->
+    <form class="form-section active" id="form-login" novalidate>
+      <div class="form-group">
+        <label for="login-email">ایمیل <span class="req">*</span></label>
+        <input type="email" id="login-email" placeholder="example@gmail.com" autocomplete="email">
+        <div class="field-error" id="err-login-email">لطفاً یک ایمیل معتبر وارد کن</div>
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">رمز عبور <span class="req">*</span></label>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+        <div class="field-error" id="err-login-password">رمز عبور حداقل ۶ کاراکتر باشد</div>
+      </div>
+
+      <div class="remember-row">
+        <label class="remember-label">
+          <span class="switch">
+            <input type="checkbox" id="login-remember">
+            <span class="slider"></span>
+          </span>
+          مرا به خاطر بسپار
+        </label>
+        <a href="#" class="forgot-link">فراموشی رمز؟</a>
+      </div>
+
+      <button type="submit" class="submit-btn">ورود به کوانتم</button>
+
+      <div class="divider-or">یا</div>
+
+      <button type="button" class="google-btn" id="google-login-1">
+        <svg viewBox="0 0 48 48">
+          <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.5 6.5 29.5 4.5 24 4.5 12.7 4.5 3.5 13.7 3.5 25S12.7 45.5 24 45.5 44.5 36.3 44.5 25c0-1.5-.2-3-.9-4.5z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.5 6.5 29.5 4.5 24 4.5c-7.6 0-14.2 4.3-17.7 10.2z"/>
+          <path fill="#4CAF50" d="M24 45.5c5.4 0 10.3-2 14-5.4l-6.5-5.5c-2 1.5-4.7 2.4-7.5 2.4-5.2 0-9.6-3.3-11.2-7.9l-6.6 5.1C9.7 41.1 16.3 45.5 24 45.5z"/>
+          <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.5 5.5c-.5.4 6.7-4.9 6.7-14 0-1.5-.2-3-.9-4.5z"/>
+        </svg>
+        ورود با گوگل
+      </button>
+
+      <div class="auth-foot">
+        حساب نداری؟ <a href="#" data-switch="register">همین حالا ثبت‌نام کن</a>
+      </div>
+    </form>
+
+    <!-- ============ فرم ثبت‌نام ============ -->
+    <form class="form-section" id="form-register" novalidate>
+      <div class="form-group">
+        <label for="reg-name">نام و نام خانوادگی <span class="req">*</span></label>
+        <input type="text" id="reg-name" placeholder="مثلاً: علی محمدی" autocomplete="name">
+        <div class="field-error" id="err-reg-name">نام و نام خانوادگی را کامل وارد کن</div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-email">ایمیل جیمیل <span class="req">*</span></label>
+        <input type="email" id="reg-email" placeholder="example@gmail.com" autocomplete="email">
+        <div class="field-error" id="err-reg-email">فقط ایمیل Gmail پذیرفته می‌شود</div>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-password">رمز عبور <span class="req">*</span></label>
+        <input type="password" id="reg-password" placeholder="حداقل ۶ کاراکتر" autocomplete="new-password">
+        <div class="field-error" id="err-reg-password">رمز عبور باید حداقل ۶ کاراکتر باشد</div>
+      </div>
+
+      <div class="remember-row">
+        <label class="remember-label">
+          <span class="switch">
+            <input type="checkbox" id="reg-remember">
+            <span class="slider"></span>
+          </span>
+          مرا به خاطر بسپار
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">ثبت‌نام در کوانتم</button>
+
+      <div class="divider-or">یا</div>
+
+      <button type="button" class="google-btn" id="google-login-2">
+        <svg viewBox="0 0 48 48">
+          <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.5 6.5 29.5 4.5 24 4.5 12.7 4.5 3.5 13.7 3.5 25S12.7 45.5 24 45.5 44.5 36.3 44.5 25c0-1.5-.2-3-.9-4.5z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.5 6.5 29.5 4.5 24 4.5c-7.6 0-14.2 4.3-17.7 10.2z"/>
+          <path fill="#4CAF50" d="M24 45.5c5.4 0 10.3-2 14-5.4l-6.5-5.5c-2 1.5-4.7 2.4-7.5 2.4-5.2 0-9.6-3.3-11.2-7.9l-6.6 5.1C9.7 41.1 16.3 45.5 24 45.5z"/>
+          <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.5 5.5c-.5.4 6.7-4.9 6.7-14 0-1.5-.2-3-.9-4.5z"/>
+        </svg>
+        ثبت‌نام با گوگل
+      </button>
+
+      <div class="auth-foot">
+        حساب داری؟ <a href="#" data-switch="login">وارد شو</a>
+      </div>
+    </form>
+
+    <!-- پیام موفقیت -->
+    <div class="success-box" id="success-box">
+      <div class="check-circle">✓</div>
+      <h3 id="success-title">خوش آمدی!</h3>
+      <p id="success-message">در حال انتقال به پنل درسی...</p>
+    </div>
+
+  </div>
+
+  <script>
+    /* ============================================
+       🔄 تب‌ها و لینک‌های سوئیچ
+       ============================================ */
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const forms = document.querySelectorAll('.form-section');
+    const switchLinks = document.querySelectorAll('[data-switch]');
+
+    function switchTab(tabName) {
+      tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabName));
+      forms.forEach(f => f.classList.toggle('active', f.id === 'form-' + tabName));
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    switchLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab(link.dataset.switch);
+      });
+    });
+
+    /* ============================================
+       ✅ اعتبارسنجی
+       ============================================ */
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const gmailRegex = /^[^\s@]+@gmail\.com$/i;
+
+    function showError(inputId, errorId, show) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      if (show) {
+        input.classList.add('error');
+        error.classList.add('show');
+      } else {
+        input.classList.remove('error');
+        error.classList.remove('show');
+      }
+    }
+
+    /* --- ورود --- */
+    const formLogin = document.getElementById('form-login');
+
+    formLogin.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      let valid = true;
+
+      if (!emailRegex.test(email)) {
+        showError('login-email', 'err-login-email', true);
+        valid = false;
+      } else {
+        showError('login-email', 'err-login-email', false);
+      }
+
+      if (password.length < 6) {
+        showError('login-password', 'err-login-password', true);
+        valid = false;
+      } else {
+        showError('login-password', 'err-login-password', false);
+      }
+
+      if (!valid) return;
+
+      // ذخیره‌ی ساده (برای دمو)
+      localStorage.setItem('quantum_user', JSON.stringify({
+        email: email,
+        name: email.split('@')[0],
+        remember: document.getElementById('login-remember').checked
+      }));
+
+      showSuccess('خوش برگشتی!', 'در حال انتقال به پنل درسی...');
+    });
+
+    /* --- ثبت‌نام --- */
+    const formRegister = document.getElementById('form-register');
+
+    formRegister.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+
+      let valid = true;
+
+      if (name.length < 3 || !name.includes(' ')) {
+        showError('reg-name', 'err-reg-name', true);
+        valid = false;
+      } else {
+        showError('reg-name', 'err-reg-name', false);
+      }
+
+      if (!gmailRegex.test(email)) {
+        showError('reg-email', 'err-reg-email', true);
+        valid = false;
+      } else {
+        showError('reg-email', 'err-reg-email', false);
+      }
+
+      if (password.length < 6) {
+        showError('reg-password', 'err-reg-password', true);
+        valid = false;
+      } else {
+        showError('reg-password', 'err-reg-password', false);
+      }
+
+      if (!valid) return;
+
+      localStorage.setItem('quantum_user', JSON.stringify({
+        name: name,
+        email: email,
+        remember: document.getElementById('reg-remember').checked
+      }));
+
+      showSuccess('خوش آمدی، ' + name.split(' ')[0] + '!', 'حساب تو با موفقیت ساخته شد...');
+    });
+
+    /* --- ورود با گوگل --- */
+    ['google-login-1', 'google-login-2'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          // دمو: شبیه‌سازی ورود گوگل
+          localStorage.setItem('quantum_user', JSON.stringify({
+            name: 'کاربر گوگل',
+            email: 'user@gmail.com',
+            provider: 'google',
+            remember: true
+          }));
+          showSuccess('ورود با گوگل موفق!', 'در حال انتقال به پنل درسی...');
+        });
+      }
+    });
+
+    /* --- نمایش موفقیت و انتقال به پنل --- */
+    function showSuccess(title, message) {
+      document.getElementById('success-title').textContent = title;
+      document.getElementById('success-message').textContent = message;
+      document.getElementById('success-box').classList.add('show');
+
+      setTimeout(() => {
+        window.location.href = 'panel.html';
+      }, 1800);
+    }
+  </script>
+
+</body>
+</html>
