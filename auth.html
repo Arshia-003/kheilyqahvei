@@ -38,22 +38,26 @@
 
   html { scroll-behavior: smooth; }
 
+  /* ✅ حذف اسکرول - صفحه دقیقاً به اندازه‌ی viewport */
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   body {
     background: var(--forest);
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px 20px;
+    padding: 20px;
     font-size: 15px;
     position: relative;
-    overflow-x: hidden;
   }
 
   body::before {
     content: '';
     position: fixed;
-    top: 22px; left: 22px; right: 22px; bottom: 22px;
+    top: 18px; left: 18px; right: 18px; bottom: 18px;
     border: 1px solid rgba(200,169,107,0.18);
     pointer-events: none;
   }
@@ -61,7 +65,7 @@
   body::after {
     content: '';
     position: fixed;
-    top: 32px; left: 32px; right: 32px; bottom: 32px;
+    top: 26px; left: 26px; right: 26px; bottom: 26px;
     border: 1px solid rgba(200,169,107,0.08);
     pointer-events: none;
   }
@@ -71,17 +75,31 @@
     font-weight: 700;
   }
 
+  /* ============================================
+     📐 کارت با اسکرول داخلی (نه کل صفحه)
+     ============================================ */
   .auth-card {
     background: var(--paper);
     width: 100%;
-    max-width: 480px;
+    max-width: 470px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
     position: relative;
     border: 1px solid var(--gold);
     box-shadow: 0 30px 80px rgba(0,0,0,0.4),
                 0 0 0 1px rgba(200,169,107,0.15);
-    padding: 55px 42px 42px;
+    padding: 42px 38px 38px;
     z-index: 2;
     animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+
+  .auth-card::-webkit-scrollbar { width: 6px; }
+  .auth-card::-webkit-scrollbar-track { background: transparent; }
+  .auth-card::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 3px;
   }
 
   @keyframes cardIn {
@@ -95,6 +113,7 @@
     inset: 12px;
     border: 1px solid rgba(200,169,107,0.3);
     pointer-events: none;
+    z-index: 0;
   }
 
   .auth-card::after {
@@ -105,6 +124,7 @@
     border-top: 1.5px solid var(--brick);
     border-right: 1.5px solid var(--brick);
     pointer-events: none;
+    z-index: 0;
   }
 
   .auth-corner {
@@ -114,17 +134,21 @@
     border-bottom: 1.5px solid var(--brick);
     border-left: 1.5px solid var(--brick);
     pointer-events: none;
+    z-index: 0;
   }
 
+  /* ============================================
+     🎓 برند
+     ============================================ */
   .brand-head {
     text-align: center;
-    margin-bottom: 26px;
+    margin-bottom: 22px;
     position: relative;
     z-index: 2;
   }
 
   .brand-head .logo-circle {
-    width: 78px; height: 78px;
+    width: 68px; height: 68px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid var(--gold);
@@ -133,8 +157,8 @@
     justify-content: center;
     background: var(--forest-soft);
     box-shadow: 0 0 0 5px rgba(200,169,107,0.15),
-                0 0 30px rgba(200,169,107,0.2);
-    margin: 0 auto 16px;
+                0 0 25px rgba(200,169,107,0.2);
+    margin: 0 auto 14px;
   }
 
   .brand-head .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
@@ -143,7 +167,7 @@
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
     color: var(--forest);
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: 0.5px;
   }
 
@@ -151,15 +175,18 @@
 
   .brand-head .brand-sub {
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12.5px;
     margin-top: 4px;
     font-style: italic;
   }
 
+  /* ============================================
+     📑 تب‌ها
+     ============================================ */
   .tabs {
     display: flex;
     position: relative;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     border-bottom: 1px solid rgba(200,169,107,0.35);
     z-index: 2;
   }
@@ -168,10 +195,10 @@
     flex: 1;
     background: transparent;
     border: none;
-    padding: 12px 8px;
+    padding: 10px 8px;
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--muted);
     cursor: pointer;
     position: relative;
@@ -195,6 +222,9 @@
 
   .tab-btn.active::after { width: 100%; }
 
+  /* ============================================
+     📝 فرم‌ها
+     ============================================ */
   .form-section {
     display: none;
     position: relative;
@@ -210,14 +240,14 @@
   }
 
   .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     position: relative;
   }
 
   .form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 13.5px;
+    margin-bottom: 6px;
+    font-size: 13px;
     color: var(--forest);
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -227,12 +257,12 @@
 
   .form-group input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: var(--cream);
     border: 1.5px solid #e4ddca;
     border-radius: 3px;
     font-family: 'Vazirmatn', sans-serif;
-    font-size: 14.5px;
+    font-size: 14px;
     color: var(--text);
     transition: all 0.3s ease;
     outline: none;
@@ -240,7 +270,7 @@
 
   .form-group input::placeholder {
     color: #a8a89e;
-    font-size: 14px;
+    font-size: 13.5px;
   }
 
   .form-group input:focus {
@@ -256,19 +286,22 @@
 
   .field-error {
     display: none;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--error);
-    margin-top: 6px;
+    margin-top: 5px;
     padding-right: 4px;
   }
 
   .field-error.show { display: block; }
 
+  /* ============================================
+     🔀 سوییچ
+     ============================================ */
   .remember-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 22px 0 24px;
+    margin: 18px 0 20px;
     position: relative;
     z-index: 2;
   }
@@ -276,18 +309,18 @@
   .remember-label {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
     user-select: none;
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--text);
   }
 
   .switch {
     position: relative;
     display: inline-block;
-    width: 46px;
-    height: 24px;
+    width: 42px;
+    height: 22px;
     flex-shrink: 0;
   }
 
@@ -311,8 +344,8 @@
   .switch .slider::before {
     content: '';
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     top: 2px;
     right: 2px;
     background: var(--paper);
@@ -327,16 +360,12 @@
   }
 
   .switch input:checked + .slider::before {
-    transform: translateX(-22px);
+    transform: translateX(-20px);
     background: var(--gold);
   }
 
-  .switch .slider:hover {
-    box-shadow: 0 0 0 4px rgba(200,169,107,0.12);
-  }
-
   .forgot-link {
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--brick);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -347,21 +376,23 @@
     text-decoration: underline;
   }
 
+  /* ============================================
+     🎯 دکمه‌ها
+     ============================================ */
   .submit-btn {
     width: 100%;
     background: var(--brick);
     color: var(--cream);
-    padding: 14px 30px;
+    padding: 12px 26px;
     border: 1.5px solid var(--brick);
     border-radius: 4px;
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     margin-top: 4px;
-    position: relative;
   }
 
   .submit-btn:hover:not(:disabled) {
@@ -372,10 +403,6 @@
     box-shadow: 0 10px 25px rgba(184,92,69,0.3);
   }
 
-  .submit-btn:active:not(:disabled) {
-    transform: scale(0.98);
-  }
-
   .submit-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -384,10 +411,10 @@
   .divider-or {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin: 26px 0 20px;
+    gap: 12px;
+    margin: 18px 0 14px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 12.5px;
     position: relative;
     z-index: 2;
   }
@@ -404,17 +431,17 @@
     width: 100%;
     background: var(--paper);
     color: var(--forest);
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: 1.5px solid #e4ddca;
     border-radius: 3px;
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     z-index: 2;
@@ -427,18 +454,14 @@
     box-shadow: 0 8px 20px rgba(20,42,35,0.1);
   }
 
-  .google-btn svg {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-  }
+  .google-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
   .auth-foot {
     text-align: center;
-    margin-top: 26px;
-    padding-top: 20px;
+    margin-top: 18px;
+    padding-top: 14px;
     border-top: 1px dashed rgba(200,169,107,0.4);
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--muted);
     position: relative;
     z-index: 2;
@@ -453,6 +476,9 @@
 
   .auth-foot a:hover { color: var(--brick); }
 
+  /* ============================================
+     ✅ پیام موفقیت
+     ============================================ */
   .success-box {
     display: none;
     position: absolute;
@@ -472,8 +498,8 @@
   }
 
   .success-box .check-circle {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     background: var(--forest);
@@ -481,8 +507,8 @@
     align-items: center;
     justify-content: center;
     color: var(--gold);
-    font-size: 40px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 18px;
     animation: popIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
@@ -496,25 +522,22 @@
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
     color: var(--forest);
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 8px;
   }
 
-  .success-box p {
-    color: var(--muted);
-    font-size: 14px;
-  }
+  .success-box p { color: var(--muted); font-size: 13.5px; }
 
-  /* پیام خطا کلی */
+  /* پیام خطای کلی */
   .global-error {
     display: none;
     background: #fdf2f1;
     border: 1px solid var(--error);
     color: var(--error);
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 3px;
-    font-size: 13.5px;
-    margin-bottom: 18px;
+    font-size: 13px;
+    margin-bottom: 14px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -522,29 +545,56 @@
 
   .global-error.show { display: block; }
 
+  /* ============================================
+     📱 موبایل
+     ============================================ */
   @media (max-width: 640px) {
-    body { padding: 16px 12px; }
-    body::before { top: 10px; left: 10px; right: 10px; bottom: 10px; }
-    body::after { top: 18px; left: 18px; right: 18px; bottom: 18px; }
+    body { padding: 12px; }
+    body::before { top: 8px; left: 8px; right: 8px; bottom: 8px; }
+    body::after { top: 14px; left: 14px; right: 14px; bottom: 14px; }
 
-    .auth-card { padding: 45px 24px 32px; }
-    .auth-card::before { inset: 8px; }
-    .auth-card::after { top: 14px; right: 14px; width: 18px; height: 18px; }
-    .auth-corner { bottom: 14px; left: 14px; width: 18px; height: 18px; }
+    .auth-card {
+      padding: 34px 20px 28px;
+      max-height: calc(100vh - 24px);
+    }
+    .auth-card::before { inset: 7px; }
+    .auth-card::after { top: 13px; right: 13px; width: 16px; height: 16px; }
+    .auth-corner { bottom: 13px; left: 13px; width: 16px; height: 16px; }
 
-    .brand-head .logo-circle { width: 66px; height: 66px; }
-    .brand-head .brand-name { font-size: 21px; }
+    .brand-head { margin-bottom: 18px; }
+    .brand-head .logo-circle { width: 60px; height: 60px; margin-bottom: 12px; }
+    .brand-head .brand-name { font-size: 20px; }
 
-    .tab-btn { font-size: 15px; padding: 10px 6px; }
+    .tabs { margin-bottom: 20px; }
+    .tab-btn { font-size: 14px; padding: 9px 6px; }
 
-    .form-group input { font-size: 15px; padding: 11px 14px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group input { font-size: 14px; padding: 10px 12px; }
 
-    .submit-btn { font-size: 15px; padding: 13px 24px; }
-    .google-btn { font-size: 14px; padding: 11px 16px; }
+    .submit-btn { font-size: 14px; padding: 11px 22px; }
+    .google-btn { font-size: 13.5px; padding: 10px 14px; }
 
-    .remember-row { flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .remember-row { margin: 16px 0 18px; }
     .remember-label { font-size: 13px; }
-    .forgot-link { font-size: 12.5px; margin-right: auto; }
+    .forgot-link { font-size: 12px; }
+  }
+
+  /* موبایل خیلی کوچک (iPhone SE) */
+  @media (max-width: 380px) and (max-height: 700px) {
+    .auth-card { padding: 28px 18px 22px; }
+    .brand-head { margin-bottom: 14px; }
+    .brand-head .logo-circle { width: 52px; height: 52px; margin-bottom: 10px; }
+    .brand-head .brand-name { font-size: 18px; }
+    .brand-head .brand-sub { font-size: 11.5px; }
+
+    .tabs { margin-bottom: 16px; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { font-size: 12.5px; margin-bottom: 5px; }
+    .form-group input { padding: 9px 12px; font-size: 13.5px; }
+
+    .remember-row { margin: 14px 0 16px; }
+    .divider-or { margin: 14px 0 12px; }
+    .auth-foot { margin-top: 14px; padding-top: 12px; font-size: 12px; }
   }
 </style>
 </head>
@@ -566,7 +616,6 @@
       <button class="tab-btn" data-tab="register" type="button">ثبت‌نام</button>
     </div>
 
-    <!-- پیام خطای کلی -->
     <div class="global-error" id="global-error"></div>
 
     <!-- ============ فرم ورود ============ -->
@@ -672,12 +721,12 @@
 
   <script>
     // ============================================
-    // 🔗 آدرس Google Apps Script API
+    // 🔗 آدرس API
     // ============================================
     const API_URL = 'https://script.google.com/macros/s/AKfycby0pXJdTClYx7RuYswfwRWHcEgBhZ41ePEcsk9Frwoqw8rJhCL5vsZC9DIx5_reAIJa/exec';
 
     /* ============================================
-       🔄 تب‌ها و لینک‌های سوئیچ
+       🔄 تب‌ها
        ============================================ */
     const tabBtns = document.querySelectorAll('.tab-btn');
     const forms = document.querySelectorAll('.form-section');
@@ -689,10 +738,7 @@
       hideGlobalError();
     }
 
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
-    });
-
+    tabBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
     switchLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -704,7 +750,9 @@
        ✅ اعتبارسنجی
        ============================================ */
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const gmailRegex = /^[^\s@]+@gmail\.com$/i;
+    
+    // جیمیل معتبر: فقط حروف/عدد/نقطه/خط‌تیره/پلاس، حداقل ۶ کاراکتر قبل از @gmail.com
+    const gmailRegex = /^[a-z0-9](\.?[a-z0-9_\-+]){4,}@gmail\.com$/i;
 
     function showError(inputId, errorId, show) {
       const input = document.getElementById(inputId);
@@ -722,11 +770,12 @@
       const el = document.getElementById('global-error');
       el.textContent = msg;
       el.classList.add('show');
+      // پاک کردن خطاها بعد از ۵ ثانیه
+      setTimeout(() => el.classList.remove('show'), 5000);
     }
 
     function hideGlobalError() {
-      const el = document.getElementById('global-error');
-      el.classList.remove('show');
+      document.getElementById('global-error').classList.remove('show');
     }
 
     /* ============================================
@@ -735,14 +784,11 @@
     async function sendToSheet(payload) {
       const response = await fetch(API_URL, {
         method: 'POST',
-        mode: 'no-cors', // برای دور زدن CORS
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        redirect: 'follow'
       });
-      // با no-cors نمی‌تونیم پاسخ رو بخونیم، پس فرض می‌کنیم موفق بوده
-      return { status: 'success' };
+      return await response.json();
     }
 
     /* ============================================
@@ -755,12 +801,12 @@
       e.preventDefault();
       hideGlobalError();
 
-      const email = document.getElementById('login-email').value.trim();
+      const email = document.getElementById('login-email').value.trim().toLowerCase();
       const password = document.getElementById('login-password').value;
 
       let valid = true;
 
-      if (!emailRegex.test(email)) {
+      if (!gmailRegex.test(email)) {
         showError('login-email', 'err-login-email', true);
         valid = false;
       } else {
@@ -776,27 +822,37 @@
 
       if (!valid) return;
 
-      // دکمه در حالت لودینگ
       btnLogin.disabled = true;
       btnLogin.textContent = 'در حال ورود...';
 
       try {
-        await sendToSheet({
+        const result = await sendToSheet({
           action: 'login',
           email: email,
-          password: password,
-          remember: document.getElementById('login-remember').checked
+          password: password
         });
 
-        // ذخیره در localStorage
+        if (result.status === 'error') {
+          if (result.code === 'INVALID_CREDENTIALS') {
+            showGlobalError('ایمیل یا رمز عبور اشتباه است');
+          } else {
+            showGlobalError(result.message || 'خطایی رخ داد');
+          }
+          btnLogin.disabled = false;
+          btnLogin.textContent = 'ورود به کوانتم';
+          return;
+        }
+
+        // موفق
         localStorage.setItem('quantum_user', JSON.stringify({
           email: email,
-          name: email.split('@')[0],
+          name: result.name || email.split('@')[0],
           remember: document.getElementById('login-remember').checked
         }));
 
-        showSuccess('خوش برگشتی!', 'در حال انتقال به پنل درسی...');
+        showSuccess('خوش برگشتی، ' + (result.name || '').split(' ')[0] + '!', 'در حال انتقال به پنل درسی...');
       } catch (err) {
+        console.error(err);
         showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
         btnLogin.disabled = false;
         btnLogin.textContent = 'ورود به کوانتم';
@@ -814,18 +870,21 @@
       hideGlobalError();
 
       const name = document.getElementById('reg-name').value.trim();
-      const email = document.getElementById('reg-email').value.trim();
+      const email = document.getElementById('reg-email').value.trim().toLowerCase();
       const password = document.getElementById('reg-password').value;
 
       let valid = true;
 
-      if (name.length < 3 || !name.includes(' ')) {
+      // نام: حداقل دو کلمه، هر کلمه حداقل ۲ کاراکتر
+      const nameParts = name.split(/\s+/).filter(p => p.length >= 2);
+      if (nameParts.length < 2) {
         showError('reg-name', 'err-reg-name', true);
         valid = false;
       } else {
         showError('reg-name', 'err-reg-name', false);
       }
 
+      // جیمیل معتبر
       if (!gmailRegex.test(email)) {
         showError('reg-email', 'err-reg-email', true);
         valid = false;
@@ -846,13 +905,24 @@
       btnRegister.textContent = 'در حال ثبت‌نام...';
 
       try {
-        await sendToSheet({
+        const result = await sendToSheet({
           action: 'register',
           name: name,
           email: email,
-          password: password,
-          remember: document.getElementById('reg-remember').checked
+          password: password
         });
+
+        if (result.status === 'error') {
+          if (result.code === 'DUPLICATE_EMAIL') {
+            showGlobalError('این ایمیل قبلاً ثبت‌نام کرده. لطفاً وارد شو.');
+            showError('reg-email', 'err-reg-email', true);
+          } else {
+            showGlobalError(result.message || 'خطایی رخ داد');
+          }
+          btnRegister.disabled = false;
+          btnRegister.textContent = 'ثبت‌نام در کوانتم';
+          return;
+        }
 
         localStorage.setItem('quantum_user', JSON.stringify({
           name: name,
@@ -860,8 +930,9 @@
           remember: document.getElementById('reg-remember').checked
         }));
 
-        showSuccess('خوش آمدی، ' + name.split(' ')[0] + '!', 'حساب تو با موفقیت ساخته شد...');
+        showSuccess('خوش آمدی، ' + nameParts[0] + '!', 'حساب تو با موفقیت ساخته شد...');
       } catch (err) {
+        console.error(err);
         showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
         btnRegister.disabled = false;
         btnRegister.textContent = 'ثبت‌نام در کوانتم';
@@ -876,19 +947,24 @@
       if (btn) {
         btn.addEventListener('click', async () => {
           const isRegister = id === 'google-login-2';
+          const demoEmail = 'demo.user@gmail.com';
 
           try {
-            await sendToSheet({
-              action: isRegister ? 'register-google' : 'login-google',
+            const result = await sendToSheet({
+              action: isRegister ? 'register-google' : 'login',
               name: 'کاربر گوگل',
-              email: 'user@gmail.com',
-              password: '(google-oauth)',
-              remember: true
+              email: demoEmail,
+              password: '(google-oauth)'
             });
+
+            if (result.status === 'error' && result.code === 'DUPLICATE_EMAIL') {
+              showGlobalError('این ایمیل قبلاً ثبت‌نام کرده');
+              return;
+            }
 
             localStorage.setItem('quantum_user', JSON.stringify({
               name: 'کاربر گوگل',
-              email: 'user@gmail.com',
+              email: demoEmail,
               provider: 'google',
               remember: true
             }));
