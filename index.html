@@ -6,9 +6,11 @@
 <meta name="theme-color" content="#142A23">
 <title>کوانتم | همراه کنکوری‌ها</title>
 
+<!-- فاوآیکن -->
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 
+<!-- فونت‌ها -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
@@ -44,12 +46,16 @@
     overflow-x: hidden;
     font-size: 15px;
     font-family: 'Vazirmatn', sans-serif;
+    font-weight: 400;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  h1, h2, h3, .logo-text, .btn, .auth-btn {
+  h1, h2, h3,
+  .logo-text,
+  .btn,
+  .auth-btn {
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
   }
@@ -78,7 +84,8 @@
   }
 
   header .logo-wrap .logo-circle {
-    width: 52px; height: 52px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid var(--gold);
@@ -90,7 +97,9 @@
     flex-shrink: 0;
   }
 
-  header .logo-wrap .logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+  header .logo-wrap .logo-circle img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
 
   header .logo-text {
     color: var(--cream);
@@ -101,6 +110,7 @@
 
   header .logo-text span { color: var(--gold); }
 
+  /* دکمه ثبت‌نام / ورود */
   .auth-btn {
     display: inline-block;
     background: transparent;
@@ -155,7 +165,8 @@
   .hero-content { position: relative; z-index: 2; }
 
   .hero .logo-big-circle {
-    width: 150px; height: 150px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid var(--gold);
@@ -283,6 +294,7 @@
     margin: 0 auto;
   }
 
+  /* ====== کارت‌ها ====== */
   .card {
     background: var(--paper);
     padding: 48px 32px;
@@ -416,6 +428,7 @@
     color: #c4cbc6;
   }
 
+  /* ====== فوتر ====== */
   footer {
     background: #0d1c17;
     padding: 20px;
@@ -497,7 +510,7 @@
   }
 
   /* ============================================
-     ✕ دکمه‌ی بستن با افکت ذره‌بین (DeepSeek style)
+     ✕ دکمه‌ی بستن با افکت ذره‌بین
      ============================================ */
   .modal-close-wrap {
     position: absolute;
@@ -511,7 +524,6 @@
     justify-content: center;
   }
 
-  /* دایره‌ی ذره‌بین - پشت دکمه، با هاور ظاهر می‌شه */
   .modal-close-wrap .magnifier {
     position: absolute;
     inset: 0;
@@ -524,7 +536,6 @@
     pointer-events: none;
   }
 
-  /* هاله‌ی نرم پشت ذره‌بین */
   .modal-close-wrap .magnifier::before {
     content: '';
     position: absolute;
@@ -535,7 +546,6 @@
     transition: opacity 0.4s ease;
   }
 
-  /* حلقه‌ی نبض‌دار (مثل DeepSeek) */
   .modal-close-wrap .magnifier::after {
     content: '';
     position: absolute;
@@ -545,7 +555,6 @@
     opacity: 0;
   }
 
-  /* دکمه‌ی بستن (ضربدر) */
   .modal-close {
     position: relative;
     width: 38px;
@@ -570,7 +579,6 @@
     z-index: 2;
   }
 
-  /* === هاور روی wrap: نمایش ذره‌بین + زوم دکمه === */
   .modal-close-wrap:hover .magnifier {
     opacity: 1;
     transform: scale(1);
@@ -586,9 +594,8 @@
     animation: magnifierRing 1.8s ease-out infinite;
   }
 
-  /* خود دکمه با هاور بزرگ‌نمایی می‌شه (حس ذره‌بین) */
   .modal-close-wrap:hover .modal-close {
-    transform: scale(1.15);
+    transform: scale(1.15) rotate(90deg);
     background: var(--forest);
     border-color: var(--forest);
     color: var(--cream);
@@ -596,33 +603,14 @@
                 0 8px 20px rgba(20,42,35,0.3);
   }
 
-  /* چرخش ملایم ضربدر موقع هاور */
-  .modal-close-wrap:hover .modal-close {
-    transform: scale(1.15) rotate(90deg);
-  }
-
-  /* انیمیشن هاله‌ی نبض‌دار */
   @keyframes magnifierPulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: scale(1.4);
-      opacity: 0.3;
-    }
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.4); opacity: 0.3; }
   }
 
-  /* انیمیشن حلقه‌ی منتشرشونده */
   @keyframes magnifierRing {
-    0% {
-      transform: scale(1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1.8);
-      opacity: 0;
-    }
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.8); opacity: 0; }
   }
 
   /* ============================================
@@ -756,7 +744,11 @@
       box-shadow: 0 0 0 2px rgba(200,169,107,0.15);
     }
     header .logo-text { font-size: 19px; letter-spacing: 0; }
-    .auth-btn { padding: 8px 16px; font-size: 13px; border-width: 1.3px; }
+    .auth-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      border-width: 1.3px;
+    }
 
     .hero { padding: 60px 22px 75px; }
     .hero::before { top: 14px; left: 14px; right: 14px; bottom: 14px; }
@@ -785,6 +777,7 @@
     .cards { grid-template-columns: 1fr; gap: 22px; }
     .card { padding: 36px 24px; }
 
+    /* افکت‌های هاور روی موبایل غیرفعال */
     .card:hover { transform: none; box-shadow: none; border-color: #e4ddca; }
     .card:hover::before,
     .card:hover::after { width: 22px; height: 22px; border-color: var(--gold); }
@@ -816,11 +809,7 @@
       height: 40px;
     }
 
-    .modal-close {
-      width: 34px;
-      height: 34px;
-      font-size: 20px;
-    }
+    .modal-close { width: 34px; height: 34px; font-size: 20px; }
 
     /* روی موبایل افکت ذره‌بین غیرفعال */
     .modal-close-wrap:hover .magnifier { opacity: 0; }
@@ -853,6 +842,7 @@
 </head>
 <body>
 
+  <!-- ====== هدر ====== -->
   <header>
     <div class="logo-wrap">
       <div class="logo-circle">
@@ -860,9 +850,10 @@
       </div>
       <div class="logo-text">کوانتم<span>.</span></div>
     </div>
-    <button class="auth-btn" type="button">ثبت‌نام / ورود</button>
+    <a href="auth.html" class="auth-btn">ثبت‌نام / ورود</a>
   </header>
 
+  <!-- ====== Hero ====== -->
   <section class="hero">
     <div class="hero-content">
       <div class="logo-big-circle">
@@ -877,6 +868,7 @@
     </div>
   </section>
 
+  <!-- ====== ویژگی‌ها ====== -->
   <section class="features" id="features">
     <h2>کوانتم چیکار می‌کنه؟</h2>
     <p class="sub">دو امکانات ساده، ولی کارآمد</p>
@@ -897,6 +889,7 @@
     </div>
   </section>
 
+  <!-- ====== بخش رایگان ====== -->
   <section class="free" id="free">
     <div class="content">
       <div class="icon-big">◆</div>
@@ -907,12 +900,14 @@
     </div>
   </section>
 
+  <!-- ====== فوتر ====== -->
   <footer></footer>
 
-  <!-- 🔮 مودال آزمون آنلاین -->
+  <!-- ============================================
+       🔮 مودال آزمون آنلاین
+       ============================================ -->
   <div class="modal-overlay" id="modal-exam">
     <div class="modal-box">
-      <!-- دکمه‌ی بستن با ذره‌بین -->
       <div class="modal-close-wrap">
         <div class="magnifier"></div>
         <button class="modal-close" aria-label="بستن">×</button>
@@ -940,7 +935,9 @@
     </div>
   </div>
 
-  <!-- 🔮 مودال جزوه‌های کوچک -->
+  <!-- ============================================
+       🔮 مودال جزوه‌های کوچک
+       ============================================ -->
   <div class="modal-overlay" id="modal-notes">
     <div class="modal-box">
       <div class="modal-close-wrap">
@@ -974,6 +971,7 @@
     </div>
   </div>
 
+  <!-- ====== اسکریپت مودال ====== -->
   <script>
     const cards = document.querySelectorAll('.card[data-modal]');
     const overlays = document.querySelectorAll('.modal-overlay');
