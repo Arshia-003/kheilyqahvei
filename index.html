@@ -14,7 +14,6 @@
 <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
 
 <script>
-  // اعمال تم قبل از رندر شدن صفحه (جلوگیری از فلش)
   (function() {
     var saved = localStorage.getItem('quantum_theme');
     if (saved === 'dark') {
@@ -43,23 +42,27 @@
     --brick: #B85C45;
     --text: #1f2a25;
     --muted: #6b756e;
-    --glow: #F4F0E6; /* رنگ درخشش لوگو */
+    --glow: #F4F0E6;
+    --border-soft: #e4ddca;
+    --modal-overlay: rgba(20, 42, 35, 0.6);
   }
 
   /* ============================================
-     🌙 تم تاریک
+     🌙 تم تاریک — آبی شبانه + فیروزه‌ای
      ============================================ */
   [data-theme="dark"] {
-    --forest: #171916;
-    --forest-soft: #34392F;
-    --gold: #B1A27B;
-    --gold-soft: #D8D0BB;
-    --cream: #D8D0BB;
-    --paper: #34392F;
-    --brick: #B1A27B;
-    --text: #D8D0BB;
-    --muted: #77745D;
-    --glow: #D8D0BB;
+    --forest: #090E1A;         /* پس‌زمینه اصلی */
+    --forest-soft: #101A2B;    /* کارت‌ها و پنل‌ها */
+    --gold: #36C5D9;           /* فیروزه‌ای (اکسنت اصلی) */
+    --gold-soft: #8296B8;      /* آبی خاکستری */
+    --cream: #E9EDF5;          /* متن روشن */
+    --paper: #101A2B;          /* کارت‌ها */
+    --brick: #36C5D9;          /* دکمه CTA = فیروزه‌ای */
+    --text: #E9EDF5;
+    --muted: #8296B8;
+    --glow: #E9EDF5;
+    --border-soft: #192840;
+    --modal-overlay: rgba(9, 14, 26, 0.75);
   }
 
   html { scroll-behavior: smooth; }
@@ -75,7 +78,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: background 0.4s ease, color 0.4s ease;
+    transition: background 0.5s ease, color 0.5s ease;
   }
 
   h1, h2, h3,
@@ -101,7 +104,11 @@
     z-index: 100;
     border-bottom: 1px solid rgba(200,169,107,0.35);
     gap: 16px;
-    transition: background 0.4s ease;
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+
+  [data-theme="dark"] header {
+    border-bottom-color: rgba(54,197,217,0.25);
   }
 
   header .logo-wrap {
@@ -111,7 +118,6 @@
     min-width: 0;
   }
 
-  /* لوگوی هدر: بدون دایره، فقط خود لوگو با درخشش کرمی */
   header .logo-wrap .logo-img {
     width: 52px;
     height: 52px;
@@ -120,7 +126,7 @@
     filter: drop-shadow(0 0 4px var(--glow))
             drop-shadow(0 0 10px var(--glow));
     animation: logoGlow 3s ease-in-out infinite;
-    transition: filter 0.4s ease;
+    transition: filter 0.5s ease;
   }
 
   @keyframes logoGlow {
@@ -139,11 +145,12 @@
     font-size: 24px;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    transition: color 0.5s ease;
   }
 
-  header .logo-text span { color: var(--gold); }
+  header .logo-text span { color: var(--gold); transition: color 0.5s ease; }
 
-  /* ====== اکشن‌های هدر (تم + ثبت‌نام/خوش‌آمد) ====== */
+  /* ====== اکشن‌های هدر ====== */
   .header-actions {
     display: flex;
     align-items: center;
@@ -152,7 +159,7 @@
   }
 
   /* ============================================
-     🌗 دکمه‌ی تغییر تم
+     🌗 دکمه‌ی تغییر تم + جرقه‌ها
      ============================================ */
   .theme-toggle {
     width: 42px;
@@ -167,9 +174,10 @@
     justify-content: center;
     padding: 0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     flex-shrink: 0;
+    z-index: 10;
   }
 
   .theme-toggle:hover {
@@ -179,6 +187,10 @@
     box-shadow: 0 0 0 4px rgba(200,169,107,0.2);
   }
 
+  [data-theme="dark"] .theme-toggle:hover {
+    box-shadow: 0 0 0 4px rgba(54,197,217,0.25);
+  }
+
   .theme-toggle svg {
     width: 20px;
     height: 20px;
@@ -186,7 +198,6 @@
     transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* حالت روشن: خورشید نشون داده می‌شه (یعنی کلیک کنی می‌ری تاریک) */
   .theme-toggle .icon-moon {
     opacity: 0;
     transform: rotate(-90deg) scale(0.5);
@@ -196,7 +207,6 @@
     transform: rotate(0) scale(1);
   }
 
-  /* حالت تاریک: ماه نشون داده می‌شه */
   [data-theme="dark"] .theme-toggle .icon-moon {
     opacity: 1;
     transform: rotate(0) scale(1);
@@ -206,7 +216,56 @@
     transform: rotate(90deg) scale(0.5);
   }
 
-  /* ====== دکمه ثبت‌نام / ورود (مهمان) ====== */
+  /* ============================================
+     ✨ جرقه‌ها (Sparkles)
+     ============================================ */
+  .sparkle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    /* رنگ از JS ست می‌شه */
+    animation: sparkleFly 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* جرقه‌های ستاره‌ای (4 پر) */
+  .sparkle.star {
+    width: 10px;
+    height: 10px;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .sparkle.star::before,
+  .sparkle.star::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+  }
+
+  .sparkle.star::before {
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+  }
+
+  @keyframes sparkleFly {
+    0% {
+      transform: translate(0, 0) scale(0);
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(0);
+      opacity: 0;
+    }
+  }
+
+  /* ====== دکمه ثبت‌نام / ورود ====== */
   .auth-btn {
     display: inline-block;
     background: transparent;
@@ -232,7 +291,7 @@
   }
 
   /* ============================================
-     👋 دکمه‌ی خوش‌آمد (کاربر لاگین‌شده)
+     👋 دکمه‌ی خوش‌آمد
      ============================================ */
   .welcome-btn {
     display: none;
@@ -284,7 +343,6 @@
     font-weight: 700;
   }
 
-  /* انیمیشن دست تکون دادن */
   .wave-emoji {
     display: inline-block;
     animation: wave 2.5s ease-in-out infinite;
@@ -308,7 +366,7 @@
     position: relative;
     overflow: hidden;
     flex: 1;
-    transition: background 0.4s ease;
+    transition: background 0.5s ease;
   }
 
   .hero::before {
@@ -319,6 +377,10 @@
     pointer-events: none;
   }
 
+  [data-theme="dark"] .hero::before {
+    border-color: rgba(54,197,217,0.22);
+  }
+
   .hero::after {
     content: '';
     position: absolute;
@@ -327,9 +389,12 @@
     pointer-events: none;
   }
 
+  [data-theme="dark"] .hero::after {
+    border-color: rgba(54,197,217,0.1);
+  }
+
   .hero-content { position: relative; z-index: 2; }
 
-  /* لوگوی بزرگ Hero: بدون دایره، فقط درخشش کرمی */
   .hero .logo-big-img {
     width: 150px;
     height: 150px;
@@ -341,7 +406,7 @@
             drop-shadow(0 0 40px var(--glow));
     animation: float 5s ease-in-out infinite,
                logoGlowBig 3.5s ease-in-out infinite;
-    transition: filter 0.4s ease;
+    transition: filter 0.5s ease;
   }
 
   @keyframes float {
@@ -362,7 +427,6 @@
     }
   }
 
-  /* پیام شخصی‌سازی‌شده بالای تیتر */
   .hero-greeting {
     display: none;
     color: var(--gold);
@@ -371,6 +435,7 @@
     font-size: 17px;
     margin-bottom: 14px;
     letter-spacing: 0.3px;
+    transition: color 0.5s ease;
   }
 
   .hero-greeting.show { display: block; }
@@ -381,9 +446,10 @@
     letter-spacing: 0.5px;
     color: var(--cream);
     line-height: 1.4;
+    transition: color 0.5s ease;
   }
 
-  .hero h1 span { color: var(--gold); }
+  .hero h1 span { color: var(--gold); transition: color 0.5s ease; }
 
   .divider {
     display: flex;
@@ -402,13 +468,14 @@
     background: linear-gradient(to left, transparent, var(--gold), transparent);
   }
 
-  .divider .diamond { color: var(--brick); font-size: 11px; }
+  .divider .diamond { color: var(--brick); font-size: 11px; transition: color 0.5s ease; }
 
   .hero p {
     font-size: 16px;
     color: var(--gold-soft);
     max-width: 660px;
     margin: 0 auto 40px;
+    transition: color 0.5s ease;
   }
 
   .btn {
@@ -425,6 +492,10 @@
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  [data-theme="dark"] .btn {
+    color: #090E1A;
+  }
+
   .btn:hover {
     background: transparent;
     color: var(--brick);
@@ -434,12 +505,17 @@
     box-shadow: 0 10px 25px rgba(184,92,69,0.35);
   }
 
+  [data-theme="dark"] .btn:hover {
+    box-shadow: 0 10px 25px rgba(54,197,217,0.35);
+  }
+
   /* ====== ویژگی‌ها ====== */
   .features {
     padding: 100px 20px;
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    transition: background 0.5s ease;
   }
 
   .features h2 {
@@ -448,7 +524,7 @@
     color: var(--forest);
     margin-bottom: 14px;
     line-height: 1.4;
-    transition: color 0.4s ease;
+    transition: color 0.5s ease;
   }
 
   .features .sub {
@@ -456,6 +532,7 @@
     color: var(--muted);
     margin-bottom: 45px;
     font-size: 15px;
+    transition: color 0.5s ease;
   }
 
   .features .ornament {
@@ -471,9 +548,10 @@
     content: '';
     width: 60px; height: 1px;
     background: var(--gold);
+    transition: background 0.5s ease;
   }
 
-  .features .ornament span { color: var(--brick); font-size: 12px; }
+  .features .ornament span { color: var(--brick); font-size: 12px; transition: color 0.5s ease; }
 
   .cards {
     display: grid;
@@ -489,7 +567,7 @@
     padding: 48px 32px;
     text-align: center;
     position: relative;
-    border: 1px solid rgba(200,169,107,0.3);
+    border: 1px solid var(--border-soft);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -520,6 +598,10 @@
     border-color: var(--gold);
   }
 
+  [data-theme="dark"] .card:hover {
+    box-shadow: 0 22px 55px rgba(0,0,0,0.5);
+  }
+
   .card:hover::before,
   .card:hover::after {
     width: 34px; height: 34px;
@@ -545,12 +627,14 @@
     position: absolute;
     inset: 6px;
     border-radius: 50%;
-    border: 1px dashed rgba(184,92,69,0.5);
+    border: 1px dashed var(--brick);
+    opacity: 0.5;
     transition: border-color 0.5s ease;
   }
 
   .card:hover .icon-circle::after {
     border-color: var(--gold);
+    opacity: 1;
     animation: spin 20s linear infinite;
   }
 
@@ -574,7 +658,7 @@
 
   .card:hover h3 { color: var(--brick); }
 
-  .card p { color: var(--muted); font-size: 15px; }
+  .card p { color: var(--muted); font-size: 15px; transition: color 0.5s ease; }
 
   /* ====== بخش رایگان ====== */
   .free {
@@ -584,7 +668,7 @@
     padding: 90px 20px;
     position: relative;
     overflow: hidden;
-    transition: background 0.4s ease;
+    transition: background 0.5s ease;
   }
 
   .free::before {
@@ -595,12 +679,17 @@
     pointer-events: none;
   }
 
+  [data-theme="dark"] .free::before {
+    border-color: rgba(54,197,217,0.2);
+  }
+
   .free .content { position: relative; z-index: 2; }
 
   .free .icon-big {
     font-size: 38px;
     margin-bottom: 22px;
     color: var(--gold);
+    transition: color 0.5s ease;
   }
 
   .free h2 {
@@ -609,24 +698,26 @@
     line-height: 1.5;
   }
 
-  .free h2 span { color: var(--gold); }
+  .free h2 span { color: var(--gold); transition: color 0.5s ease; }
 
   .free p {
     font-size: 16px;
     max-width: 640px;
     margin: 0 auto;
     color: var(--gold-soft);
+    transition: color 0.5s ease;
   }
 
   footer {
     background: #0d1c17;
     padding: 20px;
     border-top: 1px solid rgba(200,169,107,0.35);
-    transition: background 0.4s ease;
+    transition: background 0.5s ease, border-color 0.5s ease;
   }
 
   [data-theme="dark"] footer {
-    background: #101210;
+    background: #06090F;
+    border-top-color: rgba(54,197,217,0.2);
   }
 
   /* ============================================
@@ -635,7 +726,7 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(20, 42, 35, 0.6);
+    background: var(--modal-overlay);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
@@ -645,7 +736,7 @@
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease, background 0.5s ease;
   }
 
   .modal-overlay.active { opacity: 1; visibility: visible; }
@@ -680,6 +771,10 @@
     border: 1px solid rgba(200,169,107,0.35);
     pointer-events: none;
     z-index: 1;
+  }
+
+  [data-theme="dark"] .modal-box::before {
+    border-color: rgba(54,197,217,0.3);
   }
 
   .modal-box::after {
@@ -818,6 +913,7 @@
     margin-bottom: 8px;
     text-align: center;
     line-height: 1.5;
+    transition: color 0.5s ease;
   }
 
   .modal-content .modal-ornament {
@@ -835,9 +931,10 @@
     height: 1px;
     background: var(--forest);
     opacity: 0.4;
+    transition: background 0.5s ease;
   }
 
-  .modal-content .modal-ornament span { color: var(--forest); font-size: 11px; }
+  .modal-content .modal-ornament span { color: var(--forest); font-size: 11px; transition: color 0.5s ease; }
 
   .modal-content p {
     font-size: 15px;
@@ -846,6 +943,7 @@
     margin-bottom: 16px;
     text-align: justify;
     text-align-last: center;
+    transition: color 0.5s ease;
   }
 
   .modal-content p strong {
@@ -862,6 +960,7 @@
     font-size: 14.5px;
     line-height: 2;
     border-radius: 2px;
+    transition: background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
   }
 
   .modal-content p strong::before,
@@ -894,6 +993,11 @@
     border-top: 1px solid rgba(20,42,35,0.15);
     position: relative;
     font-weight: 500;
+    transition: color 0.5s ease, border-color 0.5s ease;
+  }
+
+  [data-theme="dark"] .modal-content .modal-signature {
+    border-top-color: rgba(233,237,245,0.15);
   }
 
   .modal-content .modal-signature::before {
@@ -943,7 +1047,6 @@
       border-width: 1.3px;
     }
 
-    /* دکمه‌ی خوش‌آمد موبایل */
     .welcome-btn {
       padding: 5px 12px 5px 10px;
       font-size: 13px;
@@ -955,7 +1058,7 @@
       font-size: 12.5px;
     }
     .welcome-btn .welcome-text {
-      display: none; /* فقط آواتار روی موبایل */
+      display: none;
     }
 
     .hero { padding: 60px 22px 75px; }
@@ -984,11 +1087,11 @@
     .cards { grid-template-columns: 1fr; gap: 22px; }
     .card { padding: 36px 24px; }
 
-    .card:hover { transform: none; box-shadow: none; border-color: rgba(200,169,107,0.3); }
+    .card:hover { transform: none; box-shadow: none; border-color: var(--border-soft); }
     .card:hover::before,
     .card:hover::after { width: 22px; height: 22px; border-color: var(--gold); }
     .card:hover .icon-circle { transform: none; border-color: var(--gold); box-shadow: none; }
-    .card:hover .icon-circle::after { animation: none; border-color: rgba(184,92,69,0.5); }
+    .card:hover .icon-circle::after { animation: none; border-color: var(--brick); }
     .card:hover h3 { color: var(--forest); }
 
     .card .icon-circle { width: 72px; height: 72px; font-size: 30px; margin-bottom: 20px; }
@@ -1073,7 +1176,7 @@
       <!-- دکمه‌ی مهمان -->
       <a href="auth.html" class="auth-btn" id="auth-btn">ثبت‌نام / ورود</a>
 
-      <!-- دکمه‌ی خوش‌آمد (کاربر لاگین‌شده) -->
+      <!-- دکمه‌ی خوش‌آمد -->
       <a href="panel.html" class="welcome-btn" id="welcome-btn">
         <span class="user-dot" id="user-dot">؟</span>
         <span class="welcome-text">سلام <strong id="welcome-name">کاربر</strong> <span class="wave-emoji">👋</span></span>
@@ -1200,6 +1303,51 @@
 
   <script>
     /* ============================================
+       ✨ افکت جرقه / ستاره هنگام تغییر تم
+       ============================================ */
+    function createSparkles(button, color) {
+      const rect = button.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const count = 14;
+
+      for (let i = 0; i < count; i++) {
+        const spark = document.createElement('span');
+        const isStar = Math.random() > 0.5;
+        spark.className = 'sparkle' + (isStar ? ' star' : '');
+
+        // زاویه و فاصله‌ی تصادفی
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
+        const distance = 40 + Math.random() * 50;
+
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+
+        spark.style.left = centerX + 'px';
+        spark.style.top = centerY + 'px';
+        spark.style.setProperty('--tx', tx + 'px');
+        spark.style.setProperty('--ty', ty + 'px');
+
+        // رنگ
+        if (isStar) {
+          spark.style.color = color;
+        } else {
+          spark.style.background = color;
+          spark.style.boxShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
+        }
+
+        // تاخیر تصادفی کوچیک
+        spark.style.animationDelay = (Math.random() * 0.08) + 's';
+
+        document.body.appendChild(spark);
+
+        // حذف بعد از انیمیشن
+        setTimeout(() => spark.remove(), 1100);
+      }
+    }
+
+    /* ============================================
        🌗 تم تاریک / روشن
        ============================================ */
     const themeToggle = document.getElementById('theme-toggle');
@@ -1207,13 +1355,21 @@
 
     themeToggle.addEventListener('click', () => {
       const isDark = htmlEl.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        htmlEl.removeAttribute('data-theme');
-        localStorage.setItem('quantum_theme', 'light');
-      } else {
-        htmlEl.setAttribute('data-theme', 'dark');
-        localStorage.setItem('quantum_theme', 'dark');
-      }
+
+      // رنگ جرقه‌ها: اگه داریم می‌ریم تاریک → فیروزه‌ای، اگه می‌ریم روشن → طلایی
+      const sparkColor = isDark ? '#C8A96B' : '#36C5D9';
+      createSparkles(themeToggle, sparkColor);
+
+      // تغییر تم بعد از یه مکث کوچیک که جرقه‌ها دیده بشن
+      setTimeout(() => {
+        if (isDark) {
+          htmlEl.removeAttribute('data-theme');
+          localStorage.setItem('quantum_theme', 'light');
+        } else {
+          htmlEl.setAttribute('data-theme', 'dark');
+          localStorage.setItem('quantum_theme', 'dark');
+        }
+      }, 120);
     });
 
     /* ============================================
