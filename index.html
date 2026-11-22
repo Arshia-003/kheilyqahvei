@@ -45,30 +45,31 @@
     --glow: #F4F0E6;
     --border-soft: #e4ddca;
     --modal-overlay: rgba(20, 42, 35, 0.6);
+    --bg-page: #F4F0E6;
+    --text-on-light: #1f2a25;
   }
 
-  /* ============================================
-     🌙 تم تاریک — آبی شبانه + فیروزه‌ای
-     ============================================ */
   [data-theme="dark"] {
-    --forest: #090E1A;         /* پس‌زمینه اصلی */
-    --forest-soft: #101A2B;    /* کارت‌ها و پنل‌ها */
-    --gold: #36C5D9;           /* فیروزه‌ای (اکسنت اصلی) */
-    --gold-soft: #8296B8;      /* آبی خاکستری */
-    --cream: #E9EDF5;          /* متن روشن */
-    --paper: #101A2B;          /* کارت‌ها */
-    --brick: #36C5D9;          /* دکمه CTA = فیروزه‌ای */
-    --text: #E9EDF5;
-    --muted: #8296B8;
-    --glow: #E9EDF5;
-    --border-soft: #192840;
-    --modal-overlay: rgba(9, 14, 26, 0.75);
+    --forest: #17110D;
+    --forest-soft: #241912;
+    --paper: #35251A;
+    --border-soft: #493325;
+    --gold: #B88655;
+    --gold-soft: #D8C3A5;
+    --cream: #D8C3A5;
+    --text: #D8C3A5;
+    --muted: #A99A88;
+    --brick: #B88655;
+    --glow: #D8C3A5;
+    --modal-overlay: rgba(23, 17, 13, 0.85);
+    --bg-page: #17110D;
+    --text-on-light: #D8C3A5;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--cream);
+    background: var(--bg-page);
     color: var(--text);
     line-height: 1.9;
     overflow-x: hidden;
@@ -92,7 +93,6 @@
 
   img { max-width: 100%; height: auto; display: block; }
 
-  /* ====== هدر ====== */
   header {
     background: var(--forest);
     padding: 16px 50px;
@@ -105,10 +105,11 @@
     border-bottom: 1px solid rgba(200,169,107,0.35);
     gap: 16px;
     transition: background 0.5s ease, border-color 0.5s ease;
+    overflow: visible;
   }
 
   [data-theme="dark"] header {
-    border-bottom-color: rgba(54,197,217,0.25);
+    border-bottom-color: rgba(184,134,85,0.35);
   }
 
   header .logo-wrap {
@@ -150,7 +151,6 @@
 
   header .logo-text span { color: var(--gold); transition: color 0.5s ease; }
 
-  /* ====== اکشن‌های هدر ====== */
   .header-actions {
     display: flex;
     align-items: center;
@@ -158,26 +158,44 @@
     flex-shrink: 0;
   }
 
-  /* ============================================
-     🌗 دکمه‌ی تغییر تم + جرقه‌ها
-     ============================================ */
+  /* ====== دکمه‌ی تم + stage ستاره‌ها ====== */
+  .theme-toggle-wrap {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .star-stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 260px;
+    height: 260px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
   .theme-toggle {
+    position: absolute;
+    inset: 0;
     width: 42px;
     height: 42px;
     border-radius: 50%;
     border: 1.5px solid var(--gold);
-    background: transparent;
+    background: var(--forest);
     color: var(--gold);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    position: relative;
     overflow: visible;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    flex-shrink: 0;
-    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.5s ease, border-color 0.5s ease;
+    z-index: 2;
   }
 
   .theme-toggle:hover {
@@ -188,7 +206,7 @@
   }
 
   [data-theme="dark"] .theme-toggle:hover {
-    box-shadow: 0 0 0 4px rgba(54,197,217,0.25);
+    box-shadow: 0 0 0 4px rgba(184,134,85,0.3);
   }
 
   .theme-toggle svg {
@@ -216,51 +234,43 @@
     transform: rotate(90deg) scale(0.5);
   }
 
-  /* ============================================
-     ✨ جرقه‌ها (Sparkles)
-     ============================================ */
-  .sparkle {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    /* رنگ از JS ست می‌شه */
-    animation: sparkleFly 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  /* جرقه‌های ستاره‌ای (4 پر) */
-  .sparkle.star {
-    width: 10px;
-    height: 10px;
-    border-radius: 0;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  .sparkle.star::before,
-  .sparkle.star::after {
-    content: '';
+  /* ====== ستاره‌ها ====== */
+  .star-particle {
     position: absolute;
-    inset: 0;
-    background: currentColor;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: starOutAndBack 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity;
   }
 
-  .sparkle.star::before {
-    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+  .star-particle svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 0 4px currentColor);
   }
 
-  @keyframes sparkleFly {
+  @keyframes starOutAndBack {
     0% {
-      transform: translate(0, 0) scale(0);
+      transform: translate(-50%, -50%) translate(0, 0) scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      transform: translate(-50%, -50%) translate(0, 0) scale(0.6) rotate(30deg);
       opacity: 1;
     }
-    40% {
+    55% {
+      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1) rotate(180deg);
       opacity: 1;
+    }
+    65% {
+      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1) rotate(210deg);
+      opacity: 0.9;
     }
     100% {
-      transform: translate(var(--tx), var(--ty)) scale(0);
+      transform: translate(-50%, -50%) translate(0, 0) scale(0) rotate(360deg);
       opacity: 0;
     }
   }
@@ -290,9 +300,7 @@
     box-shadow: 0 8px 20px rgba(200,169,107,0.35);
   }
 
-  /* ============================================
-     👋 دکمه‌ی خوش‌آمد
-     ============================================ */
+  /* ====== دکمه‌ی خوش‌آمد ====== */
   .welcome-btn {
     display: none;
     align-items: center;
@@ -375,10 +383,11 @@
     top: 28px; left: 28px; right: 28px; bottom: 28px;
     border: 1px solid rgba(200,169,107,0.28);
     pointer-events: none;
+    transition: border-color 0.5s ease;
   }
 
   [data-theme="dark"] .hero::before {
-    border-color: rgba(54,197,217,0.22);
+    border-color: rgba(184,134,85,0.3);
   }
 
   .hero::after {
@@ -387,10 +396,11 @@
     top: 38px; left: 38px; right: 38px; bottom: 38px;
     border: 1px solid rgba(200,169,107,0.12);
     pointer-events: none;
+    transition: border-color 0.5s ease;
   }
 
   [data-theme="dark"] .hero::after {
-    border-color: rgba(54,197,217,0.1);
+    border-color: rgba(184,134,85,0.15);
   }
 
   .hero-content { position: relative; z-index: 2; }
@@ -493,7 +503,7 @@
   }
 
   [data-theme="dark"] .btn {
-    color: #090E1A;
+    color: #17110D;
   }
 
   .btn:hover {
@@ -506,7 +516,7 @@
   }
 
   [data-theme="dark"] .btn:hover {
-    box-shadow: 0 10px 25px rgba(54,197,217,0.35);
+    box-shadow: 0 10px 25px rgba(184,134,85,0.4);
   }
 
   /* ====== ویژگی‌ها ====== */
@@ -515,7 +525,6 @@
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
-    transition: background 0.5s ease;
   }
 
   .features h2 {
@@ -527,12 +536,20 @@
     transition: color 0.5s ease;
   }
 
+  [data-theme="dark"] .features h2 {
+    color: var(--text);
+  }
+
   .features .sub {
     text-align: center;
     color: var(--muted);
     margin-bottom: 45px;
     font-size: 15px;
     transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .features .sub {
+    color: var(--gold-soft);
   }
 
   .features .ornament {
@@ -561,7 +578,6 @@
     margin: 0 auto;
   }
 
-  /* ====== کارت‌ها ====== */
   .card {
     background: var(--paper);
     padding: 48px 32px;
@@ -599,7 +615,7 @@
   }
 
   [data-theme="dark"] .card:hover {
-    box-shadow: 0 22px 55px rgba(0,0,0,0.5);
+    box-shadow: 0 22px 55px rgba(0,0,0,0.6);
   }
 
   .card:hover::before,
@@ -629,7 +645,7 @@
     border-radius: 50%;
     border: 1px dashed var(--brick);
     opacity: 0.5;
-    transition: border-color 0.5s ease;
+    transition: border-color 0.5s ease, opacity 0.5s ease;
   }
 
   .card:hover .icon-circle::after {
@@ -656,6 +672,10 @@
     transition: color 0.4s;
   }
 
+  [data-theme="dark"] .card h3 {
+    color: var(--text);
+  }
+
   .card:hover h3 { color: var(--brick); }
 
   .card p { color: var(--muted); font-size: 15px; transition: color 0.5s ease; }
@@ -677,10 +697,11 @@
     top: 24px; left: 24px; right: 24px; bottom: 24px;
     border: 1px solid rgba(200,169,107,0.22);
     pointer-events: none;
+    transition: border-color 0.5s ease;
   }
 
   [data-theme="dark"] .free::before {
-    border-color: rgba(54,197,217,0.2);
+    border-color: rgba(184,134,85,0.3);
   }
 
   .free .content { position: relative; z-index: 2; }
@@ -696,6 +717,8 @@
     font-size: 36px;
     margin-bottom: 20px;
     line-height: 1.5;
+    color: var(--cream);
+    transition: color 0.5s ease;
   }
 
   .free h2 span { color: var(--gold); transition: color 0.5s ease; }
@@ -716,13 +739,11 @@
   }
 
   [data-theme="dark"] footer {
-    background: #06090F;
-    border-top-color: rgba(54,197,217,0.2);
+    background: #0F0B08;
+    border-top-color: rgba(184,134,85,0.3);
   }
 
-  /* ============================================
-     🔮 مودال
-     ============================================ */
+  /* ====== مودال ====== */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -771,10 +792,11 @@
     border: 1px solid rgba(200,169,107,0.35);
     pointer-events: none;
     z-index: 1;
+    transition: border-color 0.5s ease;
   }
 
   [data-theme="dark"] .modal-box::before {
-    border-color: rgba(54,197,217,0.3);
+    border-color: rgba(184,134,85,0.4);
   }
 
   .modal-box::after {
@@ -916,6 +938,10 @@
     transition: color 0.5s ease;
   }
 
+  [data-theme="dark"] .modal-content .modal-title {
+    color: var(--text);
+  }
+
   .modal-content .modal-ornament {
     display: flex;
     align-items: center;
@@ -934,7 +960,16 @@
     transition: background 0.5s ease;
   }
 
+  [data-theme="dark"] .modal-content .modal-ornament::before,
+  [data-theme="dark"] .modal-content .modal-ornament::after {
+    background: var(--text);
+  }
+
   .modal-content .modal-ornament span { color: var(--forest); font-size: 11px; transition: color 0.5s ease; }
+
+  [data-theme="dark"] .modal-content .modal-ornament span {
+    color: var(--text);
+  }
 
   .modal-content p {
     font-size: 15px;
@@ -997,7 +1032,8 @@
   }
 
   [data-theme="dark"] .modal-content .modal-signature {
-    border-top-color: rgba(233,237,245,0.15);
+    color: var(--text);
+    border-top-color: rgba(216,195,165,0.15);
   }
 
   .modal-content .modal-signature::before {
@@ -1016,9 +1052,7 @@
     border-radius: 3px;
   }
 
-  /* ============================================
-     📱 RESPONSIVE
-     ============================================ */
+  /* ====== RESPONSIVE ====== */
   @media (max-width: 900px) {
     header { padding: 14px 24px; }
     .features { padding: 80px 20px; }
@@ -1035,11 +1069,10 @@
     }
     header .logo-text { font-size: 19px; letter-spacing: 0; }
 
-    .theme-toggle {
-      width: 38px;
-      height: 38px;
-    }
+    .theme-toggle-wrap { width: 38px; height: 38px; }
+    .theme-toggle { width: 38px; height: 38px; }
     .theme-toggle svg { width: 18px; height: 18px; }
+    .star-stage { width: 220px; height: 220px; }
 
     .auth-btn {
       padding: 8px 14px;
@@ -1094,6 +1127,8 @@
     .card:hover .icon-circle::after { animation: none; border-color: var(--brick); }
     .card:hover h3 { color: var(--forest); }
 
+    [data-theme="dark"] .card:hover h3 { color: var(--text); }
+
     .card .icon-circle { width: 72px; height: 72px; font-size: 30px; margin-bottom: 20px; }
     .card h3 { font-size: 19px; margin-bottom: 12px; }
     .card p { font-size: 14px; line-height: 1.9; }
@@ -1133,8 +1168,10 @@
     header { padding: 10px 12px; }
     header .logo-wrap .logo-img { width: 38px; height: 38px; }
     header .logo-text { font-size: 17px; }
+    .theme-toggle-wrap { width: 34px; height: 34px; }
     .theme-toggle { width: 34px; height: 34px; }
     .theme-toggle svg { width: 16px; height: 16px; }
+    .star-stage { width: 200px; height: 200px; }
     .auth-btn { padding: 7px 12px; font-size: 12px; }
     .welcome-btn { padding: 5px 10px 5px 8px; }
     .welcome-btn .user-dot { width: 24px; height: 24px; font-size: 12px; }
@@ -1147,7 +1184,6 @@
 </head>
 <body>
 
-  <!-- ====== هدر ====== -->
   <header>
     <div class="logo-wrap">
       <img src="logo.png" alt="کوانتم" class="logo-img">
@@ -1155,28 +1191,28 @@
     </div>
 
     <div class="header-actions">
-      <!-- 🌗 دکمه‌ی تغییر تم -->
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="تغییر تم">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2"></path>
-          <path d="M12 20v2"></path>
-          <path d="M4.93 4.93l1.41 1.41"></path>
-          <path d="M17.66 17.66l1.41 1.41"></path>
-          <path d="M2 12h2"></path>
-          <path d="M20 12h2"></path>
-          <path d="M6.34 17.66l-1.41 1.41"></path>
-          <path d="M19.07 4.93l-1.41 1.41"></path>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
+      <div class="theme-toggle-wrap">
+        <div class="star-stage" id="star-stage"></div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="تغییر تم">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="M4.93 4.93l1.41 1.41"></path>
+            <path d="M17.66 17.66l1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="M6.34 17.66l-1.41 1.41"></path>
+            <path d="M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
 
-      <!-- دکمه‌ی مهمان -->
       <a href="auth.html" class="auth-btn" id="auth-btn">ثبت‌نام / ورود</a>
 
-      <!-- دکمه‌ی خوش‌آمد -->
       <a href="panel.html" class="welcome-btn" id="welcome-btn">
         <span class="user-dot" id="user-dot">؟</span>
         <span class="welcome-text">سلام <strong id="welcome-name">کاربر</strong> <span class="wave-emoji">👋</span></span>
@@ -1184,7 +1220,6 @@
     </div>
   </header>
 
-  <!-- ====== Hero ====== -->
   <section class="hero">
     <div class="hero-content">
       <img src="logo.png" alt="کوانتم" class="logo-big-img">
@@ -1198,7 +1233,6 @@
     </div>
   </section>
 
-  <!-- ====== ویژگی‌ها ====== -->
   <section class="features" id="features">
     <h2>کوانتم چیکار می‌کنه؟</h2>
     <p class="sub">دو امکانات ساده، ولی کارآمد</p>
@@ -1219,7 +1253,6 @@
     </div>
   </section>
 
-  <!-- ====== بخش رایگان ====== -->
   <section class="free" id="free">
     <div class="content">
       <div class="icon-big">◆</div>
@@ -1230,12 +1263,8 @@
     </div>
   </section>
 
-  <!-- ====== فوتر ====== -->
   <footer></footer>
 
-  <!-- ============================================
-       🔮 مودال آزمون آنلاین
-       ============================================ -->
   <div class="modal-overlay" id="modal-exam">
     <div class="modal-box">
       <div class="modal-close-wrap">
@@ -1265,9 +1294,6 @@
     </div>
   </div>
 
-  <!-- ============================================
-       🔮 مودال جزوه‌های کوچک
-       ============================================ -->
   <div class="modal-overlay" id="modal-notes">
     <div class="modal-box">
       <div class="modal-close-wrap">
@@ -1302,65 +1328,61 @@
   </div>
 
   <script>
-    /* ============================================
-       ✨ افکت جرقه / ستاره هنگام تغییر تم
-       ============================================ */
-    function createSparkles(button, color) {
-      const rect = button.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+    const STAR_SVG = `
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0 L13.8 9.2 L22.4 6.8 L15.2 12 L22.4 17.2 L13.8 14.8 L12 24 L10.2 14.8 L1.6 17.2 L8.8 12 L1.6 6.8 L10.2 9.2 Z"
+              fill="currentColor"/>
+      </svg>
+    `;
 
-      const count = 14;
+    function createStars(color) {
+      const stage = document.getElementById('star-stage');
+      if (!stage) return;
+
+      const stageRect = stage.getBoundingClientRect();
+      const centerX = stageRect.width / 2;
+      const centerY = stageRect.height / 2;
+
+      const count = 8;
 
       for (let i = 0; i < count; i++) {
-        const spark = document.createElement('span');
-        const isStar = Math.random() > 0.5;
-        spark.className = 'sparkle' + (isStar ? ' star' : '');
+        const star = document.createElement('span');
+        star.className = 'star-particle';
+        star.style.color = color;
+        star.innerHTML = STAR_SVG;
 
-        // زاویه و فاصله‌ی تصادفی
-        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
-        const distance = 40 + Math.random() * 50;
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+        const distance = 40 + Math.random() * 30;
 
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance;
 
-        spark.style.left = centerX + 'px';
-        spark.style.top = centerY + 'px';
-        spark.style.setProperty('--tx', tx + 'px');
-        spark.style.setProperty('--ty', ty + 'px');
+        star.style.left = centerX + 'px';
+        star.style.top = centerY + 'px';
 
-        // رنگ
-        if (isStar) {
-          spark.style.color = color;
-        } else {
-          spark.style.background = color;
-          spark.style.boxShadow = `0 0 8px ${color}, 0 0 16px ${color}`;
-        }
+        star.style.setProperty('--tx', tx + 'px');
+        star.style.setProperty('--ty', ty + 'px');
 
-        // تاخیر تصادفی کوچیک
-        spark.style.animationDelay = (Math.random() * 0.08) + 's';
+        const size = 12 + Math.random() * 10;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
 
-        document.body.appendChild(spark);
+        star.style.animationDelay = (Math.random() * 0.1) + 's';
 
-        // حذف بعد از انیمیشن
-        setTimeout(() => spark.remove(), 1100);
+        stage.appendChild(star);
+
+        setTimeout(() => star.remove(), 2300);
       }
     }
 
-    /* ============================================
-       🌗 تم تاریک / روشن
-       ============================================ */
     const themeToggle = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
 
     themeToggle.addEventListener('click', () => {
       const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+      const starColor = isDark ? '#C8A96B' : '#B88655';
+      createStars(starColor);
 
-      // رنگ جرقه‌ها: اگه داریم می‌ریم تاریک → فیروزه‌ای، اگه می‌ریم روشن → طلایی
-      const sparkColor = isDark ? '#C8A96B' : '#36C5D9';
-      createSparkles(themeToggle, sparkColor);
-
-      // تغییر تم بعد از یه مکث کوچیک که جرقه‌ها دیده بشن
       setTimeout(() => {
         if (isDark) {
           htmlEl.removeAttribute('data-theme');
@@ -1369,12 +1391,9 @@
           htmlEl.setAttribute('data-theme', 'dark');
           localStorage.setItem('quantum_theme', 'dark');
         }
-      }, 120);
+      }, 500);
     });
 
-    /* ============================================
-       🔐 چک وضعیت ورود کاربر
-       ============================================ */
     const userData = localStorage.getItem('quantum_user');
     const authBtn = document.getElementById('auth-btn');
     const welcomeBtn = document.getElementById('welcome-btn');
@@ -1399,9 +1418,6 @@
       }
     }
 
-    /* ============================================
-       🔮 مودال‌ها
-       ============================================ */
     const cards = document.querySelectorAll('.card[data-modal]');
     const overlays = document.querySelectorAll('.modal-overlay');
 
