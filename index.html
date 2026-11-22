@@ -164,17 +164,17 @@
     flex-shrink: 0;
   }
 
-  /* stage ۱۰۰px — کوچک‌تر از قبل تا ستاره‌ها از صفحه بیرون نزنن */
   .star-stage {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
     transform: translate(-50%, -50%);
     pointer-events: none;
     overflow: hidden;
     z-index: 1;
+    border-radius: 50%;
   }
 
   .theme-toggle {
@@ -233,14 +233,14 @@
     transform: rotate(90deg) scale(0.5);
   }
 
-  /* ====== ستاره‌ها ====== */
+  /* ====== ستاره‌ها — چرخش منظم دور دکمه ====== */
   .star-particle {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 11px;
+    height: 11px;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    animation: starOutAndBack 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: starOrbit 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     will-change: transform, opacity;
   }
 
@@ -248,28 +248,24 @@
     width: 100%;
     height: 100%;
     display: block;
-    filter: drop-shadow(0 0 4px currentColor);
+    filter: drop-shadow(0 0 3px currentColor);
   }
 
-  @keyframes starOutAndBack {
+  @keyframes starOrbit {
     0% {
-      transform: translate(-50%, -50%) translate(0, 0) scale(0) rotate(0deg);
+      transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(0) rotate(0deg);
       opacity: 0;
     }
-    10% {
-      transform: translate(-50%, -50%) translate(0, 0) scale(0.6) rotate(30deg);
+    15% {
+      transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(1) rotate(60deg);
       opacity: 1;
     }
-    55% {
-      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1) rotate(180deg);
+    85% {
+      transform: translate(-50%, -50%) translate(var(--ex), var(--ey)) scale(1) rotate(300deg);
       opacity: 1;
-    }
-    65% {
-      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(1) rotate(210deg);
-      opacity: 0.9;
     }
     100% {
-      transform: translate(-50%, -50%) translate(0, 0) scale(0) rotate(360deg);
+      transform: translate(-50%, -50%) translate(var(--ex), var(--ey)) scale(0) rotate(360deg);
       opacity: 0;
     }
   }
@@ -521,7 +517,7 @@
   /* ====== ویژگی‌ها ====== */
   .features {
     padding: 100px 20px;
-    max-width: 1000px;
+    max-width: 1150px;
     margin: 0 auto;
     width: 100%;
   }
@@ -569,24 +565,28 @@
 
   .features .ornament span { color: var(--brick); font-size: 12px; transition: color 0.5s ease; }
 
-  /* سه کارت هم‌ردیف */
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 28px;
-    max-width: 1000px;
+    max-width: 1120px;
     margin: 0 auto;
   }
 
   .card {
     background: var(--paper);
-    padding: 44px 26px;
+    padding: 48px 28px;
     text-align: center;
     position: relative;
     border: 1px solid var(--border-soft);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .card::before,
@@ -636,6 +636,7 @@
     font-size: 34px;
     position: relative;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
   }
 
   .card .icon-circle::after {
@@ -727,6 +728,17 @@
     font-size: 16px;
     max-width: 640px;
     margin: 0 auto;
+    color: var(--gold-soft);
+    transition: color 0.5s ease;
+  }
+
+  .free .free-long-text {
+    text-align: center;
+    text-align-last: center;
+    max-width: 780px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 2.1;
     color: var(--gold-soft);
     transition: color 0.5s ease;
   }
@@ -1072,7 +1084,7 @@
     .theme-toggle-wrap { width: 38px; height: 38px; }
     .theme-toggle { width: 38px; height: 38px; }
     .theme-toggle svg { width: 18px; height: 18px; }
-    .star-stage { width: 90px; height: 90px; }
+    .star-stage { width: 86px; height: 86px; }
 
     .auth-btn {
       padding: 8px 14px;
@@ -1118,7 +1130,7 @@
     .features .ornament::after { width: 45px; }
 
     .cards { grid-template-columns: 1fr; gap: 22px; }
-    .card { padding: 36px 24px; }
+    .card { padding: 36px 24px; min-height: auto; }
 
     .card:hover { transform: none; box-shadow: none; border-color: var(--border-soft); }
     .card:hover::before,
@@ -1138,6 +1150,7 @@
     .free .icon-big { font-size: 32px; margin-bottom: 16px; }
     .free h2 { font-size: 22px; line-height: 1.6; margin-bottom: 16px; }
     .free p { font-size: 14px; line-height: 1.9; }
+    .free .free-long-text { font-size: 13.5px; line-height: 2; }
 
     .modal-overlay { padding: 12px; }
     .modal-box { padding: 50px 22px 32px; max-height: 92vh; border-width: 1px; }
@@ -1262,9 +1275,9 @@
   <section class="free" id="free">
     <div class="content">
       <div class="icon-big">◆</div>
-      <h2>کوانتم <span>۱۰۰٪ رایگان</span> است</h2>
-      <p>
-        تمام امکانات برای همه‌ی دانش‌آموزان ایرانی، بدون هیچ هزینه‌ای در دسترسه.
+      <h2>دانش، فراتر از محدودیت‌ها</h2>
+      <p class="free-long-text">
+        ما در کوانتم بر این باوریم که دسترسی به دانش و ابزارهای پیشرفت تحصیلی نباید محدود به امکانات مالی افراد باشد. از همین رو، بخش اصلی خدمات و قابلیت‌های کوانتم به‌صورت رایگان در اختیار تمامی دانش‌آموزان قرار گرفته است. در آینده، امکانات و خدمات پیشرفته‌تری نیز در قالب اشتراک ارائه خواهند شد؛ با این حال، پایبندی به فراهم‌کردن بستری مناسب و در دسترس برای همه دانش‌آموزان، همواره از اصول بنیادین کوانتم خواهد بود.
       </p>
     </div>
   </section>
@@ -1346,22 +1359,22 @@
         <div class="modal-ornament"><span>◆</span></div>
 
         <p>
-          یه برنامه‌ی درسی منظم، بهترین کمکی‌ه که می‌تونی به خودت بکنی. توی کوانتم قراره بتونی برنامه‌ی روزانه و هفتگی‌ات رو ساده و کاربردی تنظیم کنی.
+          برای رسیدن به اهداف بزرگ، فقط تلاش کردن کافی نیست؛ باید بدانی زمانت را چگونه صرف کنی و قدم بعدی‌ات چیست!
         </p>
 
         <p>
-          هدف‌هات رو مشخص کن، ساعت‌های مطالعه‌ات رو بچین و پیشرفتت رو قدم‌به‌قدم دنبال کن؛ بدون پیچیدگی و بدون حواس‌پرتی.
+          جدول برنامه‌ریزی کوانتم به تو کمک می‌کند برنامه درسی و فعالیت‌های روزانه‌ات را به شکلی منظم ثبت و مدیریت کنی تا همیشه دید روشنی از کارهای پیش رو و میزان پیشرفتت داشته باشی.
         </p>
 
         <p>
-          ما هم به‌مرور قابلیت‌های بیشتری به جدول برنامه‌ریزی اضافه می‌کنیم تا برنامه‌ریزی برات راحت‌تر و لذت‌بخش‌تر بشه.
+          ما هم به‌مرور قابلیت‌های بیشتری به این بخش اضافه می‌کنیم تا بتوانی برنامه‌هایت را دقیق‌تر تنظیم کنی، عملکردت را بهتر زیر نظر بگیری و با نظم بیشتری به سمت اهدافت حرکت کنی.
         </p>
 
         <p>
-          <strong>با یه برنامه‌ی درست، هر روز یه قدم به هدفت نزدیک‌تر می‌شی!</strong>
+          <strong>هر روز، یک قدم منظم‌تر؛ هر هفته، یک قدم نزدیک‌تر به هدف!</strong>
         </p>
 
-        <span class="modal-signature">کوانتم؛ نظم، تمرکز، پیشرفت.</span>
+        <span class="modal-signature">کوانتم؛ برنامه‌ریزی دقیق، پیشرفت ماندگار.</span>
       </div>
     </div>
   </div>
@@ -1378,13 +1391,17 @@
       const stage = document.getElementById('star-stage');
       if (!stage) return;
 
-      const stageRect = stage.getBoundingClientRect();
-      const centerX = stageRect.width / 2;
-      const centerY = stageRect.height / 2;
+      const w = stage.offsetWidth;
+      const h = stage.offsetHeight;
 
-      const count = 8;
-      // حداکثر فاصله = نصف کوچک‌ترین ضلع منهای اندازه‌ی ستاره
-      const maxDist = Math.min(stageRect.width, stageRect.height) / 2 - 14;
+      const cx = w / 2;
+      const cy = h / 2;
+
+      const count = 7;
+      const radius = (w / 2) - 12;
+
+      // زاویه‌ها با فاصله‌ی کاملاً یکسان دور دکمه (360/7)
+      const step = (2 * Math.PI) / count;
 
       for (let i = 0; i < count; i++) {
         const star = document.createElement('span');
@@ -1392,48 +1409,60 @@
         star.style.color = color;
         star.innerHTML = STAR_SVG;
 
-        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
-        // فاصله بین ۵۰٪ تا ۹۰٪ maxDist → هیچ‌وقت به لبه نمی‌رسه
-        const distance = maxDist * 0.5 + Math.random() * maxDist * 0.4;
+        // زاویه‌ی شروع منظم: i * step
+        const startA = i * step;
 
-        const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance;
+        // نقطه‌ی شروع روی مدار
+        const sx = -Math.cos(startA) * radius;
+        const sy = Math.sin(startA) * radius;
 
-        star.style.left = centerX + 'px';
-        star.style.top = centerY + 'px';
+        // نقطه‌ی پایان: یک دور کامل جلوتر، دقیقاً همون نقطه
+        const endA = startA + (2 * Math.PI);
+        const ex = -Math.cos(endA) * radius;
+        const ey = Math.sin(endA) * radius;
 
-        star.style.setProperty('--tx', tx + 'px');
-        star.style.setProperty('--ty', ty + 'px');
+        star.style.left = cx + 'px';
+        star.style.top = cy + 'px';
 
-        const size = 10 + Math.random() * 8;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
+        star.style.setProperty('--sx', sx + 'px');
+        star.style.setProperty('--sy', sy + 'px');
+        star.style.setProperty('--ex', ex + 'px');
+        star.style.setProperty('--ey', ey + 'px');
 
-        star.style.animationDelay = (Math.random() * 0.08) + 's';
+        star.style.width = '11px';
+        star.style.height = '11px';
+
+        // تاخیر یکسان و منظم: i * 0.12
+        star.style.animationDelay = (i * 0.12) + 's';
 
         stage.appendChild(star);
 
-        setTimeout(() => star.remove(), 2300);
+        setTimeout(() => star.remove(), 1600 + i * 120 + 300);
       }
     }
 
     const themeToggle = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
 
+    let themeLock = false;
+
     themeToggle.addEventListener('click', () => {
+      if (themeLock) return;
+      themeLock = true;
+
       const isDark = htmlEl.getAttribute('data-theme') === 'dark';
       const starColor = isDark ? '#C8A96B' : '#B88655';
       createStars(starColor);
 
-      setTimeout(() => {
-        if (isDark) {
-          htmlEl.removeAttribute('data-theme');
-          localStorage.setItem('quantum_theme', 'light');
-        } else {
-          htmlEl.setAttribute('data-theme', 'dark');
-          localStorage.setItem('quantum_theme', 'dark');
-        }
-      }, 500);
+      if (isDark) {
+        htmlEl.removeAttribute('data-theme');
+        localStorage.setItem('quantum_theme', 'light');
+      } else {
+        htmlEl.setAttribute('data-theme', 'dark');
+        localStorage.setItem('quantum_theme', 'dark');
+      }
+
+      setTimeout(() => { themeLock = false; }, 2600);
     });
 
     const userData = localStorage.getItem('quantum_user');
