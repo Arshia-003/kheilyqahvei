@@ -6,12 +6,22 @@
 <meta name="theme-color" content="#142A23">
 <title>کوانتم | همراه کنکوری‌ها</title>
 
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/svg+xml" href="favicon-glow.svg">
 <link rel="apple-touch-icon" href="logo.png">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
+
+<script>
+  // اعمال تم قبل از رندر شدن صفحه (جلوگیری از فلش)
+  (function() {
+    var saved = localStorage.getItem('quantum_theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 
 <style>
   * {
@@ -33,6 +43,23 @@
     --brick: #B85C45;
     --text: #1f2a25;
     --muted: #6b756e;
+    --glow: #F4F0E6; /* رنگ درخشش لوگو */
+  }
+
+  /* ============================================
+     🌙 تم تاریک
+     ============================================ */
+  [data-theme="dark"] {
+    --forest: #171916;
+    --forest-soft: #34392F;
+    --gold: #B1A27B;
+    --gold-soft: #D8D0BB;
+    --cream: #D8D0BB;
+    --paper: #34392F;
+    --brick: #B1A27B;
+    --text: #D8D0BB;
+    --muted: #77745D;
+    --glow: #D8D0BB;
   }
 
   html { scroll-behavior: smooth; }
@@ -48,6 +75,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background 0.4s ease, color 0.4s ease;
   }
 
   h1, h2, h3,
@@ -73,6 +101,7 @@
     z-index: 100;
     border-bottom: 1px solid rgba(200,169,107,0.35);
     gap: 16px;
+    transition: background 0.4s ease;
   }
 
   header .logo-wrap {
@@ -82,25 +111,26 @@
     min-width: 0;
   }
 
-  /* لوگوی هدر: بدون دایره، فقط خود لوگو با درخشش */
+  /* لوگوی هدر: بدون دایره، فقط خود لوگو با درخشش کرمی */
   header .logo-wrap .logo-img {
     width: 52px;
     height: 52px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 4px rgba(200,169,107,0.85))
-            drop-shadow(0 0 10px rgba(200,169,107,0.5));
+    filter: drop-shadow(0 0 4px var(--glow))
+            drop-shadow(0 0 10px var(--glow));
     animation: logoGlow 3s ease-in-out infinite;
+    transition: filter 0.4s ease;
   }
 
   @keyframes logoGlow {
     0%, 100% {
-      filter: drop-shadow(0 0 4px rgba(200,169,107,0.8))
-              drop-shadow(0 0 10px rgba(200,169,107,0.4));
+      filter: drop-shadow(0 0 4px var(--glow))
+              drop-shadow(0 0 10px var(--glow));
     }
     50% {
-      filter: drop-shadow(0 0 8px rgba(200,169,107,1))
-              drop-shadow(0 0 18px rgba(200,169,107,0.7));
+      filter: drop-shadow(0 0 8px var(--glow))
+              drop-shadow(0 0 18px var(--glow));
     }
   }
 
@@ -112,6 +142,69 @@
   }
 
   header .logo-text span { color: var(--gold); }
+
+  /* ====== اکشن‌های هدر (تم + ثبت‌نام/خوش‌آمد) ====== */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     🌗 دکمه‌ی تغییر تم
+     ============================================ */
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--gold);
+    color: var(--forest);
+    transform: rotate(25deg) scale(1.08);
+    box-shadow: 0 0 0 4px rgba(200,169,107,0.2);
+  }
+
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* حالت روشن: خورشید نشون داده می‌شه (یعنی کلیک کنی می‌ری تاریک) */
+  .theme-toggle .icon-moon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  .theme-toggle .icon-sun {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  /* حالت تاریک: ماه نشون داده می‌شه */
+  [data-theme="dark"] .theme-toggle .icon-moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+  [data-theme="dark"] .theme-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
 
   /* ====== دکمه ثبت‌نام / ورود (مهمان) ====== */
   .auth-btn {
@@ -142,7 +235,7 @@
      👋 دکمه‌ی خوش‌آمد (کاربر لاگین‌شده)
      ============================================ */
   .welcome-btn {
-    display: none; /* پیش‌فرض مخفی */
+    display: none;
     align-items: center;
     gap: 10px;
     background: transparent;
@@ -160,9 +253,7 @@
     position: relative;
   }
 
-  .welcome-btn.show {
-    display: inline-flex;
-  }
+  .welcome-btn.show { display: inline-flex; }
 
   .welcome-btn:hover {
     background: rgba(200,169,107,0.12);
@@ -185,9 +276,7 @@
     flex-shrink: 0;
   }
 
-  .welcome-btn .welcome-text {
-    color: var(--gold-soft);
-  }
+  .welcome-btn .welcome-text { color: var(--gold-soft); }
 
   .welcome-btn .welcome-text strong {
     color: var(--cream);
@@ -219,6 +308,7 @@
     position: relative;
     overflow: hidden;
     flex: 1;
+    transition: background 0.4s ease;
   }
 
   .hero::before {
@@ -239,18 +329,19 @@
 
   .hero-content { position: relative; z-index: 2; }
 
-  /* لوگوی بزرگ Hero: بدون دایره، فقط درخشش */
+  /* لوگوی بزرگ Hero: بدون دایره، فقط درخشش کرمی */
   .hero .logo-big-img {
     width: 150px;
     height: 150px;
     object-fit: contain;
     margin: 0 auto 32px;
     display: block;
-    filter: drop-shadow(0 0 10px rgba(200,169,107,1))
-            drop-shadow(0 0 22px rgba(200,169,107,0.6))
-            drop-shadow(0 0 40px rgba(200,169,107,0.3));
+    filter: drop-shadow(0 0 10px var(--glow))
+            drop-shadow(0 0 22px var(--glow))
+            drop-shadow(0 0 40px var(--glow));
     animation: float 5s ease-in-out infinite,
                logoGlowBig 3.5s ease-in-out infinite;
+    transition: filter 0.4s ease;
   }
 
   @keyframes float {
@@ -260,14 +351,14 @@
 
   @keyframes logoGlowBig {
     0%, 100% {
-      filter: drop-shadow(0 0 10px rgba(200,169,107,0.9))
-              drop-shadow(0 0 22px rgba(200,169,107,0.5))
-              drop-shadow(0 0 36px rgba(200,169,107,0.25));
+      filter: drop-shadow(0 0 10px var(--glow))
+              drop-shadow(0 0 22px var(--glow))
+              drop-shadow(0 0 36px var(--glow));
     }
     50% {
-      filter: drop-shadow(0 0 16px rgba(200,169,107,1))
-              drop-shadow(0 0 34px rgba(200,169,107,0.8))
-              drop-shadow(0 0 55px rgba(200,169,107,0.5));
+      filter: drop-shadow(0 0 16px var(--glow))
+              drop-shadow(0 0 34px var(--glow))
+              drop-shadow(0 0 55px var(--glow));
     }
   }
 
@@ -315,7 +406,7 @@
 
   .hero p {
     font-size: 16px;
-    color: #c4cbc6;
+    color: var(--gold-soft);
     max-width: 660px;
     margin: 0 auto 40px;
   }
@@ -323,7 +414,7 @@
   .btn {
     display: inline-block;
     background: var(--brick);
-    color: var(--cream);
+    color: var(--forest);
     padding: 14px 46px;
     border: 1.5px solid var(--brick);
     border-radius: 4px;
@@ -357,6 +448,7 @@
     color: var(--forest);
     margin-bottom: 14px;
     line-height: 1.4;
+    transition: color 0.4s ease;
   }
 
   .features .sub {
@@ -397,7 +489,7 @@
     padding: 48px 32px;
     text-align: center;
     position: relative;
-    border: 1px solid #e4ddca;
+    border: 1px solid rgba(200,169,107,0.3);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -492,6 +584,7 @@
     padding: 90px 20px;
     position: relative;
     overflow: hidden;
+    transition: background 0.4s ease;
   }
 
   .free::before {
@@ -522,13 +615,18 @@
     font-size: 16px;
     max-width: 640px;
     margin: 0 auto;
-    color: #c4cbc6;
+    color: var(--gold-soft);
   }
 
   footer {
     background: #0d1c17;
     padding: 20px;
     border-top: 1px solid rgba(200,169,107,0.35);
+    transition: background 0.4s ease;
+  }
+
+  [data-theme="dark"] footer {
+    background: #101210;
   }
 
   /* ============================================
@@ -744,7 +842,7 @@
   .modal-content p {
     font-size: 15px;
     line-height: 2.1;
-    color: #3a4440;
+    color: var(--muted);
     margin-bottom: 16px;
     text-align: justify;
     text-align-last: center;
@@ -832,8 +930,15 @@
       width: 42px; height: 42px;
     }
     header .logo-text { font-size: 19px; letter-spacing: 0; }
+
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+    }
+    .theme-toggle svg { width: 18px; height: 18px; }
+
     .auth-btn {
-      padding: 8px 16px;
+      padding: 8px 14px;
       font-size: 13px;
       border-width: 1.3px;
     }
@@ -879,7 +984,7 @@
     .cards { grid-template-columns: 1fr; gap: 22px; }
     .card { padding: 36px 24px; }
 
-    .card:hover { transform: none; box-shadow: none; border-color: #e4ddca; }
+    .card:hover { transform: none; box-shadow: none; border-color: rgba(200,169,107,0.3); }
     .card:hover::before,
     .card:hover::after { width: 22px; height: 22px; border-color: var(--gold); }
     .card:hover .icon-circle { transform: none; border-color: var(--gold); box-shadow: none; }
@@ -925,6 +1030,8 @@
     header { padding: 10px 12px; }
     header .logo-wrap .logo-img { width: 38px; height: 38px; }
     header .logo-text { font-size: 17px; }
+    .theme-toggle { width: 34px; height: 34px; }
+    .theme-toggle svg { width: 16px; height: 16px; }
     .auth-btn { padding: 7px 12px; font-size: 12px; }
     .welcome-btn { padding: 5px 10px 5px 8px; }
     .welcome-btn .user-dot { width: 24px; height: 24px; font-size: 12px; }
@@ -944,14 +1051,34 @@
       <div class="logo-text">کوانتم<span>.</span></div>
     </div>
 
-    <!-- دکمه‌ی مهمان -->
-    <a href="auth.html" class="auth-btn" id="auth-btn">ثبت‌نام / ورود</a>
+    <div class="header-actions">
+      <!-- 🌗 دکمه‌ی تغییر تم -->
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="تغییر تم">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="M4.93 4.93l1.41 1.41"></path>
+          <path d="M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="M6.34 17.66l-1.41 1.41"></path>
+          <path d="M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
 
-    <!-- دکمه‌ی خوش‌آمد (کاربر لاگین‌شده) -->
-    <a href="panel.html" class="welcome-btn" id="welcome-btn">
-      <span class="user-dot" id="user-dot">؟</span>
-      <span class="welcome-text">سلام <strong id="welcome-name">کاربر</strong> <span class="wave-emoji">👋</span></span>
-    </a>
+      <!-- دکمه‌ی مهمان -->
+      <a href="auth.html" class="auth-btn" id="auth-btn">ثبت‌نام / ورود</a>
+
+      <!-- دکمه‌ی خوش‌آمد (کاربر لاگین‌شده) -->
+      <a href="panel.html" class="welcome-btn" id="welcome-btn">
+        <span class="user-dot" id="user-dot">؟</span>
+        <span class="welcome-text">سلام <strong id="welcome-name">کاربر</strong> <span class="wave-emoji">👋</span></span>
+      </a>
+    </div>
   </header>
 
   <!-- ====== Hero ====== -->
@@ -1073,6 +1200,23 @@
 
   <script>
     /* ============================================
+       🌗 تم تاریک / روشن
+       ============================================ */
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        htmlEl.removeAttribute('data-theme');
+        localStorage.setItem('quantum_theme', 'light');
+      } else {
+        htmlEl.setAttribute('data-theme', 'dark');
+        localStorage.setItem('quantum_theme', 'dark');
+      }
+    });
+
+    /* ============================================
        🔐 چک وضعیت ورود کاربر
        ============================================ */
     const userData = localStorage.getItem('quantum_user');
@@ -1086,19 +1230,15 @@
         const fullName = user.name || 'کاربر';
         const firstName = fullName.split(' ')[0];
 
-        // مخفی کردن دکمه‌ی مهمان
         authBtn.style.display = 'none';
 
-        // نمایش دکمه‌ی خوش‌آمد
         welcomeBtn.classList.add('show');
         document.getElementById('welcome-name').textContent = firstName;
         document.getElementById('user-dot').textContent = firstName.charAt(0);
 
-        // پیام شخصی‌سازی‌شده بالای تیتر
         heroGreeting.textContent = 'سلام ' + firstName + ' عزیز 👋';
         heroGreeting.classList.add('show');
       } catch (e) {
-        // اگه دیتا خراب بود، پاک کن
         localStorage.removeItem('quantum_user');
       }
     }
