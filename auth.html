@@ -42,7 +42,8 @@
     --brick: #B85C45;
     --text: #1f2a25;
     --muted: #6b756e;
-    --glow: #F4F0E6;
+    --glow: #8B6F47;
+    --glow-soft: rgba(139, 111, 71, 0.7);
     --border-soft: #e4ddca;
     --error: #c0392b;
     --bg-page: #142A23;
@@ -63,6 +64,7 @@
     --muted: #A99A88;
     --brick: #B88655;
     --glow: #D8C3A5;
+    --glow-soft: rgba(216, 195, 165, 0.7);
     --bg-page: #17110D;
     --input-bg: #241912;
     --input-border: #493325;
@@ -118,9 +120,6 @@
     font-weight: 700;
   }
 
-  /* ============================================
-     📦 کانتینر کل
-     ============================================ */
   .auth-wrapper {
     position: relative;
     width: 100%;
@@ -128,9 +127,6 @@
     z-index: 2;
   }
 
-  /* ============================================
-     🔐 کارت اصلی
-     ============================================ */
   .auth-card {
     background: var(--paper);
     width: 100%;
@@ -210,7 +206,6 @@
     z-index: 2;
   }
 
-  /* لوگو بدون دایره، فقط با درخشش طلایی/کرمی مثل ایندکس */
   .brand-head .logo-img {
     width: 78px;
     height: 78px;
@@ -218,8 +213,8 @@
     margin: 0 auto 14px;
     display: block;
     filter: drop-shadow(0 0 8px var(--glow))
-            drop-shadow(0 0 16px var(--glow))
-            drop-shadow(0 0 28px var(--glow));
+            drop-shadow(0 0 16px var(--glow-soft))
+            drop-shadow(0 0 28px var(--glow-soft));
     animation: authLogoGlow 3.5s ease-in-out infinite;
     transition: filter 0.5s ease;
   }
@@ -227,13 +222,13 @@
   @keyframes authLogoGlow {
     0%, 100% {
       filter: drop-shadow(0 0 8px var(--glow))
-              drop-shadow(0 0 16px var(--glow))
-              drop-shadow(0 0 24px var(--glow));
+              drop-shadow(0 0 16px var(--glow-soft))
+              drop-shadow(0 0 24px var(--glow-soft));
     }
     50% {
       filter: drop-shadow(0 0 12px var(--glow))
-              drop-shadow(0 0 26px var(--glow))
-              drop-shadow(0 0 42px var(--glow));
+              drop-shadow(0 0 26px var(--glow-soft))
+              drop-shadow(0 0 42px var(--glow-soft));
     }
   }
 
@@ -524,9 +519,6 @@
     border-bottom-color: var(--brick);
   }
 
-  /* ============================================
-     🏠 دکمه‌ی بازگشت کلاسیک (کنار لینک جابه‌جایی)
-     ============================================ */
   .back-btn {
     display: inline-flex;
     align-items: center;
@@ -551,7 +543,6 @@
     border-color: rgba(216,195,165,0.3);
   }
 
-  /* هاله‌ی طلایی که هنگام هاور از راست به چپ پر می‌شود */
   .back-btn::before {
     content: '';
     position: absolute;
@@ -673,9 +664,6 @@
 
   .global-error.show { display: block; }
 
-  /* ============================================
-     📱 RESPONSIVE
-     ============================================ */
   @media (max-width: 640px) {
     body { padding: 12px; }
     body::before { top: 8px; left: 8px; right: 8px; bottom: 8px; }
@@ -950,9 +938,9 @@
 
         if (result.status === 'error') {
           if (result.code === 'INVALID_CREDENTIALS') {
-            showGlobalError('ایمیل یا رمز عبور اشتباه است');
+            showGlobalError('ایمیل یا رمز عبور وارد شده صحیح نیست. لطفاً دوباره تلاش کنید.');
           } else {
-            showGlobalError(result.message || 'خطایی رخ داد');
+            showGlobalError(result.message || 'خطایی در فرآیند ورود رخ داد. لطفاً دوباره تلاش کنید.');
           }
           btnLogin.disabled = false;
           btnLogin.textContent = 'ورود به کوانتم';
@@ -968,7 +956,7 @@
         showSuccess('خوش برگشتی، ' + (result.name || '').split(' ')[0] + '!', 'در حال انتقال به صفحه‌ی اصلی...');
       } catch (err) {
         console.error(err);
-        showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
+        showGlobalError('ارتباط با سرور برقرار نشد. لطفاً اتصال اینترنت خود را بررسی و دوباره تلاش کنید.');
         btnLogin.disabled = false;
         btnLogin.textContent = 'ورود به کوانتم';
       }
@@ -1027,10 +1015,10 @@
 
         if (result.status === 'error') {
           if (result.code === 'DUPLICATE_EMAIL') {
-            showGlobalError('این ایمیل قبلاً ثبت‌نام کرده. لطفاً وارد شو.');
+            showGlobalError('این ایمیل قبلاً در کوانتم ثبت‌نام شده است. لطفاً وارد حساب کاربری خود شوید.');
             showError('reg-email', 'err-reg-email', true);
           } else {
-            showGlobalError(result.message || 'خطایی رخ داد');
+            showGlobalError(result.message || 'خطایی در فرآیند ثبت‌نام رخ داد. لطفاً دوباره تلاش کنید.');
           }
           btnRegister.disabled = false;
           btnRegister.textContent = 'ثبت‌نام در کوانتم';
@@ -1043,10 +1031,10 @@
           remember: document.getElementById('reg-remember').checked
         }));
 
-        showSuccess('خوش آمدی، ' + nameParts[0] + '!', 'حساب تو با موفقیت ساخته شد...');
+        showSuccess('خوش آمدی، ' + nameParts[0] + '!', 'حساب کاربری شما با موفقیت ساخته شد...');
       } catch (err) {
         console.error(err);
-        showGlobalError('مشکلی در ارتباط با سرور پیش آمد. لطفاً دوباره تلاش کن.');
+        showGlobalError('ارتباط با سرور برقرار نشد. لطفاً اتصال اینترنت خود را بررسی و دوباره تلاش کنید.');
         btnRegister.disabled = false;
         btnRegister.textContent = 'ثبت‌نام در کوانتم';
       }
