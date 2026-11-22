@@ -46,7 +46,6 @@
     --border-soft: #e4ddca;
     --modal-overlay: rgba(20, 42, 35, 0.6);
     --bg-page: #F4F0E6;
-    --text-on-light: #1f2a25;
   }
 
   [data-theme="dark"] {
@@ -63,7 +62,6 @@
     --glow: #D8C3A5;
     --modal-overlay: rgba(23, 17, 13, 0.85);
     --bg-page: #17110D;
-    --text-on-light: #D8C3A5;
   }
 
   html { scroll-behavior: smooth; }
@@ -166,12 +164,13 @@
     flex-shrink: 0;
   }
 
+  /* stage ۱۰۰px — کوچک‌تر از قبل تا ستاره‌ها از صفحه بیرون نزنن */
   .star-stage {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 260px;
-    height: 260px;
+    width: 100px;
+    height: 100px;
     transform: translate(-50%, -50%);
     pointer-events: none;
     overflow: hidden;
@@ -570,17 +569,18 @@
 
   .features .ornament span { color: var(--brick); font-size: 12px; transition: color 0.5s ease; }
 
+  /* سه کارت هم‌ردیف */
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 32px;
-    max-width: 780px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .card {
     background: var(--paper);
-    padding: 48px 32px;
+    padding: 44px 26px;
     text-align: center;
     position: relative;
     border: 1px solid var(--border-soft);
@@ -1072,7 +1072,7 @@
     .theme-toggle-wrap { width: 38px; height: 38px; }
     .theme-toggle { width: 38px; height: 38px; }
     .theme-toggle svg { width: 18px; height: 18px; }
-    .star-stage { width: 220px; height: 220px; }
+    .star-stage { width: 90px; height: 90px; }
 
     .auth-btn {
       padding: 8px 14px;
@@ -1171,7 +1171,7 @@
     .theme-toggle-wrap { width: 34px; height: 34px; }
     .theme-toggle { width: 34px; height: 34px; }
     .theme-toggle svg { width: 16px; height: 16px; }
-    .star-stage { width: 200px; height: 200px; }
+    .star-stage { width: 80px; height: 80px; }
     .auth-btn { padding: 7px 12px; font-size: 12px; }
     .welcome-btn { padding: 5px 10px 5px 8px; }
     .welcome-btn .user-dot { width: 24px; height: 24px; font-size: 12px; }
@@ -1235,7 +1235,7 @@
 
   <section class="features" id="features">
     <h2>کوانتم چیکار می‌کنه؟</h2>
-    <p class="sub">دو امکانات ساده، ولی کارآمد</p>
+    <p class="sub">سه امکانات ساده، ولی کارآمد</p>
     <div class="ornament"><span>◆</span></div>
 
     <div class="cards">
@@ -1249,6 +1249,12 @@
         <div class="icon-circle">📖</div>
         <h3>جزوه‌ی کوچک</h3>
         <p>خلاصه‌های کوتاه و کاربردی از مهم‌ترین نکات دروس، برای مرور سریع.</p>
+      </div>
+
+      <div class="card" data-modal="planner">
+        <div class="icon-circle">📅</div>
+        <h3>جدول برنامه‌ریزی</h3>
+        <p>برنامه‌ی درسی روزانه و هفتگی، با امکان تنظیم و پیگیری هدف‌های مطالعه.</p>
       </div>
     </div>
   </section>
@@ -1327,6 +1333,39 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="modal-planner">
+    <div class="modal-box">
+      <div class="modal-close-wrap">
+        <div class="magnifier"></div>
+        <button class="modal-close" aria-label="بستن">×</button>
+      </div>
+      <div class="modal-corner"></div>
+
+      <div class="modal-content">
+        <h3 class="modal-title">📅 جدول برنامه‌ریزی کوانتم</h3>
+        <div class="modal-ornament"><span>◆</span></div>
+
+        <p>
+          یه برنامه‌ی درسی منظم، بهترین کمکی‌ه که می‌تونی به خودت بکنی. توی کوانتم قراره بتونی برنامه‌ی روزانه و هفتگی‌ات رو ساده و کاربردی تنظیم کنی.
+        </p>
+
+        <p>
+          هدف‌هات رو مشخص کن، ساعت‌های مطالعه‌ات رو بچین و پیشرفتت رو قدم‌به‌قدم دنبال کن؛ بدون پیچیدگی و بدون حواس‌پرتی.
+        </p>
+
+        <p>
+          ما هم به‌مرور قابلیت‌های بیشتری به جدول برنامه‌ریزی اضافه می‌کنیم تا برنامه‌ریزی برات راحت‌تر و لذت‌بخش‌تر بشه.
+        </p>
+
+        <p>
+          <strong>با یه برنامه‌ی درست، هر روز یه قدم به هدفت نزدیک‌تر می‌شی!</strong>
+        </p>
+
+        <span class="modal-signature">کوانتم؛ نظم، تمرکز، پیشرفت.</span>
+      </div>
+    </div>
+  </div>
+
   <script>
     const STAR_SVG = `
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1344,6 +1383,8 @@
       const centerY = stageRect.height / 2;
 
       const count = 8;
+      // حداکثر فاصله = نصف کوچک‌ترین ضلع منهای اندازه‌ی ستاره
+      const maxDist = Math.min(stageRect.width, stageRect.height) / 2 - 14;
 
       for (let i = 0; i < count; i++) {
         const star = document.createElement('span');
@@ -1351,8 +1392,9 @@
         star.style.color = color;
         star.innerHTML = STAR_SVG;
 
-        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
-        const distance = 40 + Math.random() * 30;
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+        // فاصله بین ۵۰٪ تا ۹۰٪ maxDist → هیچ‌وقت به لبه نمی‌رسه
+        const distance = maxDist * 0.5 + Math.random() * maxDist * 0.4;
 
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance;
@@ -1363,11 +1405,11 @@
         star.style.setProperty('--tx', tx + 'px');
         star.style.setProperty('--ty', ty + 'px');
 
-        const size = 12 + Math.random() * 10;
+        const size = 10 + Math.random() * 8;
         star.style.width = size + 'px';
         star.style.height = size + 'px';
 
-        star.style.animationDelay = (Math.random() * 0.1) + 's';
+        star.style.animationDelay = (Math.random() * 0.08) + 's';
 
         stage.appendChild(star);
 
