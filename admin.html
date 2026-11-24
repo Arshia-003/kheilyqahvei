@@ -245,6 +245,77 @@
     background: rgba(192, 57, 43, 0.06);
   }
 
+  /* ====== مرا به خاطر بسپار ====== */
+  .login-card .remember-row {
+    display: flex;
+    align-items: center;
+    margin: 16px 0 4px;
+  }
+
+  .login-card .remember-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 13px;
+    color: var(--text);
+    transition: color 0.5s ease;
+  }
+
+  .login-card .switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .login-card .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .login-card .switch .slider {
+    position: absolute;
+    inset: 0;
+    background: #d4cdc0;
+    border-radius: 999px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid #c4bda8;
+    cursor: pointer;
+  }
+
+  [data-theme="dark"] .login-card .switch .slider {
+    background: #493325;
+    border-color: #35251A;
+  }
+
+  .login-card .switch .slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    right: 2px;
+    background: var(--paper);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+
+  .login-card .switch input:checked + .slider {
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+
+  .login-card .switch input:checked + .slider::before {
+    transform: translateX(-20px);
+    background: var(--gold);
+  }
+
   .login-card .submit-btn {
     width: 100%;
     background: var(--brick);
@@ -258,7 +329,7 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   [data-theme="dark"] .login-card .submit-btn {
@@ -816,6 +887,16 @@
           <input type="password" id="admin-password" placeholder="••••••••" autocomplete="current-password">
         </div>
 
+        <div class="remember-row">
+          <label class="remember-label">
+            <span class="switch">
+              <input type="checkbox" id="admin-remember">
+              <span class="slider"></span>
+            </span>
+            مرا به خاطر بسپار
+          </label>
+        </div>
+
         <button type="submit" class="submit-btn" id="btn-admin-login">ورود به پنل ادمین</button>
       </form>
 
@@ -917,9 +998,10 @@
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'Dead0031388';
     const ADMIN_SESSION_KEY = 'quantum_admin_session';
+    const ADMIN_REMEMBER_KEY = 'quantum_admin_remember';
 
     /* ============================================
-       📦 ذخیره‌سازی جزوه‌ها (localStorage)
+       📦 ذخیره‌سازی جزوه‌ها
        ============================================ */
     const NOTES_KEY = 'quantum_notes';
 
@@ -941,9 +1023,20 @@
        ============================================ */
     const loginScreen = document.getElementById('admin-login-screen');
     const adminPanel = document.getElementById('admin-panel');
+    const btnAdminLogin = document.getElementById('btn-admin-login');
+    const loginError = document.getElementById('login-error');
 
     function isAdminLoggedIn() {
-      return localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+      // اگه session فعاله → لاگینه
+      if (localStorage.getItem(ADMIN_SESSION_KEY) === 'true') {
+        return true;
+      }
+      // اگه "مرا به خاطر بسپار" فعاله → خودکار لاگین کن
+      if (localStorage.getItem(ADMIN_REMEMBER_KEY) === 'true') {
+        localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+        return true;
+      }
+      return false;
     }
 
     function showAdminPanel() {
@@ -955,9 +1048,11 @@
     function showLoginScreen() {
       loginScreen.classList.remove('hidden');
       adminPanel.classList.remove('show');
+      btnAdminLogin.disabled = false;
+      btnAdminLogin.textContent = 'ورود به پنل ادمین';
     }
 
-    // در شروع، چک کن اگه قبلاً لاگین شده
+    // در شروع، چک کن
     if (isAdminLoggedIn()) {
       showAdminPanel();
     }
@@ -966,8 +1061,6 @@
        🔐 فرم لاگین ادمین
        ============================================ */
     const loginForm = document.getElementById('admin-login-form');
-    const loginError = document.getElementById('login-error');
-    const btnAdminLogin = document.getElementById('btn-admin-login');
 
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -975,6 +1068,7 @@
 
       const username = document.getElementById('admin-name').value.trim();
       const password = document.getElementById('admin-password').value;
+      const remember = document.getElementById('admin-remember').checked;
 
       if (!username || !password) {
         loginError.textContent = 'لطفاً نام کاربری و رمز عبور را وارد کنید.';
@@ -985,10 +1079,17 @@
       btnAdminLogin.disabled = true;
       btnAdminLogin.textContent = 'در حال بررسی...';
 
-      // شبیه‌سازی تأخیر برای امنیت بیشتر
       setTimeout(() => {
         if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
           localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+
+          // اگه "مرا به خاطر بسپار" تیک خورده → remember رو ذخیره کن
+          if (remember) {
+            localStorage.setItem(ADMIN_REMEMBER_KEY, 'true');
+          } else {
+            localStorage.removeItem(ADMIN_REMEMBER_KEY);
+          }
+
           document.getElementById('admin-name').value = '';
           document.getElementById('admin-password').value = '';
           showAdminPanel();
@@ -1003,12 +1104,21 @@
 
     /* ============================================
        🚪 خروج از پنل
+       - فقط session پاک می‌شه
+       - remember می‌مونه → دفعه‌ی بعد خودکار لاگین
        ============================================ */
     document.getElementById('logout-btn').addEventListener('click', () => {
       localStorage.removeItem(ADMIN_SESSION_KEY);
+      // remember پاک نمی‌شه
       showLoginScreen();
-      btnAdminLogin.disabled = false;
-      btnAdminLogin.textContent = 'ورود به پنل ادمین';
+
+      // اگه remember فعاله، بعد از یه لحظه دوباره خودکار لاگین کن
+      if (localStorage.getItem(ADMIN_REMEMBER_KEY) === 'true') {
+        setTimeout(() => {
+          localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+          showAdminPanel();
+        }, 600);
+      }
     });
 
     /* ============================================
@@ -1050,7 +1160,6 @@
       notes.push(newNote);
       saveNotes(notes);
 
-      // پاک کردن فرم
       addNoteForm.reset();
 
       showNoteMessage('success', 'جزوه با موفقیت اضافه شد.');
@@ -1083,7 +1192,6 @@
         </div>
       `).join('');
 
-      // دکمه‌های حذف
       container.querySelectorAll('[data-delete]').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = btn.dataset.delete;
