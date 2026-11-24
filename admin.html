@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#142A23">
+<title>پنل ادمین | کوانتم</title>
+
+<link rel="icon" type="image/svg+xml" href="favicon-glow.svg">
+<link rel="apple-touch-icon" href="logo.png">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@v9.4.1/dist/font-face.css" rel="stylesheet">
+
+<script>
+  (function() {
+    var saved = localStorage.getItem('quantum_theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    --forest: #142A23;
+    --forest-soft: #1e3a30;
+    --gold: #C8A96B;
+    --gold-soft: #d9c08a;
+    --cream: #F4F0E6;
+    --paper: #fbf8f1;
+    --brick: #B85C45;
+    --text: #1f2a25;
+    --muted: #6b756e;
+    --glow: #8B6F47;
+    --glow-soft: rgba(139, 111, 71, 0.7);
+    --border-soft: #e4ddca;
+    --error: #c0392b;
+    --success: #2e7d32;
+    --bg-page: #F4F0E6;
+    --input-bg: #F4F0E6;
+    --input-border: #e4ddca;
+    --input-focus-bg: #fbf8f1;
+  }
+
+  [data-theme="dark"] {
+    --forest: #17110D;
+    --forest-soft: #241912;
+    --paper: #35251A;
+    --border-soft: #493325;
+    --gold: #B88655;
+    --gold-soft: #D8C3A5;
+    --cream: #D8C3A5;
+    --text: #D8C3A5;
+    --muted: #A99A88;
+    --brick: #B88655;
+    --glow: #D8C3A5;
+    --glow-soft: rgba(216, 195, 165, 0.7);
+    --bg-page: #17110D;
+    --input-bg: #241912;
+    --input-border: #493325;
+    --input-focus-bg: #35251A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-page);
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+
+  h1, h2, h3, .logo-text, .btn, .submit-btn, .brand-name {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* ====== صفحه لاگین ادمین ====== */
+  .admin-login-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    transition: background 0.5s ease;
+  }
+
+  [data-theme="dark"] .admin-login-screen {
+    background: var(--bg-page);
+  }
+
+  .admin-login-screen.hidden {
+    display: none;
+  }
+
+  .login-card {
+    background: var(--paper);
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid var(--gold);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(200,169,107,0.15);
+    padding: 40px 32px 32px;
+    position: relative;
+    animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+
+  [data-theme="dark"] .login-card {
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(184,134,85,0.25);
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .login-card::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(200,169,107,0.3);
+    pointer-events: none;
+    transition: border-color 0.5s ease;
+  }
+
+  [data-theme="dark"] .login-card::before {
+    border-color: rgba(184,134,85,0.35);
+  }
+
+  .login-card .brand-head {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .login-card .logo-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 0 8px var(--glow))
+            drop-shadow(0 0 16px var(--glow-soft));
+    animation: authLogoGlow 3.5s ease-in-out infinite;
+    transition: filter 0.5s ease;
+  }
+
+  @keyframes authLogoGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px var(--glow))
+              drop-shadow(0 0 16px var(--glow-soft));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px var(--glow))
+              drop-shadow(0 0 26px var(--glow-soft));
+    }
+  }
+
+  .login-card .brand-name {
+    color: var(--forest);
+    font-size: 22px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .login-card .brand-name {
+    color: var(--text);
+  }
+
+  .login-card .brand-name span { color: var(--gold); }
+
+  .login-card .admin-badge {
+    display: inline-block;
+    background: var(--brick);
+    color: var(--cream);
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  [data-theme="dark"] .login-card .admin-badge {
+    color: #17110D;
+  }
+
+  .login-card .form-group {
+    margin-bottom: 16px;
+  }
+
+  .login-card .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--forest);
+    font-weight: 600;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .login-card .form-group label {
+    color: var(--text);
+  }
+
+  .login-card .form-group input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: 3px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .login-card .form-group input:focus {
+    border-color: var(--gold);
+    background: var(--input-focus-bg);
+    box-shadow: 0 0 0 3px rgba(200,169,107,0.15);
+  }
+
+  .login-card .form-group input.error {
+    border-color: var(--error);
+    background: rgba(192, 57, 43, 0.06);
+  }
+
+  .login-card .submit-btn {
+    width: 100%;
+    background: var(--brick);
+    color: var(--forest);
+    padding: 12px 26px;
+    border: 1.5px solid var(--brick);
+    border-radius: 4px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 8px;
+  }
+
+  [data-theme="dark"] .login-card .submit-btn {
+    color: #17110D;
+  }
+
+  .login-card .submit-btn:hover:not(:disabled) {
+    background: transparent;
+    color: var(--brick);
+    border-radius: 999px;
+    box-shadow: 0 10px 25px rgba(184,92,69,0.3);
+  }
+
+  .login-error {
+    display: none;
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid var(--error);
+    color: var(--error);
+    padding: 10px 14px;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .login-error.show { display: block; }
+
+  .login-card .back-to-site {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(200,169,107,0.4);
+    font-size: 12.5px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  [data-theme="dark"] .login-card .back-to-site {
+    border-top-color: rgba(184,134,85,0.3);
+    color: var(--gold-soft);
+  }
+
+  .login-card .back-to-site:hover {
+    color: var(--brick);
+  }
+
+  .login-card .back-to-site svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* ====== پنل ادمین ====== */
+  .admin-panel {
+    display: none;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .admin-panel.show {
+    display: flex;
+  }
+
+  header {
+    background: var(--forest);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(200,169,107,0.35);
+    gap: 16px;
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+
+  [data-theme="dark"] header {
+    border-bottom-color: rgba(184,134,85,0.35);
+  }
+
+  header .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  header .logo-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px var(--glow))
+            drop-shadow(0 0 10px var(--glow-soft));
+    transition: filter 0.5s ease;
+  }
+
+  header .logo-text {
+    color: var(--cream);
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    transition: color 0.5s ease;
+  }
+
+  header .logo-text span { color: var(--gold); }
+
+  header .admin-label {
+    color: var(--gold-soft);
+    font-size: 12px;
+    margin-right: 8px;
+    transition: color 0.5s ease;
+  }
+
+  header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    text-decoration: none;
+  }
+
+  .logout-btn:hover {
+    background: var(--brick);
+    border-color: var(--brick);
+    color: var(--cream);
+  }
+
+  [data-theme="dark"] .logout-btn:hover {
+    color: #17110D;
+  }
+
+  /* ====== محتوای اصلی ====== */
+  .admin-content {
+    padding: 32px 24px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+  }
+
+  .admin-content h1 {
+    text-align: center;
+    font-size: 26px;
+    color: var(--forest);
+    margin-bottom: 8px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .admin-content h1 {
+    color: var(--text);
+  }
+
+  .admin-content .sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 32px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .admin-content .sub {
+    color: var(--gold-soft);
+  }
+
+  /* ====== تب‌ها ====== */
+  .admin-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 0;
+    transition: border-color 0.5s ease;
+  }
+
+  .admin-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 8px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .admin-tab-btn:hover {
+    color: var(--forest);
+  }
+
+  [data-theme="dark"] .admin-tab-btn:hover {
+    color: var(--text);
+  }
+
+  .admin-tab-btn.active {
+    color: var(--forest);
+  }
+
+  [data-theme="dark"] .admin-tab-btn.active {
+    color: var(--text);
+  }
+
+  .admin-tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .admin-tab-btn.active::after {
+    width: 100%;
+  }
+
+  .tab-content {
+    display: none;
+    animation: formFadeIn 0.4s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ====== فرم افزودن جزوه ====== */
+  .form-card {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    padding: 28px 24px;
+    position: relative;
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 18px; height: 18px;
+    border-top: 1.5px solid var(--gold);
+    border-right: 1.5px solid var(--gold);
+    pointer-events: none;
+  }
+
+  .form-card::after {
+    content: '';
+    position: absolute;
+    bottom: 8px; left: 8px;
+    width: 18px; height: 18px;
+    border-bottom: 1.5px solid var(--gold);
+    border-left: 1.5px solid var(--gold);
+    pointer-events: none;
+  }
+
+  .form-card .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-card .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--forest);
+    font-weight: 600;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .form-card .form-group label {
+    color: var(--text);
+  }
+
+  .form-card .form-group label .req {
+    color: var(--brick);
+    margin-right: 3px;
+  }
+
+  .form-card .form-group input,
+  .form-card .form-group textarea,
+  .form-card .form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: 3px;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .form-card .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.9;
+  }
+
+  .form-card .form-group input:focus,
+  .form-card .form-group textarea:focus,
+  .form-card .form-group select:focus {
+    border-color: var(--gold);
+    background: var(--input-focus-bg);
+    box-shadow: 0 0 0 3px rgba(200,169,107,0.15);
+  }
+
+  .form-card .submit-btn {
+    width: 100%;
+    background: var(--brick);
+    color: var(--forest);
+    padding: 12px 26px;
+    border: 1.5px solid var(--brick);
+    border-radius: 4px;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 4px;
+  }
+
+  [data-theme="dark"] .form-card .submit-btn {
+    color: #17110D;
+  }
+
+  .form-card .submit-btn:hover {
+    background: transparent;
+    color: var(--brick);
+    border-radius: 999px;
+    box-shadow: 0 10px 25px rgba(184,92,69,0.3);
+  }
+
+  .form-message {
+    display: none;
+    padding: 10px 14px;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .form-message.show { display: block; }
+
+  .form-message.success {
+    background: rgba(46, 125, 50, 0.1);
+    border: 1px solid var(--success);
+    color: var(--success);
+  }
+
+  .form-message.error {
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid var(--error);
+    color: var(--error);
+  }
+
+  /* ====== لیست جزوه‌ها ====== */
+  .notes-list {
+    margin-top: 28px;
+  }
+
+  .notes-list h3 {
+    font-size: 18px;
+    color: var(--forest);
+    margin-bottom: 14px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .notes-list h3 {
+    color: var(--text);
+  }
+
+  .note-item {
+    background: var(--paper);
+    border: 1px solid var(--border-soft);
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.3s ease;
+  }
+
+  .note-item:hover {
+    border-color: var(--gold);
+    box-shadow: 0 6px 20px rgba(20,42,35,0.1);
+  }
+
+  [data-theme="dark"] .note-item:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+
+  .note-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .note-item-info h4 {
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--forest);
+    margin-bottom: 4px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .note-item-info h4 {
+    color: var(--text);
+  }
+
+  .note-item-info .note-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+    transition: color 0.5s ease;
+  }
+
+  .note-item-info .note-meta .badge {
+    background: var(--forest);
+    color: var(--cream);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+  }
+
+  [data-theme="dark"] .note-item-info .note-meta .badge {
+    background: var(--forest-soft);
+    color: var(--text);
+  }
+
+  .note-item-info .note-preview {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    transition: color 0.5s ease;
+  }
+
+  .note-item .delete-btn {
+    background: transparent;
+    border: 1.5px solid var(--error);
+    color: var(--error);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .note-item .delete-btn:hover {
+    background: var(--error);
+    color: var(--cream);
+    transform: scale(1.1);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-size: 14px;
+    transition: color 0.5s ease;
+  }
+
+  [data-theme="dark"] .empty-state {
+    color: var(--gold-soft);
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 640px) {
+    header { padding: 10px 16px; }
+    header .logo-img { width: 36px; height: 36px; }
+    header .logo-text { font-size: 17px; }
+    header .admin-label { display: none; }
+
+    .logout-btn {
+      padding: 6px 12px;
+      font-size: 11.5px;
+    }
+
+    .admin-content { padding: 24px 16px 50px; }
+    .admin-content h1 { font-size: 22px; }
+    .admin-content .sub { font-size: 13px; margin-bottom: 24px; }
+
+    .admin-tab-btn { font-size: 13px; padding: 10px 6px; }
+
+    .form-card { padding: 22px 18px; }
+
+    .login-card { padding: 32px 24px 26px; }
+    .login-card .logo-img { width: 56px; height: 56px; }
+    .login-card .brand-name { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============================================
+       🔐 صفحه لاگین ادمین
+       ============================================ -->
+  <div class="admin-login-screen" id="admin-login-screen">
+    <div class="login-card">
+      <div class="brand-head">
+        <img src="logo.png" alt="کوانتم" class="logo-img">
+        <div class="brand-name">کوانتم<span>.</span></div>
+        <div class="admin-badge">پنل ادمین</div>
+      </div>
+
+      <div class="login-error" id="login-error"></div>
+
+      <form id="admin-login-form" novalidate>
+        <div class="form-group">
+          <label for="admin-name">نام کاربری</label>
+          <input type="text" id="admin-name" placeholder="admin" autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password">رمز عبور</label>
+          <input type="password" id="admin-password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="submit-btn" id="btn-admin-login">ورود به پنل ادمین</button>
+      </form>
+
+      <a href="index.html" class="back-to-site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"></path>
+          <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+        برگشت به سایت
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================
+       📊 پنل ادمین
+       ============================================ -->
+  <div class="admin-panel" id="admin-panel">
+    <header>
+      <div class="logo-wrap">
+        <img src="logo.png" alt="کوانتم" class="logo-img">
+        <div class="logo-text">کوانتم<span>.</span> <span class="admin-label">| پنل ادمین</span></div>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="logout-btn" style="border-color: var(--gold);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5"></path>
+            <path d="M12 19l-7-7 7-7"></path>
+          </svg>
+          سایت
+        </a>
+        <button class="logout-btn" id="logout-btn" type="button">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          خروج
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <h1>داشبورد ادمین</h1>
+      <p class="sub">مدیریت محتوای کوانتم</p>
+
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="notes" type="button">📖 جزوه‌ها</button>
+      </div>
+
+      <!-- ====== تب جزوه‌ها ====== -->
+      <div class="tab-content active" id="tab-notes">
+        <div class="form-card">
+          <div class="form-message" id="note-form-message"></div>
+
+          <form id="add-note-form" novalidate>
+            <div class="form-group">
+              <label for="note-title">عنوان جزوه <span class="req">*</span></label>
+              <input type="text" id="note-title" placeholder="مثلاً: جزوه فصل ۱ ریاضی">
+            </div>
+
+            <div class="form-group">
+              <label for="note-subject">درس <span class="req">*</span></label>
+              <select id="note-subject">
+                <option value="">-- انتخاب درس --</option>
+                <option value="ریاضی">ریاضی</option>
+                <option value="فیزیک">فیزیک</option>
+                <option value="شیمی">شیمی</option>
+                <option value="زیست">زیست</option>
+                <option value="ادبیات">ادبیات</option>
+                <option value="عربی">عربی</option>
+                <option value="دین و زندگی">دین و زندگی</option>
+                <option value="زبان">زبان</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="note-content">متن جزوه <span class="req">*</span></label>
+              <textarea id="note-content" placeholder="متن کامل جزوه رو اینجا بنویس..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="btn-add-note">افزودن جزوه</button>
+          </form>
+        </div>
+
+        <div class="notes-list">
+          <h3>جزوه‌های موجود</h3>
+          <div id="notes-container"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* ============================================
+       🔐 تنظیمات ادمین
+       ============================================ */
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'Dead0031388';
+    const ADMIN_SESSION_KEY = 'quantum_admin_session';
+
+    /* ============================================
+       📦 ذخیره‌سازی جزوه‌ها (localStorage)
+       ============================================ */
+    const NOTES_KEY = 'quantum_notes';
+
+    function getNotes() {
+      try {
+        const data = localStorage.getItem(NOTES_KEY);
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveNotes(notes) {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    }
+
+    /* ============================================
+       🔐 چک کردن لاگین ادمین
+       ============================================ */
+    const loginScreen = document.getElementById('admin-login-screen');
+    const adminPanel = document.getElementById('admin-panel');
+
+    function isAdminLoggedIn() {
+      return localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+    }
+
+    function showAdminPanel() {
+      loginScreen.classList.add('hidden');
+      adminPanel.classList.add('show');
+      renderNotes();
+    }
+
+    function showLoginScreen() {
+      loginScreen.classList.remove('hidden');
+      adminPanel.classList.remove('show');
+    }
+
+    // در شروع، چک کن اگه قبلاً لاگین شده
+    if (isAdminLoggedIn()) {
+      showAdminPanel();
+    }
+
+    /* ============================================
+       🔐 فرم لاگین ادمین
+       ============================================ */
+    const loginForm = document.getElementById('admin-login-form');
+    const loginError = document.getElementById('login-error');
+    const btnAdminLogin = document.getElementById('btn-admin-login');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      loginError.classList.remove('show');
+
+      const username = document.getElementById('admin-name').value.trim();
+      const password = document.getElementById('admin-password').value;
+
+      if (!username || !password) {
+        loginError.textContent = 'لطفاً نام کاربری و رمز عبور را وارد کنید.';
+        loginError.classList.add('show');
+        return;
+      }
+
+      btnAdminLogin.disabled = true;
+      btnAdminLogin.textContent = 'در حال بررسی...';
+
+      // شبیه‌سازی تأخیر برای امنیت بیشتر
+      setTimeout(() => {
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+          localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+          document.getElementById('admin-name').value = '';
+          document.getElementById('admin-password').value = '';
+          showAdminPanel();
+        } else {
+          loginError.textContent = 'نام کاربری یا رمز عبور اشتباه است. لطفاً دوباره تلاش کنید.';
+          loginError.classList.add('show');
+          btnAdminLogin.disabled = false;
+          btnAdminLogin.textContent = 'ورود به پنل ادمین';
+        }
+      }, 400);
+    });
+
+    /* ============================================
+       🚪 خروج از پنل
+       ============================================ */
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem(ADMIN_SESSION_KEY);
+      showLoginScreen();
+      btnAdminLogin.disabled = false;
+      btnAdminLogin.textContent = 'ورود به پنل ادمین';
+    });
+
+    /* ============================================
+       📝 افزودن جزوه
+       ============================================ */
+    const addNoteForm = document.getElementById('add-note-form');
+    const noteFormMessage = document.getElementById('note-form-message');
+
+    function showNoteMessage(type, text) {
+      noteFormMessage.className = 'form-message show ' + type;
+      noteFormMessage.textContent = text;
+      setTimeout(() => {
+        noteFormMessage.classList.remove('show');
+      }, 4000);
+    }
+
+    addNoteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('note-title').value.trim();
+      const subject = document.getElementById('note-subject').value;
+      const content = document.getElementById('note-content').value.trim();
+
+      if (!title || !subject || !content) {
+        showNoteMessage('error', 'لطفاً همه‌ی فیلدهای ستاره‌دار را پر کنید.');
+        return;
+      }
+
+      const notes = getNotes();
+
+      const newNote = {
+        id: Date.now().toString(),
+        title: title,
+        subject: subject,
+        content: content,
+        createdAt: new Date().toISOString()
+      };
+
+      notes.push(newNote);
+      saveNotes(notes);
+
+      // پاک کردن فرم
+      addNoteForm.reset();
+
+      showNoteMessage('success', 'جزوه با موفقیت اضافه شد.');
+      renderNotes();
+    });
+
+    /* ============================================
+       📋 نمایش لیست جزوه‌ها
+       ============================================ */
+    function renderNotes() {
+      const container = document.getElementById('notes-container');
+      const notes = getNotes();
+
+      if (notes.length === 0) {
+        container.innerHTML = '<div class="empty-state">هنوز هیچ جزوه‌ای اضافه نشده است.</div>';
+        return;
+      }
+
+      container.innerHTML = notes.map(note => `
+        <div class="note-item" data-id="${note.id}">
+          <div class="note-item-info">
+            <h4>${escapeHtml(note.title)}</h4>
+            <div class="note-meta">
+              <span class="badge">${escapeHtml(note.subject)}</span>
+              <span>${formatDate(note.createdAt)}</span>
+            </div>
+            <div class="note-preview">${escapeHtml(note.content)}</div>
+          </div>
+          <button class="delete-btn" data-delete="${note.id}" title="حذف">×</button>
+        </div>
+      `).join('');
+
+      // دکمه‌های حذف
+      container.querySelectorAll('[data-delete]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.delete;
+          if (confirm('آیا از حذف این جزوه مطمئن هستید؟')) {
+            const updated = getNotes().filter(n => n.id !== id);
+            saveNotes(updated);
+            renderNotes();
+          }
+        });
+      });
+    }
+
+    /* ============================================
+       🛠️ ابزارهای کمکی
+       ============================================ */
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function formatDate(iso) {
+      try {
+        const d = new Date(iso);
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return d.toLocaleDateString('fa-IR', options);
+      } catch (e) {
+        return '';
+      }
+    }
+  </script>
+
+</body>
+</html>
