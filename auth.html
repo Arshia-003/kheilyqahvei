@@ -196,9 +196,6 @@
     z-index: 0;
   }
 
-  /* ============================================
-     🏷️ هدر برند + لوگوی درخشان
-     ============================================ */
   .brand-head {
     text-align: center;
     margin-bottom: 20px;
@@ -259,9 +256,6 @@
     color: var(--gold-soft);
   }
 
-  /* ============================================
-     📝 فرم‌ها
-     ============================================ */
   .form-section {
     display: none;
     position: relative;
@@ -470,9 +464,6 @@
     cursor: not-allowed;
   }
 
-  /* ============================================
-     🔗 پایین فرم: لینک جابه‌جایی + دکمه بازگشت
-     ============================================ */
   .auth-foot {
     margin-top: 20px;
     padding-top: 16px;
@@ -581,9 +572,6 @@
     transform: translateX(-3px);
   }
 
-  /* ============================================
-     ✅ جعبه‌ی موفقیت
-     ============================================ */
   .success-box {
     display: none;
     position: absolute;
@@ -836,6 +824,13 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycby0pXJdTClYx7RuYswfwRWHcEgBhZ41ePEcsk9Frwoqw8rJhCL5vsZC9DIx5_reAIJa/exec';
 
+    // ============================================
+    // 🔐 اطلاعات ادمین
+    // ============================================
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'Dead0031388';
+    const ADMIN_SESSION_KEY = 'quantum_admin_session';
+
     /* ============================================
        🔄 جابه‌جایی بین فرم‌ها
        ============================================ */
@@ -908,6 +903,25 @@
       const email = document.getElementById('login-email').value.trim().toLowerCase();
       const password = document.getElementById('login-password').value;
 
+      // ============================================
+      // 🛡️ چک ادمین (قبل از هر چیز)
+      // ============================================
+      if (email === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+
+        document.getElementById('success-title').textContent = 'ورود ادمین موفق!';
+        document.getElementById('success-message').textContent = 'در حال انتقال به پنل ادمین...';
+        document.getElementById('success-box').classList.add('show');
+
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 1200);
+        return;
+      }
+
+      // ============================================
+      // 👤 ورود عادی کاربر
+      // ============================================
       let valid = true;
 
       if (!gmailRegex.test(email)) {
