@@ -48,9 +48,6 @@
     --error: #c0392b;
     --success: #2e7d32;
     --bg-page: #F4F0E6;
-    --input-bg: #F4F0E6;
-    --input-border: #e4ddca;
-    --input-focus-bg: #fbf8f1;
   }
 
   [data-theme="dark"] {
@@ -67,9 +64,6 @@
     --glow: #D8C3A5;
     --glow-soft: rgba(216, 195, 165, 0.7);
     --bg-page: #17110D;
-    --input-bg: #241912;
-    --input-border: #493325;
-    --input-focus-bg: #35251A;
   }
 
   html { scroll-behavior: smooth; }
@@ -85,14 +79,112 @@
     transition: background 0.5s ease, color 0.5s ease;
   }
 
-  h1, h2, h3, .logo-text, .btn, .submit-btn, .brand-name {
+  h1, h2, h3, .logo-text, .brand-name {
     font-family: 'Estedad', sans-serif;
     font-weight: 700;
   }
 
   img { max-width: 100%; height: auto; display: block; }
 
-  /* ====== هدر ====== */
+  /* ============================================
+     🚫 صفحه‌ی دسترسی غیرمجاز
+     ============================================ */
+  .access-denied {
+    position: fixed;
+    inset: 0;
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+  }
+
+  [data-theme="dark"] .access-denied {
+    background: var(--bg-page);
+  }
+
+  .access-denied .denied-box {
+    background: var(--paper);
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid var(--gold);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    padding: 40px 32px;
+    position: relative;
+  }
+
+  .access-denied .denied-box::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(200,169,107,0.3);
+    pointer-events: none;
+  }
+
+  .access-denied .denied-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .access-denied h2 {
+    color: var(--forest);
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  [data-theme="dark"] .access-denied h2 {
+    color: var(--text);
+  }
+
+  .access-denied p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  [data-theme="dark"] .access-denied p {
+    color: var(--gold-soft);
+  }
+
+  .access-denied .go-auth {
+    display: inline-block;
+    background: var(--brick);
+    color: var(--forest);
+    padding: 11px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Estedad', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.4s ease;
+  }
+
+  [data-theme="dark"] .access-denied .go-auth {
+    color: #17110D;
+  }
+
+  .access-denied .go-auth:hover {
+    border-radius: 999px;
+    background: transparent;
+    color: var(--brick);
+    border: 1.5px solid var(--brick);
+  }
+
+  /* ============================================
+     📊 پنل ادمین
+     ============================================ */
+  .admin-panel {
+    display: none;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .admin-panel.show {
+    display: flex;
+  }
+
   header {
     background: var(--forest);
     padding: 14px 32px;
@@ -370,8 +462,6 @@
     color: var(--forest);
     margin-bottom: 8px;
     font-size: 18px;
-    font-family: 'Estedad', sans-serif;
-    font-weight: 700;
     transition: color 0.4s;
   }
 
@@ -394,7 +484,6 @@
 
   .admin-card .card-badge {
     display: inline-block;
-    margin-top: auto;
     padding: 4px 12px;
     background: rgba(184, 92, 69, 0.1);
     border: 1px solid var(--brick);
@@ -403,7 +492,7 @@
     border-radius: 999px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-top: 18px;
+    margin-top: auto;
     transition: all 0.5s ease;
   }
 
@@ -473,112 +562,124 @@
 </head>
 <body>
 
-  <!-- ====== هدر ====== -->
-  <header>
-    <div class="logo-wrap">
-      <img src="logo.png" alt="کوانتم" class="logo-img">
-      <div class="logo-text">کوانتم<span>.</span> <span class="admin-label">| پنل ادمین</span></div>
+  <!-- ============================================
+       🚫 دسترسی غیرمجاز (اگه ادمین نباشه)
+       ============================================ -->
+  <div class="access-denied" id="access-denied" style="display: none;">
+    <div class="denied-box">
+      <div class="denied-icon">🔒</div>
+      <h2>دسترسی غیرمجاز</h2>
+      <p>برای ورود به پنل ادمین، ابتدا باید با حساب ادمین وارد شوید.</p>
+      <a href="auth.html" class="go-auth">رفتن به صفحه‌ی ورود</a>
     </div>
+  </div>
 
-    <div class="header-actions">
-      <a href="index.html" class="logout-btn" style="border-color: var(--gold);">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 12H5"></path>
-          <path d="M12 19l-7-7 7-7"></path>
-        </svg>
-        سایت
-      </a>
-      <button class="logout-btn" id="logout-btn" type="button">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-          <polyline points="16 17 21 12 16 7"></polyline>
-          <line x1="21" y1="12" x2="9" y2="12"></line>
-        </svg>
-        خروج
-      </button>
-    </div>
-  </header>
-
-  <!-- ====== بخش خوش‌آمد ====== -->
-  <section class="admin-hero">
-    <div class="content">
-      <div class="hero-ornament"><span>◆</span></div>
-      <h1>خوش آمدی، <span class="gold">ادمین</span> 👋</h1>
-      <p>از این‌جا می‌تونی محتوای کوانتم رو مدیریت کنی. هر بخش رو که بخوای، باز کن و شروع کن.</p>
-    </div>
-  </section>
-
-  <!-- ====== محتوای اصلی ====== -->
-  <section class="admin-content">
-    <h2 class="section-title">ابزارهای مدیریت</h2>
-    <p class="section-sub">هر بخش رو انتخاب کن — به‌زودی همه فعال می‌شن</p>
-
-    <div class="admin-grid">
-      <!-- کارت ۱: افزودن آزمون -->
-      <div class="admin-card" data-tool="exam">
-        <div class="card-icon">📝</div>
-        <h3>افزودن آزمون</h3>
-        <p>سوال‌های جدید بساز، آزمون طراحی کن و به بانک سوال اضافه کن.</p>
-        <span class="card-badge">به‌زودی</span>
+  <!-- ============================================
+       📊 پنل ادمین
+       ============================================ -->
+  <div class="admin-panel" id="admin-panel">
+    <header>
+      <div class="logo-wrap">
+        <img src="logo.png" alt="کوانتم" class="logo-img">
+        <div class="logo-text">کوانتم<span>.</span> <span class="admin-label">| پنل ادمین</span></div>
       </div>
 
-      <!-- کارت ۲: افزودن جزوه -->
-      <div class="admin-card" data-tool="notes">
-        <div class="card-icon">📖</div>
-        <h3>افزودن جزوه</h3>
-        <p>خلاصه‌های درسی رو آپلود کن و به کتابخانه‌ی جزوه‌ها اضافه کن.</p>
-        <span class="card-badge">به‌زودی</span>
+      <div class="header-actions">
+        <a href="index.html" class="logout-btn" style="border-color: var(--gold);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5"></path>
+            <path d="M12 19l-7-7 7-7"></path>
+          </svg>
+          سایت
+        </a>
+        <button class="logout-btn" id="logout-btn" type="button">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          خروج
+        </button>
       </div>
+    </header>
 
-      <!-- کارت ۳: برگزاری آزمون -->
-      <div class="admin-card" data-tool="run">
-        <div class="card-icon">🚀</div>
-        <h3>برگزاری آزمون</h3>
-        <p>آزمون‌های آماده رو برای دانش‌آموزان فعال کن و زمان‌بندی کن.</p>
-        <span class="card-badge">به‌زودی</span>
+    <section class="admin-hero">
+      <div class="content">
+        <div class="hero-ornament"><span>◆</span></div>
+        <h1>خوش آمدی، <span class="gold">ادمین</span> 👋</h1>
+        <p>از این‌جا می‌تونی محتوای کوانتم رو مدیریت کنی. هر بخش رو که بخوای، باز کن و شروع کن.</p>
       </div>
+    </section>
 
-      <!-- کارت ۴: آمار و تحلیل -->
-      <div class="admin-card" data-tool="stats">
-        <div class="card-icon">📊</div>
-        <h3>آمار و تحلیل</h3>
-        <p>عملکرد دانش‌آموزان، نتایج آزمون‌ها و آمار کلی سایت رو ببین.</p>
-        <span class="card-badge">به‌زودی</span>
+    <section class="admin-content">
+      <h2 class="section-title">ابزارهای مدیریت</h2>
+      <p class="section-sub">هر بخش رو انتخاب کن — به‌زودی همه فعال می‌شن</p>
+
+      <div class="admin-grid">
+        <div class="admin-card" data-tool="exam">
+          <div class="card-icon">📝</div>
+          <h3>افزودن آزمون</h3>
+          <p>سوال‌های جدید بساز، آزمون طراحی کن و به بانک سوال اضافه کن.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
+
+        <div class="admin-card" data-tool="notes">
+          <div class="card-icon">📖</div>
+          <h3>افزودن جزوه</h3>
+          <p>خلاصه‌های درسی رو آپلود کن و به کتابخانه‌ی جزوه‌ها اضافه کن.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
+
+        <div class="admin-card" data-tool="run">
+          <div class="card-icon">🚀</div>
+          <h3>برگزاری آزمون</h3>
+          <p>آزمون‌های آماده رو برای دانش‌آموزان فعال کن و زمان‌بندی کن.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
+
+        <div class="admin-card" data-tool="stats">
+          <div class="card-icon">📊</div>
+          <h3>آمار و تحلیل</h3>
+          <p>عملکرد دانش‌آموزان، نتایج آزمون‌ها و آمار کلی سایت رو ببین.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
+
+        <div class="admin-card" data-tool="users">
+          <div class="card-icon">👥</div>
+          <h3>مدیریت کاربران</h3>
+          <p>کاربران ثبت‌نام‌شده رو ببین، ویرایش کن و دسترسی‌ها رو مدیریت کن.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
+
+        <div class="admin-card" data-tool="settings">
+          <div class="card-icon">⚙️</div>
+          <h3>تنظیمات سایت</h3>
+          <p>پیام‌های سایت، اطلاعات تماس و تنظیمات کلی رو تغییر بده.</p>
+          <span class="card-badge">به‌زودی</span>
+        </div>
       </div>
+    </section>
 
-      <!-- کارت ۵: مدیریت کاربران -->
-      <div class="admin-card" data-tool="users">
-        <div class="card-icon">👥</div>
-        <h3>مدیریت کاربران</h3>
-        <p>کاربران ثبت‌نام‌شده رو ببین، ویرایش کن و دسترسی‌ها رو مدیریت کن.</p>
-        <span class="card-badge">به‌زودی</span>
-      </div>
-
-      <!-- کارت ۶: تنظیمات -->
-      <div class="admin-card" data-tool="settings">
-        <div class="card-icon">⚙️</div>
-        <h3>تنظیمات سایت</h3>
-        <p>پیام‌های سایت، اطلاعات تماس و تنظیمات کلی رو تغییر بده.</p>
-        <span class="card-badge">به‌زودی</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== فوتر ====== -->
-  <footer>
-    <div class="brand">کوانتم</div>
-    <div class="brand-sub">پنل ادمین | قدم‌به‌قدم تا پیشرفت</div>
-  </footer>
+    <footer>
+      <div class="brand">کوانتم</div>
+      <div class="brand-sub">پنل ادمین | قدم‌به‌قدم تا پیشرفت</div>
+    </footer>
+  </div>
 
   <script>
     /* ============================================
-       🔐 چک لاگین ادمین
+       🔐 چک ادمین بودن (فقط همین یه بار)
        ============================================ */
     const ADMIN_SESSION_KEY = 'quantum_admin_session';
+    const adminPanel = document.getElementById('admin-panel');
+    const accessDenied = document.getElementById('access-denied');
 
-    // اگه ادمین لاگین نیست → بفرست auth.html
-    if (localStorage.getItem(ADMIN_SESSION_KEY) !== 'true') {
-      window.location.href = 'auth.html';
+    if (localStorage.getItem(ADMIN_SESSION_KEY) === 'true') {
+      adminPanel.classList.add('show');
+      accessDenied.style.display = 'none';
+    } else {
+      adminPanel.style.display = 'none';
+      accessDenied.style.display = 'flex';
     }
 
     /* ============================================
@@ -594,10 +695,7 @@
        ============================================ */
     document.querySelectorAll('.admin-card').forEach(card => {
       card.addEventListener('click', () => {
-        // فعلاً فقط یه پیام نشون بده
-        const tool = card.dataset.tool;
-        console.log('Tool clicked:', tool);
-        // بعداً این‌جا لینک به صفحه‌ی مربوطه می‌ذاریم
+        console.log('Tool clicked:', card.dataset.tool);
       });
     });
   </script>
